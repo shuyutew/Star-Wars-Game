@@ -477,12 +477,12 @@ Drink implements Drinkable interface.
     <id>Relation</id>
     <coordinates>
       <x>770</x>
-      <y>270</y>
+      <y>300</y>
       <w>330</w>
-      <h>70</h>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>310.0;50.0;10.0;10.0</additional_attributes>
+    <additional_attributes>310.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -775,5 +775,16 @@ a droid/robot.
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>440.0;10.0;440.0;510.0;10.0;510.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>770</x>
+      <y>120</y>
+      <w>520</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>500.0;10.0;500.0;90.0;10.0;160.0</additional_attributes>
   </element>
 </diagram>
