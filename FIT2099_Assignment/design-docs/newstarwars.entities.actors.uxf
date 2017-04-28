@@ -29,7 +29,7 @@ fontsize=16
     <id>UMLClass</id>
     <coordinates>
       <x>315</x>
-      <y>369</y>
+      <y>405</y>
       <w>90</w>
       <h>27</h>
     </coordinates>
@@ -40,7 +40,7 @@ fontsize=16
     <id>UMLClass</id>
     <coordinates>
       <x>333</x>
-      <y>630</y>
+      <y>666</y>
       <w>90</w>
       <h>27</h>
     </coordinates>
@@ -51,7 +51,7 @@ fontsize=16
     <id>Relation</id>
     <coordinates>
       <x>360</x>
-      <y>387</y>
+      <y>423</y>
       <w>27</w>
       <h>261</h>
     </coordinates>
@@ -62,7 +62,7 @@ fontsize=16
     <id>UMLClass</id>
     <coordinates>
       <x>630</x>
-      <y>36</y>
+      <y>72</y>
       <w>90</w>
       <h>27</h>
     </coordinates>
@@ -73,7 +73,7 @@ fontsize=16
     <id>Relation</id>
     <coordinates>
       <x>396</x>
-      <y>36</y>
+      <y>72</y>
       <w>252</w>
       <h>369</h>
     </coordinates>
@@ -84,7 +84,7 @@ fontsize=16
     <id>UMLClass</id>
     <coordinates>
       <x>531</x>
-      <y>639</y>
+      <y>675</y>
       <w>90</w>
       <h>27</h>
     </coordinates>
@@ -95,7 +95,7 @@ fontsize=16
     <id>Relation</id>
     <coordinates>
       <x>414</x>
-      <y>639</y>
+      <y>675</y>
       <w>135</w>
       <h>27</h>
     </coordinates>
@@ -106,7 +106,7 @@ fontsize=16
     <id>UMLClass</id>
     <coordinates>
       <x>1017</x>
-      <y>108</y>
+      <y>144</y>
       <w>90</w>
       <h>27</h>
     </coordinates>
@@ -117,7 +117,7 @@ fontsize=16
     <id>UMLClass</id>
     <coordinates>
       <x>1053</x>
-      <y>198</y>
+      <y>234</y>
       <w>108</w>
       <h>27</h>
     </coordinates>
@@ -128,7 +128,7 @@ fontsize=16
     <id>UMLClass</id>
     <coordinates>
       <x>1071</x>
-      <y>387</y>
+      <y>423</y>
       <w>90</w>
       <h>27</h>
     </coordinates>
@@ -139,7 +139,7 @@ fontsize=16
     <id>UMLClass</id>
     <coordinates>
       <x>1008</x>
-      <y>45</y>
+      <y>81</y>
       <w>126</w>
       <h>54</h>
     </coordinates>
@@ -151,7 +151,7 @@ SWEntityInterface</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1026</x>
-      <y>144</y>
+      <y>180</y>
       <w>162</w>
       <h>45</h>
     </coordinates>
@@ -162,7 +162,7 @@ SWEntityInterface</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1098</x>
-      <y>288</y>
+      <y>324</y>
       <w>126</w>
       <h>27</h>
     </coordinates>
@@ -173,7 +173,7 @@ SWEntityInterface</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>711</x>
-      <y>36</y>
+      <y>72</y>
       <w>315</w>
       <h>45</h>
     </coordinates>
@@ -184,7 +184,7 @@ SWEntityInterface</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>711</x>
-      <y>45</y>
+      <y>81</y>
       <w>324</w>
       <h>90</h>
     </coordinates>
@@ -195,7 +195,7 @@ SWEntityInterface</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>711</x>
-      <y>54</y>
+      <y>90</y>
       <w>333</w>
       <h>126</h>
     </coordinates>
@@ -206,7 +206,7 @@ SWEntityInterface</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>693</x>
-      <y>54</y>
+      <y>90</y>
       <w>378</w>
       <h>171</h>
     </coordinates>
@@ -217,7 +217,7 @@ SWEntityInterface</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>675</x>
-      <y>54</y>
+      <y>90</y>
       <w>441</w>
       <h>261</h>
     </coordinates>
@@ -228,7 +228,7 @@ SWEntityInterface</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>648</x>
-      <y>54</y>
+      <y>90</y>
       <w>477</w>
       <h>351</h>
     </coordinates>
@@ -239,7 +239,7 @@ SWEntityInterface</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>792</x>
-      <y>756</y>
+      <y>792</y>
       <w>135</w>
       <h>27</h>
     </coordinates>
@@ -250,7 +250,7 @@ SWEntityInterface</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>639</x>
-      <y>756</y>
+      <y>792</y>
       <w>144</w>
       <h>27</h>
     </coordinates>
@@ -261,7 +261,7 @@ SWEntityInterface</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1080</x>
-      <y>234</y>
+      <y>270</y>
       <w>90</w>
       <h>27</h>
     </coordinates>
@@ -271,19 +271,19 @@ SWEntityInterface</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>702</x>
-      <y>54</y>
-      <w>396</w>
+      <x>684</x>
+      <y>90</y>
+      <w>414</w>
       <h>207</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>420.0;210.0;240.0;150.0;10.0;10.0</additional_attributes>
+    <additional_attributes>440.0;210.0;260.0;150.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>612</x>
-      <y>252</y>
+      <y>288</y>
       <w>531</w>
       <h>423</h>
     </coordinates>
@@ -294,7 +294,7 @@ SWEntityInterface</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>432</x>
-      <y>792</y>
+      <y>828</y>
       <w>90</w>
       <h>27</h>
     </coordinates>
@@ -305,7 +305,7 @@ SWEntityInterface</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>324</x>
-      <y>792</y>
+      <y>828</y>
       <w>90</w>
       <h>27</h>
     </coordinates>
@@ -316,7 +316,7 @@ SWEntityInterface</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>504</x>
-      <y>891</y>
+      <y>927</y>
       <w>117</w>
       <h>54</h>
     </coordinates>
@@ -327,7 +327,7 @@ SWEntityInterface</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>468</x>
-      <y>657</y>
+      <y>693</y>
       <w>99</w>
       <h>153</h>
     </coordinates>
@@ -338,7 +338,7 @@ SWEntityInterface</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>522</x>
-      <y>765</y>
+      <y>801</y>
       <w>90</w>
       <h>45</h>
     </coordinates>
@@ -350,7 +350,7 @@ Direction</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>558</x>
-      <y>801</y>
+      <y>837</y>
       <w>27</w>
       <h>108</h>
     </coordinates>
@@ -361,7 +361,7 @@ Direction</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>567</x>
-      <y>657</y>
+      <y>693</y>
       <w>27</w>
       <h>126</h>
     </coordinates>
@@ -372,7 +372,7 @@ Direction</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>369</x>
-      <y>648</y>
+      <y>684</y>
       <w>180</w>
       <h>162</h>
     </coordinates>
@@ -384,7 +384,7 @@ m1=1</panel_attributes>
     <id>UMLPackage</id>
     <coordinates>
       <x>441</x>
-      <y>0</y>
+      <y>36</y>
       <w>513</w>
       <h>711</h>
     </coordinates>
@@ -397,7 +397,7 @@ m1=1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>585</x>
-      <y>657</y>
+      <y>693</y>
       <w>126</w>
       <h>117</h>
     </coordinates>
@@ -408,7 +408,7 @@ m1=1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>603</x>
-      <y>657</y>
+      <y>693</y>
       <w>252</w>
       <h>117</h>
     </coordinates>
@@ -419,7 +419,7 @@ m1=1</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>513</x>
-      <y>549</y>
+      <y>585</y>
       <w>90</w>
       <h>27</h>
     </coordinates>
@@ -431,7 +431,7 @@ DroidParts</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>477</x>
-      <y>108</y>
+      <y>144</y>
       <w>414</w>
       <h>369</h>
     </coordinates>
@@ -439,7 +439,7 @@ DroidParts</panel_attributes>
 Droid
 -
 Responsibility
-- cannot use force --&gt; force level = 0
+- cannot use force --&gt; forceAbilityLevel = 0
 
 - Owned by an actor. As long as it's hitpoint is
 more than 0, the droid will follow the owner.
@@ -462,7 +462,7 @@ still exist, as it can still be repair by using other DroidParts.
     <id>Relation</id>
     <coordinates>
       <x>549</x>
-      <y>468</y>
+      <y>504</y>
       <w>27</w>
       <h>99</h>
     </coordinates>
@@ -473,7 +473,7 @@ still exist, as it can still be repair by using other DroidParts.
     <id>UMLClass</id>
     <coordinates>
       <x>27</x>
-      <y>180</y>
+      <y>216</y>
       <w>378</w>
       <h>108</h>
     </coordinates>
@@ -489,7 +489,7 @@ This class represents "robots" - all non-human characters
     <id>Relation</id>
     <coordinates>
       <x>351</x>
-      <y>279</y>
+      <y>315</y>
       <w>27</w>
       <h>108</h>
     </coordinates>
@@ -500,7 +500,7 @@ This class represents "robots" - all non-human characters
     <id>Relation</id>
     <coordinates>
       <x>396</x>
-      <y>198</y>
+      <y>234</y>
       <w>99</w>
       <h>27</h>
     </coordinates>
@@ -511,7 +511,7 @@ This class represents "robots" - all non-human characters
     <id>Relation</id>
     <coordinates>
       <x>882</x>
-      <y>387</y>
+      <y>423</y>
       <w>207</w>
       <h>27</h>
     </coordinates>
@@ -522,7 +522,7 @@ This class represents "robots" - all non-human characters
     <id>Relation</id>
     <coordinates>
       <x>576</x>
-      <y>54</y>
+      <y>90</y>
       <w>72</w>
       <h>72</h>
     </coordinates>
