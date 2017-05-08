@@ -22,6 +22,7 @@ public class Canteen extends SWEntity implements Fillable {
 
 	private int capacity;
 	private int level;
+	//private int hitpoints;
 	
 	public Canteen(MessageRenderer m, int capacity, int initialLevel)  {
 		super(m);
@@ -30,14 +31,36 @@ public class Canteen extends SWEntity implements Fillable {
 		
 		this.capacity = capacity;
 		this.level= initialLevel;
+		//this.hitpoints = level;
 		capabilities.add(Capability.FILLABLE);
+		if (capacity == initialLevel){
+			capabilities.add(Capability.DRINKABLE);
+		}
 		this.addAffordance(new Fill(this, m));
 	}
 
 	public void fill() {
-	
 		level = capacity;
+		//hitpoints = level;
+		capabilities.add(Capability.DRINKABLE);
 	}
+	
+	//the canteen level reduce by 1 bar. For every bar, 5 hitpoints is restored.
+
+	public void use(){
+		/**
+		super.takeDamage(1);
+		this.level = hitpoints;
+		
+		if (this.hitpoints<=0) {
+			this.shortDescription = "an empty canteen";
+			this.longDescription  = "a slightly battered aluminium canteen";
+			
+			this.capabilities.remove(Capability.DRINKABLE);
+		}
+	*/
+	}
+
 
 	
 	@Override 
