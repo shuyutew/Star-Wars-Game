@@ -181,6 +181,20 @@ public class SWWorld extends World {
 		tim.setSymbol("T");
 		loc = myGrid.getLocationByCoordinates(4,3);
 		entityManager.setLocation(tim, loc);
+		
+		// A Tusken Raider
+		TuskenRaider david = new TuskenRaider(10, "David", iface, this);
+		
+		david.setSymbol("D");
+		loc = myGrid.getLocationByCoordinates(7,2);
+		entityManager.setLocation(david, loc);
+		
+		// A Tusken Raider
+		TuskenRaider zac = new TuskenRaider(10, "Zac", iface, this);
+		
+		zac.setSymbol("Z");
+		loc = myGrid.getLocationByCoordinates(2,6);
+		entityManager.setLocation(zac, loc);
 
 	}
 
