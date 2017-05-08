@@ -184,11 +184,6 @@ public class SWWorld extends World {
 		loc = myGrid.getLocationByCoordinates(3, 4);
 		entityManager.setLocation(blaster, loc);
 		
-/**We decided to setSymbol "T" for all TuskenRaider because we realised that if we set different symbol to 
- * different TuskenRaider, it's going to be hard for users to identify which symbol indicates Tusken Raiders
- * and which is some other things. So overall, in the map symbol "T indicates TuskenRaiders the players will
- * only know which TuskenRaider has the name of what when they meet up at the same coordinate."*/		
-		
 		// A Tusken Raider
 		TuskenRaider tim = new TuskenRaider(10, "Tim", iface, this);
 		
@@ -199,23 +194,16 @@ public class SWWorld extends World {
 		// A Tusken Raider
 		TuskenRaider david = new TuskenRaider(10, "David", iface, this);
 		
-		david.setSymbol("T");
+		david.setSymbol("D");
 		loc = myGrid.getLocationByCoordinates(7,2);
 		entityManager.setLocation(david, loc);
 		
 		// A Tusken Raider
 		TuskenRaider zac = new TuskenRaider(10, "Zac", iface, this);
 		
-		zac.setSymbol("T");
+		zac.setSymbol("Z");
 		loc = myGrid.getLocationByCoordinates(2,6);
 		entityManager.setLocation(zac, loc);
-		
-		// A Tusken Raider
-		TuskenRaider tom = new TuskenRaider(10, "Tom", iface, this);
-		
-		tom.setSymbol("T");
-		loc = myGrid.getLocationByCoordinates(1,1);
-		entityManager.setLocation(tom, loc);
 
 	}
 

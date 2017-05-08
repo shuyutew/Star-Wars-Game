@@ -74,10 +74,9 @@ public class BenKenobi extends SWLegend {
 		
 		if (contents.size() > 1) { // if it is equal to one, the only thing here is this Player, so there is nothing to report
 			for (SWEntityInterface entity : contents) {
-				if (entity.hasCapability(Capability.WEAPON)){
-					System.out.println("hi");
-					if (entity.hasCapability(Capability.WEAPON)){ // don't include self in scene description
-						System.out.println("bitch");
+				if (entity != this){
+					if (entity.hasCapability(Capability.FILLABLE) == true){ // don't include self in scene description
+						System.out.println("hi");
 					}
 				}
 
