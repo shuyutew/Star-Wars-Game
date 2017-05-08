@@ -1,10 +1,15 @@
 package starwars.entities.actors;
 
+import java.util.List;
+
 import edu.monash.fit2099.simulator.space.Direction;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
+import starwars.SWEntityInterface;
 import starwars.SWLegend;
+import starwars.SWLocation;
 import starwars.SWWorld;
 import starwars.Team;
+import starwars.Capability;
 import starwars.actions.Move;
 import starwars.entities.LightSaber;
 import starwars.entities.actors.behaviors.AttackInformation;
@@ -43,6 +48,8 @@ public class BenKenobi extends SWLegend {
 	
 	@Override
 	protected void legendAct() {
+		
+		SWLocation location = this.world.getEntityManager().whereIs(this);
 
 		if(isDead()) {
 			return;
@@ -61,6 +68,19 @@ public class BenKenobi extends SWLegend {
 			Move myMove = new Move(newdirection, messageRenderer, world);
 
 			scheduler.schedule(myMove, this, 1);
+		}
+		
+		List<SWEntityInterface> contents = this.world.getEntityManager().contents(location);
+		
+		if (contents.size() > 1) { // if it is equal to one, the only thing here is this Player, so there is nothing to report
+			for (SWEntityInterface entity : contents) {
+				if (entity != this){
+					if (entity.hasCapability(Capability.FILLABLE) == true){ // don't include self in scene description
+						System.out.println("hi");
+					}
+				}
+
+			}
 		}
 	}
 

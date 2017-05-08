@@ -38,6 +38,8 @@ public class Canteen extends SWEntity implements Fillable {
 	
 		level = capacity;
 	}
+
+	
 	@Override 
 	public String getShortDescription() {
 		return shortDescription + " [" + level + "/" + capacity + "]";
