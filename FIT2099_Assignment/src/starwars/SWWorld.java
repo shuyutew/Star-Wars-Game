@@ -115,7 +115,6 @@ public class SWWorld extends World {
 		loc = myGrid.getLocationByCoordinates(6, 5);
 		SWEntity canteenBen = new Canteen(iface, 10, 10);
 		canteenBen.setSymbol("o");
-		canteenBen.setHitpoints(500);
 		entityManager.setLocation(canteenBen, loc);
 		canteenBen.addAffordance(new Take(canteenBen, iface));
 		

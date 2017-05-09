@@ -32,6 +32,7 @@ public class Canteen extends SWEntity implements Fillable {
 		this.capacity = capacity;
 		this.level= initialLevel;
 		capabilities.add(Capability.FILLABLE);
+		//capabilities.add(Capability.DRINKABLE);
 		this.addAffordance(new Fill(this, m));
 	}
 
@@ -50,5 +51,19 @@ public class Canteen extends SWEntity implements Fillable {
 	@Override
 	public String getLongDescription () {
 		return longDescription + " [" + level + "/" + capacity + "]";
+	}
+	
+	@Override
+	public void takeDamage(int damage) {
+		super.takeDamage(damage);
+		
+		if (this.hitpoints<=0) {
+			System.out.println("finished");
+			this.shortDescription = "an empty blaster";
+			this.longDescription  = "An empty blaster that makes a pitiful \"ping\" sound when fired";
+			
+			this.capabilities.remove(Capability.FILLABLE);
+		}
+		
 	}
 }

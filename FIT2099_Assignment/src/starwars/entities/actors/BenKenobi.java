@@ -13,6 +13,8 @@ import starwars.Team;
 import starwars.Capability;
 import starwars.actions.Move;
 import starwars.actions.Leave;
+import starwars.actions.Take;
+import starwars.actions.Healing;
 import starwars.entities.LightSaber;
 import starwars.entities.actors.behaviors.AttackInformation;
 import starwars.entities.actors.behaviors.AttackNeighbours;
@@ -34,9 +36,12 @@ public class BenKenobi extends SWLegend {
 	private static BenKenobi ben = null; // yes, it is OK to return the static instance!
 	private Patrol path;
 	private MessageRenderer m;
+	private boolean taken;
+	private int maxHitpoint;
 	private BenKenobi(MessageRenderer m, SWWorld world, Direction [] moves) {
 		super(Team.GOOD, 1000, m, world);
 		this.m = m;
+		maxHitpoint = 1000;
 		path = new Patrol(moves);
 		this.setShortDescription("Ben Kenobi");
 		this.setLongDescription("Ben Kenobi, an old man who has perhaps seen too much");
@@ -54,7 +59,6 @@ public class BenKenobi extends SWLegend {
 	protected void legendAct() {
 		
 		boolean isCanteen = false;
-		boolean dropped = false;
 		SWEntityInterface fullCan = null;
 		
 		SWLocation location = this.world.getEntityManager().whereIs(this);
@@ -77,9 +81,6 @@ public class BenKenobi extends SWLegend {
 							isCanteen = true;
 						}
 					}
-					else if(entity.getShortDescription()=="A Lightsaber"){
-						dropped = true;
-					}
 				}
 
 			}
@@ -91,11 +92,23 @@ public class BenKenobi extends SWLegend {
 			scheduler.schedule(attack.affordance, ben, 1);
 		}
 		
-		else if(isCanteen && !(dropped)){
+		else if(isCanteen && this.getHitpoints()!= maxHitpoint){
 			Leave byeItem = new Leave(this.getItemCarried(), m);
-			fullCan.takeDamage(10);
 			scheduler.schedule(byeItem, this, 1);
 		}
+		
+		else if(isCanteen && this.getItemCarried()==null){
+			System.out.println("bbitchhhhh");
+			Take theCan = new Take(fullCan,m);
+			taken = true;
+			scheduler.schedule(theCan, this, 1);
+		}
+		
+		else if (taken){
+			Healing heal = new Healing(ben, m);
+			scheduler.schedule(heal, this, 1);
+		}
+		
 		
 		else {
 			Direction newdirection = path.getNext();

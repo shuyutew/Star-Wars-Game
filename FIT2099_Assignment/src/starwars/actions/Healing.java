@@ -36,40 +36,39 @@ public class Healing extends SWAffordance implements SWActionInterface {
 	}
 
 	@Override
+	/**
+	 * This should always returns true -- anything that's got a visible Leave affordance
+	 * should be being held by the actor that can see the affordance.
+	 * 
+	 * @author dsquire
+	 * @param a the SWActor we are querying
+	 * @return true
+	 */
 	public boolean canDo(SWActor a) {
-		SWEntityInterface item = a.getItemCarried();
-		if (item!= null) {
-			return item.hasCapability(Capability.FILLABLE);
-		}
-		return false;
+		return a.getItemCarried().equals(target);
 	}
 
 	@Override
 	public void act(SWActor a) {
-		SWEntityInterface target = this.getTarget();
-		boolean targetIsActor = target instanceof SWActor;
-		SWActor targetActor = null;
+		System.out.println("whatever");
 		
-		if (targetIsActor) {
-			targetActor = (SWActor) target;
-		}
-		
-		SWEntityInterface item = a.getItemCarried();
-		
-		if (item != null) {//if the actor is carrying an item 
+		if (a.getItemCarried() != null) {//if the actor is carrying an item 
+			System.out.println("helpppppp");
 			assert(this.getTarget().hasCapability(Capability.FILLABLE));
 			
-			if (item.hasCapability(Capability.DRINKABLE)) {
-				target.takeDamage(-20); // blunt weapon won't do much, but it will still do some damage
-				item.takeDamage(1); // weapon gets blunt
+			if (a.getItemCarried().hasCapability(Capability.FILLABLE)) {
+				a.takeDamage(-20); // blunt weapon won't do much, but it will still do some damage
+				a.getItemCarried().takeDamage(1); // weapon gets blunt
 			}
 			
 			
-		assert(item instanceof Fillable);
+		//assert(item instanceof Fillable);
 		}
+		
+		a.setLongDescription(a.getShortDescription() + " is healing");
 
 
-		a.say(item.getShortDescription() + "has been refilled to capacity");
+		//a.say(item.getShortDescription() + "has been refilled to capacity");
 	}
 	
 	@Override
