@@ -37,7 +37,7 @@ public class BenKenobi extends SWLegend {
 	private Patrol path;
 	private MessageRenderer m;
 	private boolean taken;
-	private boolean buddy; // to check if ben's light saber is always along with him
+	private SWEntityInterface benSS;
 	private int maxHitpoint;
 	private BenKenobi(MessageRenderer m, SWWorld world, Direction [] moves) {
 		super(Team.GOOD, 800, m, world);
@@ -48,7 +48,7 @@ public class BenKenobi extends SWLegend {
 		this.setLongDescription("Ben Kenobi, an old man who has perhaps seen too much");
 		LightSaber bensweapon = new LightSaber(m);
 		setItemCarried(bensweapon);
-		buddy = true;
+		this.taken = false;
 	}
 
 	public static BenKenobi getBenKenobi(MessageRenderer m, SWWorld world, Direction [] moves) {
@@ -62,7 +62,6 @@ public class BenKenobi extends SWLegend {
 		
 		boolean isCanteen = false;
 		SWEntityInterface fullCan = null;
-		SWEntityInterface benSS = null;
 		
 		SWLocation location = this.world.getEntityManager().whereIs(this);
 
@@ -83,11 +82,7 @@ public class BenKenobi extends SWLegend {
 							isCanteen = true;
 						}
 					}
-					if (entity.getShortDescription() == "A Lightsaber"){
-						benSS = entity;
-					}
 				}
-
 			}
 		}
 		
@@ -95,9 +90,6 @@ public class BenKenobi extends SWLegend {
 			if (this.getItemCarried().hasCapability(Capability.DRINKABLE)){
 				if(this.getItemCarried().getLevel() != 0)
 				isCanteen = true;
-			}
-			else if(this.getItemCarried().getShortDescription() == "A Lightsaber"){
-				buddy = true;
 			}
 		}
 		
@@ -107,31 +99,39 @@ public class BenKenobi extends SWLegend {
 			scheduler.schedule(attack.affordance, ben, 1);
 		}
 		
-		else if(isCanteen && this.getHitpoints()!= maxHitpoint && buddy){
-			Leave byeItem = new Leave(this.getItemCarried(), m);
-			buddy = false;
-			scheduler.schedule(byeItem, this, 0);
-			
-			Take theCan = new Take(fullCan,m);
-			taken = true;
-			scheduler.schedule(theCan, this, 1);
+//if a canteen exist and ben's hitpoint is not maximum and he is not holding a canteen
+		else if(isCanteen && this.getHitpoints()!= maxHitpoint && !taken){
+			if (this.getItemCarried() == null && !(taken)){
+				Take theCan = new Take(fullCan,m);
+				this.taken = true;
+				scheduler.schedule(theCan, this, 1);
+			}
+			else{
+				this.benSS = this.getItemCarried();
+				Leave byeItem = new Leave(this.getItemCarried(), m);
+				scheduler.schedule(byeItem, this, 0);
+				
+				Take theCan = new Take(fullCan,m);
+				this.taken = true;
+				scheduler.schedule(theCan, this, 1);
+			}
 		}
 		
-		//when his hitpoints are fully recovered and he is not holding his lightsaber. Drop canteen and
-		//pick up his light saber.
-		else if((this.getHitpoints()== maxHitpoint && !(buddy) && taken)||(this.getItemCarried().getLevel() <= 0 && !(buddy))){
+		//when ben is holding a centeen.
+		else if (taken && this.getHitpoints()!= maxHitpoint && this.getItemCarried().getLevel() > 0){
+			Healing heal = new Healing(ben, m);
+			scheduler.schedule(heal, this, 1);
+		}
+		
+//when his hitpoints are fully recovered and he is holding a canteen. Drop canteen and pick up his light saber.
+// when the canteen level <=0 drop canteen and pick up whatever he left.
+		else if(this.getHitpoints() == maxHitpoint && this.getItemCarried() == fullCan || (taken && this.getItemCarried().getLevel() <= 0)){
 			Leave byecanteen = new Leave(this.getItemCarried(), m);
 			taken = false;
 			scheduler.schedule(byecanteen, this, 0);
 			
 			Take benbuddy= new Take(benSS,m);
 			scheduler.schedule(benbuddy, this, 1);
-		}
-		
-		//when ben is holding a centeen.
-		else if (taken && this.getHitpoints()!= maxHitpoint){
-			Healing heal = new Healing(ben, m);
-			scheduler.schedule(heal, this, 1);
 		}
 		
 		else {

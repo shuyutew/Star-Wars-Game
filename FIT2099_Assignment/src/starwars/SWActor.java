@@ -185,7 +185,6 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	public void takeDamage(int damage) {
 		//Precondition 1: Ensure the damage is not negative. Negative damage could increase the SWActor's hitpoints
 		assert (damage >= 0)	:"damage on SWActor must not be negative";
-		System.out.println("HALLLDLDOJ");
 		this.hitpoints -= damage;
 	}
 
