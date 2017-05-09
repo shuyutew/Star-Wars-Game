@@ -35,6 +35,8 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	/**The amount of <code>hitpoints</code> of this actor. If the hitpoints are zero or less this <code>Actor</code> is dead*/
 	private int hitpoints;
 	
+	private int maxHitpoint;
+	
 	private int level = 0; //
 	
 	/**The world this <code>SWActor</code> belongs to.*/
@@ -81,6 +83,7 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 		actions = new HashSet<SWActionInterface>();
 		this.team = team;
 		this.hitpoints = hitpoints;
+		this.maxHitpoint = hitpoints;
 		this.world = world;
 		this.symbol = "@";
 		
@@ -126,6 +129,11 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	@Override
 	public int getLevel() {
 		return level;
+	}
+	
+	@Override
+	public int getmaxHitpoints() {
+		return maxHitpoint;
 	}
 
 	/**

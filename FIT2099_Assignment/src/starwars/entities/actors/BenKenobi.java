@@ -38,11 +38,9 @@ public class BenKenobi extends SWLegend {
 	private MessageRenderer m;
 	private boolean taken;
 	private SWEntityInterface benSS;
-	private int maxHitpoint;
 	private BenKenobi(MessageRenderer m, SWWorld world, Direction [] moves) {
 		super(Team.GOOD, 800, m, world);
 		this.m = m;
-		maxHitpoint = 1020;
 		path = new Patrol(moves);
 		this.setShortDescription("Ben Kenobi");
 		this.setLongDescription("Ben Kenobi, an old man who has perhaps seen too much");
@@ -88,8 +86,7 @@ public class BenKenobi extends SWLegend {
 		
 		if (this.getItemCarried()!=null){
 			if (this.getItemCarried().hasCapability(Capability.DRINKABLE)){
-				if(this.getItemCarried().getLevel() != 0)
-				isCanteen = true;
+				isCanteen = false;
 			}
 		}
 		
@@ -100,7 +97,7 @@ public class BenKenobi extends SWLegend {
 		}
 		
 //if a canteen exist and ben's hitpoint is not maximum and he is not holding a canteen
-		else if(isCanteen && this.getHitpoints()!= maxHitpoint && !taken){
+		else if(isCanteen && this.getHitpoints()!= this.getmaxHitpoints() && !taken){
 			if (this.getItemCarried() == null && !(taken)){
 				Take theCan = new Take(fullCan,m);
 				this.taken = true;
@@ -118,14 +115,14 @@ public class BenKenobi extends SWLegend {
 		}
 		
 		//when ben is holding a centeen.
-		else if (taken && this.getHitpoints()!= maxHitpoint && this.getItemCarried().getLevel() > 0){
+		else if (taken && this.getHitpoints()!= this.getmaxHitpoints() && this.getItemCarried().getLevel() > 0){
 			Healing heal = new Healing(ben, m);
 			scheduler.schedule(heal, this, 1);
 		}
 		
 //when his hitpoints are fully recovered and he is holding a canteen. Drop canteen and pick up his light saber.
 // when the canteen level <=0 drop canteen and pick up whatever he left.
-		else if(this.getHitpoints() == maxHitpoint && this.getItemCarried() == fullCan || (taken && this.getItemCarried().getLevel() <= 0)){
+		else if((this.getHitpoints() == this.getmaxHitpoints() && this.getItemCarried().hasCapability(Capability.DRINKABLE)) || (taken && this.getItemCarried().getLevel() <= 0)){
 			Leave byecanteen = new Leave(this.getItemCarried(), m);
 			taken = false;
 			scheduler.schedule(byecanteen, this, 0);

@@ -56,6 +56,7 @@ public interface SWEntityInterface extends EntityInterface {
 	 */
 	public int getHitpoints();
 	
+	public int getmaxHitpoints();
 	
 	public int getLevel();
 	

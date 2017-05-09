@@ -54,7 +54,14 @@ public class Healing extends SWAffordance implements SWActionInterface {
 			assert(this.getTarget().hasCapability(Capability.DRINKABLE));
 			
 			if (a.getItemCarried().hasCapability(Capability.DRINKABLE)) {
-				a.takeDamage(a.getItemCarried().getHitpoints() * -1); // blunt weapon won't do much, but it will still do some damage
+				int current = a.getHitpoints();
+				int difference = a.getmaxHitpoints() - current;
+				if (difference >= a.getItemCarried().getHitpoints()){
+					a.takeDamage(a.getItemCarried().getHitpoints() * -1); // blunt weapon won't do much, but it will still do some damage
+				}
+				else{
+					a.takeDamage(difference * -1);
+				}
 				a.getItemCarried().takeDamage(1); // weapon gets blunt
 				a.say(a.getShortDescription() + " is healing");
 			}

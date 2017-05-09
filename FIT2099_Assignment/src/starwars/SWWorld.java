@@ -220,7 +220,7 @@ public class SWWorld extends World {
 		TuskenRaider zac = new TuskenRaider(10, "Zac", iface, this);
 		
 		zac.setSymbol("T");
-		loc = myGrid.getLocationByCoordinates(2,6);
+		loc = myGrid.getLocationByCoordinates(6,5);
 		entityManager.setLocation(zac, loc);
 		
 		// A Tusken Raider
