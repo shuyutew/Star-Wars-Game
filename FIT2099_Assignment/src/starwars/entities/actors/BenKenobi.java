@@ -49,7 +49,6 @@ public class BenKenobi extends SWLegend {
 		setItemCarried(bensweapon);
 		this.taken = false;
 		this.benSS = null;
-		this.addAffordance(new Train(this, m));
 	}
 
 	public static BenKenobi getBenKenobi(MessageRenderer m, SWWorld world, Direction [] moves) {

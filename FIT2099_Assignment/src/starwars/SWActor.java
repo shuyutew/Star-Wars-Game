@@ -25,6 +25,7 @@ import edu.monash.fit2099.simulator.space.Location;
 import edu.monash.fit2099.simulator.time.Scheduler;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.actions.Attack;
+import starwars.actions.Train;
 import starwars.actions.Move;
 
 public abstract class SWActor extends Actor<SWActionInterface> implements SWEntityInterface {
@@ -92,6 +93,18 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 		//SWActors are given the Attack affordance hence they can be attacked
 		SWAffordance attack = new Attack(this, m);
 		this.addAffordance(attack);
+		
+		//SWActors are given the Train affordance hence they can be trained. But for SWRobots we need to remove this affordance!
+		SWAffordance trained = new Train(this, m);
+		this.addAffordance(trained);
+		
+		if (hitpoints>0 && hitpoints<= 50){
+			this.forceAbilityLevel = 1;
+		}
+		
+		else if(hitpoints >50 && hitpoints <= 70){
+			this.forceAbilityLevel = 2;
+		}
 	}
 	
 	/**

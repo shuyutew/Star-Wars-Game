@@ -45,7 +45,6 @@ public class Player extends SWActor {
 		super(team, hitpoints, m, world);
 		humanControlled = true; // this feels like a hack. Surely this should be dynamic
 		
-		this.addAffordance(new Train(this, m));
 	}
 	
 	/**
