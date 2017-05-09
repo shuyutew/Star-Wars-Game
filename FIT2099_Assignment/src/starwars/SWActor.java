@@ -37,6 +37,8 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	
 	private int maxHitpoint;
 	
+	private int forceAbilityLevel;
+	
 	private int level = 0; //
 	
 	/**The world this <code>SWActor</code> belongs to.*/
@@ -134,6 +136,10 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	@Override
 	public int getmaxHitpoints() {
 		return maxHitpoint;
+	}
+	
+	public int getForce() {
+		return forceAbilityLevel;
 	}
 
 	/**

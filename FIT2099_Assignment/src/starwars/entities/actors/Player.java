@@ -9,6 +9,7 @@ import starwars.SWEntityInterface;
 import starwars.SWLocation;
 import starwars.SWWorld;
 import starwars.Team;
+import starwars.actions.Train;
 import starwars.swinterfaces.SWGridController;
 
 /**
@@ -43,6 +44,8 @@ public class Player extends SWActor {
 	public Player(Team team, int hitpoints, MessageRenderer m, SWWorld world) {
 		super(team, hitpoints, m, world);
 		humanControlled = true; // this feels like a hack. Surely this should be dynamic
+		
+		this.addAffordance(new Train(this, m));
 	}
 	
 	/**

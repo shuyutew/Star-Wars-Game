@@ -110,7 +110,7 @@ public class SWWorld extends World {
 		loc = myGrid.getLocationByCoordinates(4,  5);
 		entityManager.setLocation(ben, loc);
 		
-		loc = myGrid.getLocationByCoordinates(5,9);
+		loc = myGrid.getLocationByCoordinates(4, 5);
 		
 		// Luke
 		Player luke = new Player(Team.GOOD, 100, iface, this);

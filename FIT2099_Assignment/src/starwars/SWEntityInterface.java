@@ -56,7 +56,18 @@ public interface SWEntityInterface extends EntityInterface {
 	 */
 	public int getHitpoints();
 	
+	/**
+	 * Returns the maximum hitpoints of this <code>SWEntity</code> or <code>SWActor</code>.
+	 * 
+	 * @return the amount of maxHitpoints
+	 */	
 	public int getmaxHitpoints();
+	
+	/**
+	 * Returns the level of this <code>SWEntity</code> or <code>SWActor</code>.(currently only canteen uses this)
+	 * 
+	 * @return the level
+	 */	
 	
 	public int getLevel();
 	

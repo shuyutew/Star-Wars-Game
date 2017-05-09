@@ -26,7 +26,8 @@ public class SWEntity extends Entity implements SWEntityInterface {
 	
 	protected int maxHitpoints = 0; // This is equals to whatever the hitpoint initially was.
 	
-	protected int level = 0; // Not all non actor entities will make use of this
+	protected int level = 0; // Not all non actor entities will make use of this.(currently only canteen uses this)
+	
 
 	/**
 	 * Constructor for this <code>SWEntity</code>. Will initialize this <code>SWEntity</code>'s

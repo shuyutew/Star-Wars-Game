@@ -14,6 +14,7 @@ import starwars.Capability;
 import starwars.actions.Move;
 import starwars.actions.Leave;
 import starwars.actions.Take;
+import starwars.actions.Train;
 import starwars.actions.Healing;
 import starwars.entities.LightSaber;
 import starwars.entities.actors.behaviors.AttackInformation;
@@ -48,6 +49,7 @@ public class BenKenobi extends SWLegend {
 		setItemCarried(bensweapon);
 		this.taken = false;
 		this.benSS = null;
+		this.addAffordance(new Train(this, m));
 	}
 
 	public static BenKenobi getBenKenobi(MessageRenderer m, SWWorld world, Direction [] moves) {
@@ -60,6 +62,7 @@ public class BenKenobi extends SWLegend {
 	protected void legendAct() {
 		
 		boolean isCanteen = false;
+		boolean LukeAround = false;
 		SWEntityInterface fullCan = null;
 		
 		SWLocation location = this.world.getEntityManager().whereIs(this);
@@ -82,6 +85,12 @@ public class BenKenobi extends SWLegend {
 						}
 					}
 				}
+				else if(entity != this && entity instanceof SWActor){
+					if (entity.getSymbol() == "@"){
+						LukeAround = true;
+						System.out.println("HI there LUKE");
+					}
+				}
 			}
 		}
 		
@@ -91,10 +100,20 @@ public class BenKenobi extends SWLegend {
 			}
 		}
 		
+/**
+ * Ben will prioritise attack first. Let say he is healing halfway, Ben will still attack using that canteen.
+ * Or when he reached the coordinate with canteen and a Tusken Raider is there, he would kill the TuskenRaider first
+ * before healing himself.		
+ */
+		
 		if (attack != null) {
 			say(getShortDescription() + " suddenly looks sprightly and attacks " +
 		attack.entity.getShortDescription());
 			scheduler.schedule(attack.affordance, ben, 1);
+		}
+		
+		else if(LukeAround){
+			
 		}
 		
 //if a canteen exist and ben's hitpoint is not maximum and he is not holding a canteen
