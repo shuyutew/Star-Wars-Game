@@ -27,6 +27,7 @@ public class Canteen extends SWEntity implements Fillable {
 		super(m);
 		this.shortDescription = "a canteen";
 		this.longDescription = "a slightly battered aluminium canteen";
+		this.hitpoints = initialLevel;
 		
 		this.capacity = capacity;
 		this.level= initialLevel;
@@ -37,6 +38,7 @@ public class Canteen extends SWEntity implements Fillable {
 	public void fill() {
 	
 		level = capacity;
+		this.hitpoints = level;
 	}
 
 	

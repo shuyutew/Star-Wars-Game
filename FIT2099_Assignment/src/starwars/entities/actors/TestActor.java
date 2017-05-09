@@ -14,6 +14,8 @@ import starwars.Team;
  */
 
 public class TestActor extends SWActor {
+	
+	private String name;
 
 	/**
 	 * Constructor for the <code>TestActor</code> class. This constructor will,
@@ -27,8 +29,19 @@ public class TestActor extends SWActor {
 	 * @param m <code>MessageRenderer</code> to display messages.
 	 * @param world the <code>SWWorld</code> world to which this <code>TestActor</code> belongs to
 	 */
-	public TestActor(MessageRenderer m, SWWorld world) {
+	public TestActor(String name, MessageRenderer m, SWWorld world) {
 		super(Team.GOOD, 50, m, world);
+		this.name = name;
+	}
+	
+	@Override
+	public String getShortDescription() {
+		return name;
+	}
+	
+	@Override
+	public String getLongDescription() {
+		return this.getShortDescription();
 	}
 	
 	@Override

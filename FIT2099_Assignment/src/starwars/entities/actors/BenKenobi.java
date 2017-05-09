@@ -5,12 +5,14 @@ import java.util.List;
 import edu.monash.fit2099.simulator.space.Direction;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.SWEntityInterface;
+import starwars.SWActor;
 import starwars.SWLegend;
 import starwars.SWLocation;
 import starwars.SWWorld;
 import starwars.Team;
 import starwars.Capability;
 import starwars.actions.Move;
+import starwars.actions.Leave;
 import starwars.entities.LightSaber;
 import starwars.entities.actors.behaviors.AttackInformation;
 import starwars.entities.actors.behaviors.AttackNeighbours;
@@ -31,8 +33,10 @@ public class BenKenobi extends SWLegend {
 
 	private static BenKenobi ben = null; // yes, it is OK to return the static instance!
 	private Patrol path;
+	private MessageRenderer m;
 	private BenKenobi(MessageRenderer m, SWWorld world, Direction [] moves) {
 		super(Team.GOOD, 1000, m, world);
+		this.m = m;
 		path = new Patrol(moves);
 		this.setShortDescription("Ben Kenobi");
 		this.setLongDescription("Ben Kenobi, an old man who has perhaps seen too much");
@@ -49,6 +53,10 @@ public class BenKenobi extends SWLegend {
 	@Override
 	protected void legendAct() {
 		
+		boolean isCanteen = false;
+		boolean dropped = false;
+		SWEntityInterface fullCan = null;
+		
 		SWLocation location = this.world.getEntityManager().whereIs(this);
 
 		if(isDead()) {
@@ -57,30 +65,44 @@ public class BenKenobi extends SWLegend {
 		AttackInformation attack;
 		attack = AttackNeighbours.attackLocals(ben,  ben.world, true, true);
 		
+		List<SWEntityInterface> contents = this.world.getEntityManager().contents(location);
+		
+		if (contents.size() > 1) { // if it is equal to one, the only thing here is this Player, so there is nothing to report
+			for (SWEntityInterface entity : contents) {
+				if (entity != this && !(entity instanceof SWActor)){
+					if (entity.hasCapability(Capability.FILLABLE) == true){ // don't include self in scene description
+						System.out.println("hi");
+						fullCan = entity;
+						if(entity.getHitpoints() != 0){
+							isCanteen = true;
+						}
+					}
+					else if(entity.getShortDescription()=="A Lightsaber"){
+						dropped = true;
+					}
+				}
+
+			}
+		}
+			
 		if (attack != null) {
 			say(getShortDescription() + " suddenly looks sprightly and attacks " +
 		attack.entity.getShortDescription());
 			scheduler.schedule(attack.affordance, ben, 1);
 		}
+		
+		else if(isCanteen && !(dropped)){
+			Leave byeItem = new Leave(this.getItemCarried(), m);
+			fullCan.takeDamage(10);
+			scheduler.schedule(byeItem, this, 1);
+		}
+		
 		else {
 			Direction newdirection = path.getNext();
 			say(getShortDescription() + " moves " + newdirection);
 			Move myMove = new Move(newdirection, messageRenderer, world);
 
 			scheduler.schedule(myMove, this, 1);
-		}
-		
-		List<SWEntityInterface> contents = this.world.getEntityManager().contents(location);
-		
-		if (contents.size() > 1) { // if it is equal to one, the only thing here is this Player, so there is nothing to report
-			for (SWEntityInterface entity : contents) {
-				if (entity != this){
-					if (entity.hasCapability(Capability.FILLABLE) == true){ // don't include self in scene description
-						System.out.println("hi");
-					}
-				}
-
-			}
 		}
 	}
 

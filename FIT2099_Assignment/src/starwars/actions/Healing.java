@@ -9,20 +9,10 @@ import starwars.SWActor;
 import starwars.SWEntityInterface;
 import starwars.entities.Fillable;
 
-/**
- * An Affordance for dipping things into large bodies of liquid.
- * 
- * The affordance is offered by the large bodies of liquid and can only be
- * applied in partnership with an <code>Entity</code> that is  <code>Fillable</code>
- * and implements the <code>Fill</code> interface.
- * 
- * @author Robert Merkel
- * @see {@link starwars.actions.Fill}
- * @see {@link starwars.entities.Fillable}
- */
-public class Dip extends SWAffordance implements SWActionInterface {
 
-	public Dip(SWEntityInterface theTarget, MessageRenderer m) {
+public class Healing extends SWAffordance implements SWActionInterface {
+
+	public Healing(SWEntityInterface theTarget, MessageRenderer m) {
 		super(theTarget, m);
 		// TODO Auto-generated constructor stub
 	}
@@ -56,19 +46,36 @@ public class Dip extends SWAffordance implements SWActionInterface {
 
 	@Override
 	public void act(SWActor a) {
-		SWEntityInterface item = a.getItemCarried();
-		assert(item instanceof Fillable);
-
-		for(Affordance aff: item.getAffordances()) {
-			if (aff instanceof Fill) {
-				aff.execute(a);
-			}
+		SWEntityInterface target = this.getTarget();
+		boolean targetIsActor = target instanceof SWActor;
+		SWActor targetActor = null;
+		
+		if (targetIsActor) {
+			targetActor = (SWActor) target;
 		}
+		
+		SWEntityInterface item = a.getItemCarried();
+		
+		if (item != null) {//if the actor is carrying an item 
+			assert(this.getTarget().hasCapability(Capability.FILLABLE));
+			
+			if (item.hasCapability(Capability.DRINKABLE)) {
+				target.takeDamage(-20); // blunt weapon won't do much, but it will still do some damage
+				item.takeDamage(1); // weapon gets blunt
+			}
+			
+			
+		assert(item instanceof Fillable);
+		}
+
+
 		a.say(item.getShortDescription() + "has been refilled to capacity");
 	}
 	
 	@Override
 	public String getDescription() {
-		return "dip carried item in" + target.getShortDescription();
+		return this.target.getShortDescription() + " healed.";
 	}
+
+
 }

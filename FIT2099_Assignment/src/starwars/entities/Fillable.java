@@ -12,4 +12,5 @@ public interface Fillable {
 	 * Fill this SWEntity with water
 	 */
 	void fill();
+	
 }
