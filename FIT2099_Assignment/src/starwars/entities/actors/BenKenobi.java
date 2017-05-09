@@ -47,6 +47,7 @@ public class BenKenobi extends SWLegend {
 		LightSaber bensweapon = new LightSaber(m);
 		setItemCarried(bensweapon);
 		this.taken = false;
+		this.benSS = null;
 	}
 
 	public static BenKenobi getBenKenobi(MessageRenderer m, SWWorld world, Direction [] moves) {
@@ -104,7 +105,7 @@ public class BenKenobi extends SWLegend {
 				scheduler.schedule(theCan, this, 1);
 			}
 			else{
-				this.benSS = this.getItemCarried();
+				this.benSS = this.getItemCarried();      // to store whatever Ben is holding previously
 				Leave byeItem = new Leave(this.getItemCarried(), m);
 				scheduler.schedule(byeItem, this, 0);
 				
@@ -127,8 +128,16 @@ public class BenKenobi extends SWLegend {
 			taken = false;
 			scheduler.schedule(byecanteen, this, 0);
 			
-			Take benbuddy= new Take(benSS,m);
-			scheduler.schedule(benbuddy, this, 1);
+			if (contents.size() > 1) { // if it is equal to one, the only thing here is this Player, so there is nothing to report
+				for (SWEntityInterface entity : contents) {
+					if (entity != this && !(entity instanceof SWActor)){
+						if (entity == this.benSS){ // check is Ben's previous belongings is still around 
+							Take benbuddy= new Take(benSS,m);
+							scheduler.schedule(benbuddy, this, 1);
+						}
+					}
+				}
+			}
 		}
 		
 		else {
