@@ -7,7 +7,6 @@ import starwars.Capability;
 import starwars.SWActionInterface;
 import starwars.SWActor;
 import starwars.SWEntityInterface;
-import starwars.entities.Fillable;
 
 
 public class Healing extends SWAffordance implements SWActionInterface {
@@ -50,25 +49,20 @@ public class Healing extends SWAffordance implements SWActionInterface {
 
 	@Override
 	public void act(SWActor a) {
-		System.out.println("whatever");
 		
 		if (a.getItemCarried() != null) {//if the actor is carrying an item 
-			System.out.println("helpppppp");
-			assert(this.getTarget().hasCapability(Capability.FILLABLE));
+			assert(this.getTarget().hasCapability(Capability.DRINKABLE));
 			
-			if (a.getItemCarried().hasCapability(Capability.FILLABLE)) {
-				a.takeDamage(-20); // blunt weapon won't do much, but it will still do some damage
+			if (a.getItemCarried().hasCapability(Capability.DRINKABLE)) {
+				a.takeDamage(a.getItemCarried().getHitpoints() * -1); // blunt weapon won't do much, but it will still do some damage
 				a.getItemCarried().takeDamage(1); // weapon gets blunt
+				a.say(a.getShortDescription() + " is healing");
 			}
-			
-			
-		//assert(item instanceof Fillable);
+			else{
+				a.say(a.getItemCarried().getShortDescription() + " is empty. Need to fill it with water.");
+			}
 		}
-		
-		a.setLongDescription(a.getShortDescription() + " is healing");
 
-
-		//a.say(item.getShortDescription() + "has been refilled to capacity");
 	}
 	
 	@Override

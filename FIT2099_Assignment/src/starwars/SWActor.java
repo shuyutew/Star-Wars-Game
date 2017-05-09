@@ -35,6 +35,8 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	/**The amount of <code>hitpoints</code> of this actor. If the hitpoints are zero or less this <code>Actor</code> is dead*/
 	private int hitpoints;
 	
+	private int level = 0; //
+	
 	/**The world this <code>SWActor</code> belongs to.*/
 	protected SWWorld world;
 	
@@ -120,6 +122,11 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	public int getHitpoints() {
 		return hitpoints;
 	}
+	
+	@Override
+	public int getLevel() {
+		return level;
+	}
 
 	/**
 	 * Returns an ArrayList containing this Actor's available Actions, including the Affordances of items
@@ -178,6 +185,7 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	public void takeDamage(int damage) {
 		//Precondition 1: Ensure the damage is not negative. Negative damage could increase the SWActor's hitpoints
 		assert (damage >= 0)	:"damage on SWActor must not be negative";
+		System.out.println("HALLLDLDOJ");
 		this.hitpoints -= damage;
 	}
 

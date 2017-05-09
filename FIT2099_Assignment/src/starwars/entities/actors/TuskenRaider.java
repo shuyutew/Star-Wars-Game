@@ -52,7 +52,7 @@ public class TuskenRaider extends SWActor {
 
 		AttackInformation attack = AttackNeighbours.attackLocals(this, this.world, false, false);
 		if (attack != null) {
-			say(getShortDescription() + " has attacked" + attack.entity.getShortDescription());
+			say(getShortDescription() + " has attacked " + attack.entity.getShortDescription());
 			scheduler.schedule(attack.affordance, this, 1);
 		}
 		else if (Math.random() > 0.5){

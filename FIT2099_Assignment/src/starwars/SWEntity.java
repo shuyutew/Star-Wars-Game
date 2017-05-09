@@ -23,6 +23,8 @@ public class SWEntity extends Entity implements SWEntityInterface {
 	
 	/**The amount of <code>hitpoints</code> of this <code>SWEntity</code>.*/
 	protected int hitpoints = 0; // Not all non-actor entities will make use of this
+	
+	protected int level = 0; // Not all non actor entities will make use of this
 
 	/**
 	 * Constructor for this <code>SWEntity</code>. Will initialize this <code>SWEntity</code>'s
@@ -66,6 +68,11 @@ public class SWEntity extends Entity implements SWEntityInterface {
 	@Override
 	public int getHitpoints() {
 		return hitpoints;
+	}
+	
+	@Override
+	public int getLevel() {
+		return level;
 	}
 	
 	/**

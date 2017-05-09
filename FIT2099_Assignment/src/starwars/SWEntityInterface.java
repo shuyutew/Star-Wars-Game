@@ -56,6 +56,9 @@ public interface SWEntityInterface extends EntityInterface {
 	 */
 	public int getHitpoints();
 	
+	
+	public int getLevel();
+	
 	/**
 	 * Method that reduces the <code>hitpoints</code> to insist damage on of this 
 	 * <code>SWEntity</code> or <code>SWActor</code>.

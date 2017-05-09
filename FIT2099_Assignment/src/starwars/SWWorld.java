@@ -110,15 +110,6 @@ public class SWWorld extends World {
 		loc = myGrid.getLocationByCoordinates(4,  5);
 		entityManager.setLocation(ben, loc);
 		
-		//adding a canteen somewhere at Ben's patrol route. Since Ben would be moving East the 2 times,
-		// since the coordinate is (col, row), thus the coordinate is (4+1+1,5) = (6,5)
-		loc = myGrid.getLocationByCoordinates(6, 5);
-		SWEntity canteenBen = new Canteen(iface, 10, 10);
-		canteenBen.setSymbol("o");
-		entityManager.setLocation(canteenBen, loc);
-		canteenBen.addAffordance(new Take(canteenBen, iface));
-		
-		
 		loc = myGrid.getLocationByCoordinates(5,9);
 		
 		// Luke
@@ -176,6 +167,14 @@ public class SWWorld extends World {
 		canteen.setHitpoints(500);
 		entityManager.setLocation(canteen, loc);
 		canteen.addAffordance(new Take(canteen, iface));
+		
+		//adding a canteen somewhere at Ben's patrol route. Since Ben would be moving East the 2 times,
+		// since the coordinate is (col, row), thus the coordinate is (4+1+1,5) = (6,5)
+		loc = myGrid.getLocationByCoordinates(6, 5);
+		SWEntity canteenBen = new Canteen(iface, 10, 10);
+		canteenBen.setSymbol("o");
+		entityManager.setLocation(canteenBen, loc);
+		canteenBen.addAffordance(new Take(canteenBen, iface));
 
 		// an oil can treasure
 		loc = myGrid.getLocationByCoordinates(1,5);
