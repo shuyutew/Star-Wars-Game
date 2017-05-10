@@ -63,6 +63,7 @@ public class BenKenobi extends SWLegend {
 		boolean isCanteen = false;
 		boolean LukeAround = false;
 		SWEntityInterface fullCan = null;
+		SWEntityInterface tobeTrained = null;
 		
 		SWLocation location = this.world.getEntityManager().whereIs(this);
 
@@ -86,7 +87,9 @@ public class BenKenobi extends SWLegend {
 				}
 				else if(entity != this && entity instanceof SWActor){
 					if (entity.getSymbol() == "@"){
+						tobeTrained = entity;
 						LukeAround = true;
+						System.out.println(tobeTrained.getForce());
 						System.out.println("HI there LUKE");
 					}
 				}
@@ -111,8 +114,8 @@ public class BenKenobi extends SWLegend {
 			scheduler.schedule(attack.affordance, ben, 1);
 		}
 		
-		else if(LukeAround){
-			
+		else if(LukeAround && tobeTrained.getForce()<10){
+			System.out.println("NOT MOVING");
 		}
 		
 //if a canteen exist and ben's hitpoint is not maximum and he is not holding a canteen
@@ -159,6 +162,7 @@ public class BenKenobi extends SWLegend {
 		}
 		
 		else {
+			System.out.println("MOVING");
 			Direction newdirection = path.getNext();
 			say(getShortDescription() + " moves " + newdirection);
 			Move myMove = new Move(newdirection, messageRenderer, world);

@@ -28,6 +28,7 @@ public class SWEntity extends Entity implements SWEntityInterface {
 	
 	protected int level = 0; // Not all non actor entities will make use of this.(currently only canteen uses this)
 	
+	protected int forceAbilityLevel = 0; //Non actor entites will have force of ) which means no force
 
 	/**
 	 * Constructor for this <code>SWEntity</code>. Will initialize this <code>SWEntity</code>'s
@@ -81,6 +82,11 @@ public class SWEntity extends Entity implements SWEntityInterface {
 	@Override
 	public int getLevel() {
 		return level;
+	}
+	
+	@Override
+	public int getForce() {
+		return forceAbilityLevel;
 	}
 	
 	/**

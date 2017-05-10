@@ -89,22 +89,14 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 		this.maxHitpoint = hitpoints;
 		this.world = world;
 		this.symbol = "@";
+		setForceAbility();
 		
 		//SWActors are given the Attack affordance hence they can be attacked
 		SWAffordance attack = new Attack(this, m);
 		this.addAffordance(attack);
 		
 		//SWActors are given the Train affordance hence they can be trained. But for SWRobots we need to remove this affordance!
-		SWAffordance trained = new Train(this, m);
-		this.addAffordance(trained);
-		
-		if (hitpoints>0 && hitpoints<= 50){
-			this.forceAbilityLevel = 1;
-		}
-		
-		else if(hitpoints >50 && hitpoints <= 70){
-			this.forceAbilityLevel = 2;
-		}
+		this.addAffordance(new Train(this, m));
 	}
 	
 	/**
@@ -115,6 +107,48 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	 */
 	public static void setScheduler(Scheduler s) {
 		scheduler = s;
+	}
+	
+	public void setForceAbility(){
+		if (maxHitpoint>0 && maxHitpoint<= 50){
+			this.forceAbilityLevel = 1;
+		}
+		
+		else if(maxHitpoint>50 && maxHitpoint<= 70){
+			this.forceAbilityLevel = 2;
+		}
+		
+		else if(maxHitpoint>70 && maxHitpoint<= 100){
+			this.forceAbilityLevel = 3;
+		}
+		
+		else if(maxHitpoint>100 && maxHitpoint<= 150){
+			this.forceAbilityLevel = 4;
+		}
+		
+		else if(maxHitpoint>150 && maxHitpoint<= 190){
+			this.forceAbilityLevel = 5;
+		}
+		
+		else if(maxHitpoint>190 && maxHitpoint<= 210){
+			this.forceAbilityLevel = 6;
+		}
+		
+		else if(maxHitpoint>210 && maxHitpoint<= 300){
+			this.forceAbilityLevel = 7;
+		}
+		
+		else if(maxHitpoint>300 && maxHitpoint<= 350){
+			this.forceAbilityLevel = 8;
+		}
+		
+		else if(maxHitpoint>350 && maxHitpoint<= 400){
+			this.forceAbilityLevel = 9;
+		}
+		
+		else if(maxHitpoint>400){
+			this.forceAbilityLevel = 10;
+		}
 	}
 	
 	/**
@@ -150,6 +184,13 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	public int getmaxHitpoints() {
 		return maxHitpoint;
 	}
+	
+	/**
+	 * Returns the force ability level of this <code>SWActor</code>.
+	 * 
+	 * @return 	the force ability level of this <code>SWActor</code> 
+	 * @see 	#forceAbilityLevel
+	 */
 	
 	public int getForce() {
 		return forceAbilityLevel;
@@ -199,6 +240,10 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	 */
 	public void setTeam(Team team) {
 		this.team = team;
+	}
+	
+	public void setMaxHit(int maxxie){
+		this.maxHitpoint = maxxie;
 	}
 
 	/**

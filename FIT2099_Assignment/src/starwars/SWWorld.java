@@ -98,25 +98,7 @@ public class SWWorld extends World {
 		loc.setShortDescription("Ben's Hut");
 		loc.setSymbol('H');
 		
-		Direction [] patrolmoves = {CompassBearing.EAST, CompassBearing.EAST,
-                CompassBearing.SOUTH,
-                CompassBearing.WEST, CompassBearing.WEST,
-                CompassBearing.SOUTH,
-                CompassBearing.EAST, CompassBearing.EAST,
-                CompassBearing.NORTHWEST, CompassBearing.NORTHWEST};
-		
-		BenKenobi ben = BenKenobi.getBenKenobi(iface, this, patrolmoves);
-		ben.setSymbol("B");
-		loc = myGrid.getLocationByCoordinates(4,  5);
-		entityManager.setLocation(ben, loc);
-		
-		loc = myGrid.getLocationByCoordinates(4, 5);
-		
-		// Luke
-		Player luke = new Player(Team.GOOD, 100, iface, this);
-		luke.setShortDescription("Luke");
-		entityManager.setLocation(luke, loc);
-		luke.resetMoveCommands(loc);
+
 		
 		
 		// Beggar's Canyon 
@@ -153,8 +135,6 @@ public class SWWorld extends World {
 		beru.setSymbol("AB");
 		loc = myGrid.getLocationByCoordinates(8,8);
 		entityManager.setLocation(beru, loc);
-		
-		
 		
 		// Ben Kenobi's hut
 		/*
@@ -229,6 +209,26 @@ public class SWWorld extends World {
 		tom.setSymbol("T");
 		loc = myGrid.getLocationByCoordinates(1,1);
 		entityManager.setLocation(tom, loc);
+		
+		Direction [] patrolmoves = {CompassBearing.EAST, CompassBearing.EAST,
+                CompassBearing.SOUTH,
+                CompassBearing.WEST, CompassBearing.WEST,
+                CompassBearing.SOUTH,
+                CompassBearing.EAST, CompassBearing.EAST,
+                CompassBearing.NORTHWEST, CompassBearing.NORTHWEST};
+		
+		BenKenobi ben = BenKenobi.getBenKenobi(iface, this, patrolmoves);
+		ben.setSymbol("B");
+		loc = myGrid.getLocationByCoordinates(4,  5);
+		entityManager.setLocation(ben, loc);
+		
+		loc = myGrid.getLocationByCoordinates(4, 5);
+		
+		// Luke
+		Player luke = new Player(Team.GOOD, 100, iface, this);
+		luke.setShortDescription("Luke");
+		entityManager.setLocation(luke, loc);
+		luke.resetMoveCommands(loc);
 
 	}
 

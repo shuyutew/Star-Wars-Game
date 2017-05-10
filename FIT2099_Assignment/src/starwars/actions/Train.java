@@ -25,6 +25,7 @@ public class Train extends SWAffordance implements SWActionInterface {
 	public int getDuration() {
 		return 1;
 	}
+
 	
 	/**
 	 * A String describing what this <code>Attack</code> action will do, suitable for display on a user interface
@@ -46,12 +47,30 @@ public class Train extends SWAffordance implements SWActionInterface {
 	 */
 	@Override
 	public boolean canDo(SWActor a) {
-		return true;
+		SWEntityInterface target = this.getTarget();
+		boolean targetIsActor = target instanceof SWActor;
+		SWActor targetActor = null;
+		
+		if (targetIsActor) {
+			targetActor = (SWActor) target;
+		}
+		
+		if (a.getForce()<10 && a.getTeam() == targetActor.getTeam()){
+			System.out.println("same team yo");
+			return true;
+		}
+		a.say("It seems like " + a.getShortDescription() + " has nothing new to learn anymore from " + target.getShortDescription());
+		return false;
 	}
 	
 	@Override
 	public void act(SWActor a) {
-		System.out.println("LETS train yo");
+		int theForce = a.getForce();
+		if (theForce < 10){
+			a.setMaxHit(a.getmaxHitpoints() + 100);
+			a.setForceAbility();
+		}
+		System.out.println(a.getForce());
 	}
 
 }

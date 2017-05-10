@@ -72,6 +72,15 @@ public interface SWEntityInterface extends EntityInterface {
 	public int getLevel();
 	
 	/**
+	 * Returns the force ability level of this <code>SWActor</code>.
+	 * 
+	 * @return 	the force ability level of this <code>SWActor</code> 
+	 * @see 	#forceAbilityLevel
+	 */
+	
+	public int getForce();
+	
+	/**
 	 * Method that reduces the <code>hitpoints</code> to insist damage on of this 
 	 * <code>SWEntity</code> or <code>SWActor</code>.
 	 * 
