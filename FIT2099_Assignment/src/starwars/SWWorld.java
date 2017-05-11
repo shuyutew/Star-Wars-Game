@@ -110,7 +110,7 @@ public class SWWorld extends World {
 		loc = myGrid.getLocationByCoordinates(4,  5);
 		entityManager.setLocation(ben, loc);
 		
-		//adding a canteen somewhere at Ben's patrol route. Since Ben would be moving East the 2 times,
+		//adding a canteen somewhere at Ben's patrol route. Since Ben would be moving East 2 times,
 		// since the coordinate is (col, row), thus the coordinate is (4+1+1,5) = (6,5)
 		loc = myGrid.getLocationByCoordinates(6, 5);
 		SWEntity canteenBen = new Canteen(iface, 10, 10);
@@ -149,6 +149,7 @@ public class SWWorld extends World {
 				entityManager.setLocation(new Reservoir(iface), loc);				
 			}
 		}
+		
 		//Uncle Owen
 		TestActor owen = new TestActor("UncleOwen", iface, this);
 		
@@ -162,8 +163,6 @@ public class SWWorld extends World {
 		beru.setSymbol("AB");
 		loc = myGrid.getLocationByCoordinates(8,8);
 		entityManager.setLocation(beru, loc);
-		
-		
 		
 		// Ben Kenobi's hut
 		/*
@@ -230,7 +229,31 @@ public class SWWorld extends World {
 		tom.setSymbol("T");
 		loc = myGrid.getLocationByCoordinates(1,1);
 		entityManager.setLocation(tom, loc);
-
+		
+		
+		// Droids
+		Direction [] patrolmoves1 = {CompassBearing.EAST, CompassBearing.EAST,
+                CompassBearing.EAST,
+                CompassBearing.EAST, CompassBearing.EAST,
+                CompassBearing.WEST,
+                CompassBearing.WEST, CompassBearing.WEST,
+                CompassBearing.WEST, CompassBearing.WEST};
+		
+		Direction [] patrolmoves2 = {null};
+		// C-3PO
+		Droid c3po = new Droid(200, "C-3PO", iface, this, patrolmoves1);
+		c3po.owned();
+		c3po.setSymbol("R1");
+		loc = myGrid.getLocationByCoordinates(2,1);
+		entityManager.setLocation(c3po, loc);
+		
+		// R2-D2
+		Droid r2d2 = new Droid(200, "R2-D2", iface, this, patrolmoves1);
+		// r2d2.owned();
+		
+		r2d2.setSymbol("R2");
+		loc = myGrid.getLocationByCoordinates(1,8);
+		entityManager.setLocation(r2d2, loc);
 	}
 
 	/*

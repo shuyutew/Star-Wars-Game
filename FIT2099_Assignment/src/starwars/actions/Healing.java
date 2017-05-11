@@ -62,7 +62,7 @@ public class Healing extends SWAffordance implements SWActionInterface {
 			}
 			
 			
-		//assert(item instanceof Fillable);
+		//assert(item instance of Fillable);
 		}
 		
 		a.setLongDescription(a.getShortDescription() + " is healing");
