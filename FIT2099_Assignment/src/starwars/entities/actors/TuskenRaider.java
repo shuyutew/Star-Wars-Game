@@ -52,7 +52,7 @@ public class TuskenRaider extends SWActor {
 
 		AttackInformation attack = AttackNeighbours.attackLocals(this, this.world, false, false);
 		if (attack != null) {
-			say(getShortDescription() + " has attacked" + attack.entity.getShortDescription());
+			say(getShortDescription() + " has attacked " + attack.entity.getShortDescription());
 			scheduler.schedule(attack.affordance, this, 1);
 		}
 		else if (Math.random() > 0.5){
@@ -73,6 +73,11 @@ public class TuskenRaider extends SWActor {
 			scheduler.schedule(myMove, this, 1);
 		}
 	}
+	
+	@Override
+	public void forcedTo() {
+		return;
+	}
 
 	@Override
 	public String getShortDescription() {
@@ -86,7 +91,7 @@ public class TuskenRaider extends SWActor {
 
 	private String describeLocation() {
 		SWLocation location = this.world.getEntityManager().whereIs(this);
-		return this.getShortDescription() + " [" + this.getHitpoints() + "] is at " + location.getShortDescription();
+		return this.getShortDescription() + " [" + this.getHitpoints() +", " + this.getForce()  + "] is at " + location.getShortDescription();
 
 	}
 }

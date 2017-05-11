@@ -98,34 +98,7 @@ public class SWWorld extends World {
 		loc.setShortDescription("Ben's Hut");
 		loc.setSymbol('H');
 		
-		Direction [] patrolmoves = {CompassBearing.EAST, CompassBearing.EAST,
-                CompassBearing.SOUTH,
-                CompassBearing.WEST, CompassBearing.WEST,
-                CompassBearing.SOUTH,
-                CompassBearing.EAST, CompassBearing.EAST,
-                CompassBearing.NORTHWEST, CompassBearing.NORTHWEST};
-		
-		BenKenobi ben = BenKenobi.getBenKenobi(iface, this, patrolmoves);
-		ben.setSymbol("B");
-		loc = myGrid.getLocationByCoordinates(4,  5);
-		entityManager.setLocation(ben, loc);
-		
-		//adding a canteen somewhere at Ben's patrol route. Since Ben would be moving East 2 times,
-		// since the coordinate is (col, row), thus the coordinate is (4+1+1,5) = (6,5)
-		loc = myGrid.getLocationByCoordinates(6, 5);
-		SWEntity canteenBen = new Canteen(iface, 10, 10);
-		canteenBen.setSymbol("o");
-		entityManager.setLocation(canteenBen, loc);
-		canteenBen.addAffordance(new Take(canteenBen, iface));
-		
-		
-		loc = myGrid.getLocationByCoordinates(5,9);
-		
-		// Luke
-		Player luke = new Player(Team.GOOD, 100, iface, this);
-		luke.setShortDescription("Luke");
-		entityManager.setLocation(luke, loc);
-		luke.resetMoveCommands(loc);
+
 		
 		
 		// Beggar's Canyon 
@@ -149,7 +122,6 @@ public class SWWorld extends World {
 				entityManager.setLocation(new Reservoir(iface), loc);				
 			}
 		}
-		
 		//Uncle Owen
 		TestActor owen = new TestActor("UncleOwen", iface, this);
 		
@@ -175,6 +147,14 @@ public class SWWorld extends World {
 		canteen.setHitpoints(500);
 		entityManager.setLocation(canteen, loc);
 		canteen.addAffordance(new Take(canteen, iface));
+		
+		//adding a canteen somewhere at Ben's patrol route. Since Ben would be moving East the 2 times,
+		// since the coordinate is (col, row), thus the coordinate is (4+1+1,5) = (6,5)
+		loc = myGrid.getLocationByCoordinates(6, 5);
+		SWEntity canteenBen = new Canteen(iface, 10, 10);
+		canteenBen.setSymbol("o");
+		entityManager.setLocation(canteenBen, loc);
+		canteenBen.addAffordance(new Take(canteenBen, iface));
 
 		// an oil can treasure
 		loc = myGrid.getLocationByCoordinates(1,5);
@@ -194,7 +174,7 @@ public class SWWorld extends World {
 		
 		// A blaster 
 		Blaster blaster = new Blaster(iface);
-		loc = myGrid.getLocationByCoordinates(3, 4);
+		loc = myGrid.getLocationByCoordinates(2, 5);
 		entityManager.setLocation(blaster, loc);
 
 /**We decided to setSymbol "T" for all TuskenRaider because we realised that if we set different symbol to 
@@ -220,7 +200,7 @@ public class SWWorld extends World {
 		TuskenRaider zac = new TuskenRaider(10, "Zac", iface, this);
 		
 		zac.setSymbol("T");
-		loc = myGrid.getLocationByCoordinates(2,6);
+		loc = myGrid.getLocationByCoordinates(8,5);
 		entityManager.setLocation(zac, loc);
 		
 		// A Tusken Raider
@@ -230,30 +210,26 @@ public class SWWorld extends World {
 		loc = myGrid.getLocationByCoordinates(1,1);
 		entityManager.setLocation(tom, loc);
 		
-		
-		// Droids
-		Direction [] patrolmoves1 = {CompassBearing.EAST, CompassBearing.EAST,
-                CompassBearing.EAST,
-                CompassBearing.EAST, CompassBearing.EAST,
-                CompassBearing.WEST,
+		Direction [] patrolmoves = {CompassBearing.EAST, CompassBearing.EAST,
+                CompassBearing.SOUTH,
                 CompassBearing.WEST, CompassBearing.WEST,
-                CompassBearing.WEST, CompassBearing.WEST};
+                CompassBearing.SOUTH,
+                CompassBearing.EAST, CompassBearing.EAST,
+                CompassBearing.NORTHWEST, CompassBearing.NORTHWEST};
 		
-		Direction [] patrolmoves2 = {null};
-		// C-3PO
-		Droid c3po = new Droid(200, "C-3PO", iface, this, patrolmoves1);
-		c3po.owned();
-		c3po.setSymbol("R1");
-		loc = myGrid.getLocationByCoordinates(2,1);
-		entityManager.setLocation(c3po, loc);
+		BenKenobi ben = BenKenobi.getBenKenobi(iface, this, patrolmoves);
+		ben.setSymbol("B");
+		loc = myGrid.getLocationByCoordinates(4,  5);
+		entityManager.setLocation(ben, loc);
 		
-		// R2-D2
-		Droid r2d2 = new Droid(200, "R2-D2", iface, this, patrolmoves1);
-		// r2d2.owned();
+		loc = myGrid.getLocationByCoordinates(4, 5);
 		
-		r2d2.setSymbol("R2");
-		loc = myGrid.getLocationByCoordinates(1,8);
-		entityManager.setLocation(r2d2, loc);
+		// Luke
+		Player luke = new Player(Team.GOOD, 1000, iface, this);
+		luke.setShortDescription("Luke");
+		entityManager.setLocation(luke, loc);
+		luke.resetMoveCommands(loc);
+
 	}
 
 	/*

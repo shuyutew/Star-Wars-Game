@@ -9,6 +9,7 @@ import starwars.SWEntityInterface;
 import starwars.SWLocation;
 import starwars.SWWorld;
 import starwars.Team;
+import starwars.actions.Train;
 import starwars.swinterfaces.SWGridController;
 
 /**
@@ -43,6 +44,7 @@ public class Player extends SWActor {
 	public Player(Team team, int hitpoints, MessageRenderer m, SWWorld world) {
 		super(team, hitpoints, m, world);
 		humanControlled = true; // this feels like a hack. Surely this should be dynamic
+		
 	}
 	
 	/**
@@ -60,6 +62,11 @@ public class Player extends SWActor {
 		scheduler.schedule(SWGridController.getUserDecision(this), this, 1);
 		
 	}
+	
+	@Override
+	public void forcedTo() {	
+		
+	}
 	/**
 	 * This method will describe, 
 	 * <ul>
@@ -75,7 +82,7 @@ public class Player extends SWActor {
 	public void describeScene() {
 		//get the location of the player and describe it
 		SWLocation location = this.world.getEntityManager().whereIs(this);
-		say(this.getShortDescription() + " [" + this.getHitpoints() + "] is at " + location.getShortDescription());
+		say(this.getShortDescription() + " [" + this.getHitpoints() + ", " + this.getForce() + "] is at " + location.getShortDescription());
 		
 		//get the items carried for the player
 		SWEntityInterface itemCarried = this.getItemCarried();

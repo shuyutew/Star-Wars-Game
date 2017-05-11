@@ -114,8 +114,27 @@ public class Attack extends SWAffordance implements SWActionInterface {
 			a.say(a.getShortDescription() + " is attacking " + target.getShortDescription() + "!");
 			
 			SWEntityInterface itemCarried = a.getItemCarried();
-			if (itemCarried != null) {//if the actor is carrying an item 
-				if (itemCarried.hasCapability(Capability.WEAPON)) {
+			if (itemCarried != null) {//if the actor is carrying an item
+				
+				/**Check if the item carried is a light saber. If it's a light saber, then we check whether the actor carrying
+				 * has enough force to use that light saber as weapon. Else, we would recommend them to leave the weapon
+				 * and attack with bare hands instead.
+				 * 
+				 * */
+				
+				if (itemCarried.hasCapability(Capability.WEAPON) && itemCarried.getSymbol() == "|"){
+					if(!(a.isWeakMinded()) && a.getForce()!=0){
+						target.takeDamage(itemCarried.getHitpoints() + 1); // blunt weapon won't do much, but it will still do some damage
+						itemCarried.takeDamage(1); // weapon gets blunt
+						a.takeDamage(energyForAttackWithWeapon); // actor uses energy to attack
+					}
+					else{
+						a.say(a.getShortDescription() + " has not enough force to attck with " + itemCarried.getShortDescription() + "!");
+						a.say("Please leave " + itemCarried.getShortDescription() + " and attck with bare hands instead.");
+					}
+				}
+				
+				else if (itemCarried.hasCapability(Capability.WEAPON)) {
 					target.takeDamage(itemCarried.getHitpoints() + 1); // blunt weapon won't do much, but it will still do some damage
 					itemCarried.takeDamage(1); // weapon gets blunt
 					a.takeDamage(energyForAttackWithWeapon); // actor uses energy to attack

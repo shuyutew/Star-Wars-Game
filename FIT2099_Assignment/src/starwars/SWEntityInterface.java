@@ -57,6 +57,30 @@ public interface SWEntityInterface extends EntityInterface {
 	public int getHitpoints();
 	
 	/**
+	 * Returns the maximum hitpoints of this <code>SWEntity</code> or <code>SWActor</code>.
+	 * 
+	 * @return the amount of maxHitpoints
+	 */	
+	public int getmaxHitpoints();
+	
+	/**
+	 * Returns the level of this <code>SWEntity</code> or <code>SWActor</code>.(currently only canteen uses this)
+	 * 
+	 * @return the level
+	 */	
+	
+	public int getLevel();
+	
+	/**
+	 * Returns the force ability level of this <code>SWActor</code>.
+	 * 
+	 * @return 	the force ability level of this <code>SWActor</code> 
+	 * @see 	#forceAbilityLevel
+	 */
+	
+	public int getForce();
+	
+	/**
 	 * Method that reduces the <code>hitpoints</code> to insist damage on of this 
 	 * <code>SWEntity</code> or <code>SWActor</code>.
 	 * 
@@ -64,5 +88,7 @@ public interface SWEntityInterface extends EntityInterface {
 	 * @pre <code>damage</code> should be greater than or equal to zero to avoid any increase in the number of <code>hitpoints</code>
 	 */
 	public void takeDamage(int damage);
+	
+	public void forcedTo();
 
 }

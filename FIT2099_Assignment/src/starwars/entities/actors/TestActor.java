@@ -2,12 +2,14 @@ package starwars.entities.actors;
 
 import java.util.List;
 
+import edu.monash.fit2099.gridworld.Grid.CompassBearing;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.SWActor;
 import starwars.SWEntityInterface;
 import starwars.SWLocation;
 import starwars.SWWorld;
 import starwars.Team;
+import starwars.actions.Move;
 
 /**
  * A very minimal <code>SWActor</code> that just describes the scene. It just stands still.
@@ -55,6 +57,14 @@ public class TestActor extends SWActor {
 	public void act() {
 		say(this.getShortDescription() + " is standing still at " + this.world.getEntityManager().whereIs(this).getShortDescription());
 		describeScene();
+	}
+	
+	public void forcedTo(){
+		if (this.mindControlled){
+			System.out.println("MOVEEIFNFNINIFNIN");
+			Move myMove = new Move(CompassBearing.EAST, messageRenderer, world);
+			scheduler.schedule(myMove, this, 1);
+		}
 	}
 	
 	/**
