@@ -32,8 +32,11 @@ public abstract class SWRobots extends SWActor {
 	/**If or not this <code>SWRobot</code> will patrol while not Owned. <code>SWRobot</code>s will not patrol by default*/
 	private boolean willPatrol = false;
 	
-	/**If or not this <code>SWRobot</code> will patrol while not Owned. <code>SWRobot</code>s will not patrol by default*/
+	/**If or not this <code>SWRobot</code> will talk randomly. <code>SWRobot</code>s will not by default*/
 	private boolean talk = false;
+	
+	/**If or not this <code>SWRobot</code> has an internal oil reservoir. <code>SWRobot</code>s will not have it by default*/
+	private boolean internal = false;
 	
 	/** 
 	 * Protected constructor to prevent random other code from creating 
@@ -79,6 +82,10 @@ public abstract class SWRobots extends SWActor {
 	
 	public boolean isImmobile(){
 		return this.isDead();
+	}
+	
+	public void internalOil(){
+		this.internal = true;
 	}
 	
 	@Override
