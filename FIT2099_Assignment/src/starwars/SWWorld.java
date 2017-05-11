@@ -122,6 +122,16 @@ public class SWWorld extends World {
 				entityManager.setLocation(new Reservoir(iface), loc);				
 			}
 		}
+		
+		loc = myGrid.getLocationByCoordinates(4, 5);
+		
+		// Luke
+		Player luke = new Player(Team.GOOD, 1000, iface, this);
+		luke.setShortDescription("Luke");
+		entityManager.setLocation(luke, loc);
+		luke.resetMoveCommands(loc);
+
+		
 		//Uncle Owen
 		TestActor owen = new TestActor("UncleOwen", iface, this);
 		
@@ -223,14 +233,6 @@ public class SWWorld extends World {
 		loc = myGrid.getLocationByCoordinates(4,  5);
 		entityManager.setLocation(ben, loc);
 		
-		loc = myGrid.getLocationByCoordinates(4, 5);
-		
-		// Luke
-		Player luke = new Player(Team.GOOD, 1000, iface, this);
-		luke.setShortDescription("Luke");
-		entityManager.setLocation(luke, loc);
-		luke.resetMoveCommands(loc);
-
 	}
 
 	/*

@@ -17,7 +17,7 @@ import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
  * To prevent SWRobots acting until intended, this abstract class implements
  * an API for activating them when getInstance is called.
  * 
- * Rather than implement act() like regular SWActors, Legends should implement
+ * Rather than implement act() like regular SWActors, Robots should implement
  * robotAct().  
  * 
  * @author Robert Merkel
@@ -45,7 +45,7 @@ public abstract class SWRobots extends SWActor {
 
 	
 	protected boolean isOwned() {
-		return hasOwner && willPatrol;
+		return hasOwner;
 	}
 	
 	protected boolean getPatrol() {

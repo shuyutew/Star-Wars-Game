@@ -61,17 +61,17 @@ public class Player extends SWActor {
 	public void act() {	
 		if (Controlling){
 			SWActor g = this.getPoorOnes();
+			System.out.println("--------------------");
 			System.out.println("Controlling " + g.getShortDescription() + ". Enter command of what you wish " + g.getShortDescription() + " to do");
 			SWActionInterface c = SWGridController.getUserDecision(g);
 			scheduler.schedule(c, g, 1);
 			this.Controlling = false;
-			this.removeAction(c);
 			
 		}
-		describeScene();
-		SWLocation location = this.world.getEntityManager().whereIs(this);
-
-		scheduler.schedule(SWGridController.getUserDecision(this), this, 1);
+		else{
+			describeScene();
+			scheduler.schedule(SWGridController.getUserDecision(this), this, 1);
+		}
 		
 	}
 	

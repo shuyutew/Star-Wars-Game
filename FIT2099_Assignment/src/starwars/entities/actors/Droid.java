@@ -23,14 +23,12 @@ import starwars.entities.actors.behaviors.Patrol;
  */
 public class Droid extends SWRobots {
 
-	private static Droid droid = null; // yes, it is OK to return the static instance!
+	private static Droid droid = null;
 	private Patrol path;
-	private MessageRenderer m;
 	private String name;
 	private int i;
 	public Droid(int i, String name, MessageRenderer m, SWWorld world, Direction [] moves) {
 		super(Team.NEUTRAL, 200, m, world);
-		this.m = m;
 		this.name = name;
 		path = new Patrol(moves);
 		this.setShortDescription("Droid " + name);
@@ -43,7 +41,6 @@ public class Droid extends SWRobots {
 		this.name = name;
 		this.setShortDescription("Droid " + name);
 		this.setLongDescription("This is a droid named " + name);
-		getPatrol();
 	}
 	
 
