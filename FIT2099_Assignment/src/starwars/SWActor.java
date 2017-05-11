@@ -52,6 +52,9 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	/**The item carried by this <code>SWActor</code>. <code>itemCarried</code> is null if this <code>SWActor</code> is not carrying an item*/
 	private SWEntityInterface itemCarried;
 	
+	/**The item carried by this <code>SWActor</code>. <code>droidOwned</code> is null if this <code>SWActor</code> is not owning a droid*/
+	private SWEntityInterface droidOwned;
+	
 	/**If or not this <code>SWActor</code> is human controlled. <code>SWActor</code>s are not human controlled by default*/
 	protected boolean humanControlled = false;
 	
@@ -247,6 +250,21 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	public SWEntityInterface getItemCarried() {
 		return itemCarried;
 	}
+	
+	/**
+	 * Returns the droid owned by this <code>SWActor</code>. 
+	 * <p>
+	 * This method only returns the reference of the droid owned
+	 * and does not remove the ownership held from this <code>SWActor</code>.
+	 * <p>
+	 * If this <code>SWActor</code> does not own a droid this method will return null.
+	 * 
+	 * @return 	the droid owned by this <code>SWActor</code> or null if no droid owned by this <code>SWActor</code>
+	 * @see 	#droidOwned
+	 */
+	public SWEntityInterface getDroidOwned() {
+		return droidOwned;
+	}
 
 	/**
 	 * Sets the team of this <code>SWActor</code> to a new team <code>team</code>.
@@ -293,6 +311,20 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 		this.itemCarried = target;
 	}
 	
+	/**
+	 * Assigns this <code>SWActor</code>'s <code>droidOwned</code> to 
+	 * a new droid <code>target</code>
+	 * <p>
+	 * This method will replace droid already owned by the <code>SWActor</code> with the <code>target</code>.
+	 * A null <code>target</code> would signify that this <code>SWActor</code> is not owning a droid anymore.
+	 * 
+	 * @param 	target the new droid to be set as droid owned
+	 * @see 	#droidOwned
+	 */
+	public void setDroidOwned(SWEntityInterface target) {
+		this.droidOwned = target;
+	}
+	
 	
 	/**
 	 * Returns true if this <code>SWActor</code> is dead, false otherwise.
@@ -306,7 +338,6 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	public boolean isDead() {
 		return hitpoints <= 0;
 	}
-	
 
 	@Override
 	public String getSymbol() {
