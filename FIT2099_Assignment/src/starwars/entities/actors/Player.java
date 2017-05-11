@@ -62,6 +62,11 @@ public class Player extends SWActor {
 		scheduler.schedule(SWGridController.getUserDecision(this), this, 1);
 		
 	}
+	
+	@Override
+	public void forcedTo() {	
+		
+	}
 	/**
 	 * This method will describe, 
 	 * <ul>

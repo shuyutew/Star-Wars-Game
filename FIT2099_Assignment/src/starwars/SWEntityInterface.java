@@ -88,5 +88,7 @@ public interface SWEntityInterface extends EntityInterface {
 	 * @pre <code>damage</code> should be greater than or equal to zero to avoid any increase in the number of <code>hitpoints</code>
 	 */
 	public void takeDamage(int damage);
+	
+	public void forcedTo();
 
 }

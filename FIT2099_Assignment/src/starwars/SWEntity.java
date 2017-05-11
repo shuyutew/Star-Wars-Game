@@ -89,6 +89,11 @@ public class SWEntity extends Entity implements SWEntityInterface {
 		return forceAbilityLevel;
 	}
 	
+	@Override
+	public void forcedTo() {
+		return;
+	}
+	
 	/**
 	 * Sets the <code>hitpoints</code> of this <code>SWEntity</code>
 	 * to a new number of hit points <code>p</code>.

@@ -20,6 +20,7 @@ import starwars.entities.LightSaber;
 import starwars.entities.actors.behaviors.AttackInformation;
 import starwars.entities.actors.behaviors.AttackNeighbours;
 import starwars.entities.actors.behaviors.Patrol;
+import starwars.swinterfaces.SWGridController;
 
 /**
  * Ben (aka Obe-Wan) Kenobi.  
@@ -58,6 +59,11 @@ public class BenKenobi extends SWLegend {
 	}
 	
 	@Override
+	public void forcedTo() {	
+		
+	}
+	
+	@Override
 	protected void legendAct() {
 		
 		boolean isCanteen = false;
@@ -80,7 +86,7 @@ public class BenKenobi extends SWLegend {
 				if (entity != this && !(entity instanceof SWActor)){
 					if (entity.hasCapability(Capability.DRINKABLE) == true){ // don't include self in scene description
 						fullCan = entity;
-						if(entity.getHitpoints() != 0){
+						if(entity.getLevel() != 0){
 							isCanteen = true;
 						}
 					}
@@ -170,7 +176,6 @@ public class BenKenobi extends SWLegend {
 		}
 		
 		else {
-			System.out.println("MOVING");
 			Direction newdirection = path.getNext();
 			say(getShortDescription() + " moves " + newdirection);
 			Move myMove = new Move(newdirection, messageRenderer, world);

@@ -73,6 +73,11 @@ public class TuskenRaider extends SWActor {
 			scheduler.schedule(myMove, this, 1);
 		}
 	}
+	
+	@Override
+	public void forcedTo() {
+		return;
+	}
 
 	@Override
 	public String getShortDescription() {

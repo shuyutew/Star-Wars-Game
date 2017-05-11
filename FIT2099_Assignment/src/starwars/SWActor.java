@@ -25,6 +25,7 @@ import edu.monash.fit2099.simulator.space.Location;
 import edu.monash.fit2099.simulator.time.Scheduler;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.actions.Attack;
+import starwars.actions.MindControl;
 import starwars.actions.Train;
 import starwars.actions.Move;
 
@@ -53,6 +54,8 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	
 	/**If or not this <code>SWActor</code> is human controlled. <code>SWActor</code>s are not human controlled by default*/
 	protected boolean humanControlled = false;
+	
+	protected boolean mindControlled = false;
 	
 	/**A string symbol that represents this <code>SWActor</code>, suitable for display*/
 	private String symbol;
@@ -97,6 +100,11 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 		
 		//SWActors are given the Train affordance hence they can be trained. But for SWRobots we need to remove this affordance!
 		this.addAffordance(new Train(this, m));
+		
+//It does make sense that every actor could be mind controlled if their force ability level is less than a certain level
+//Thus, in the MindControl class, under the canDo() method, we would set some conditions so that actors with a certain
+//force ability would not be able to be mind controlled.
+		this.addAffordance(new MindControl(this, m));
 	}
 	
 	/**
@@ -194,6 +202,13 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	
 	public int getForce() {
 		return forceAbilityLevel;
+	}
+	
+	public boolean isWeakMinded(){
+		if (this.forceAbilityLevel <= 4 && this.forceAbilityLevel>0){
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -310,6 +325,14 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	 */
 	public boolean isHumanControlled() {
 		return humanControlled;
+	}
+	
+	public SWWorld getWorld(){
+		return world;
+	}
+	
+	public void beingMindControlled(boolean isit){
+		mindControlled = isit;
 	}
 	
 

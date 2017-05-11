@@ -1,18 +1,22 @@
 package starwars.actions;
 
+import starwars.SWAffordance;
+import edu.monash.fit2099.gridworld.Grid.CompassBearing;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.SWActionInterface;
 import starwars.SWActor;
-import starwars.SWAffordance;
 import starwars.SWEntityInterface;
+import starwars.swinterfaces.SWGridController;
 
-
-public class Train extends SWAffordance implements SWActionInterface {
-
-	public Train(SWEntityInterface theTarget, MessageRenderer m) {
-		super(theTarget, m);
-	}
+public class MindControl extends SWAffordance implements SWActionInterface{
 	
+	private MessageRenderer m;
+
+	public MindControl(SWEntityInterface theTarget, MessageRenderer m) {
+		super(theTarget, m);
+		this.m = m;
+	}
+
 	/**
 	 * Returns the time is takes to perform this <code>Train</code> action.
 	 * 
@@ -20,9 +24,8 @@ public class Train extends SWAffordance implements SWActionInterface {
 	 */
 	@Override
 	public int getDuration() {
-		return 1;
+		return 0;
 	}
-
 	
 	/**
 	 * A String describing what this <code>Attack</code> action will do, suitable for display on a user interface
@@ -31,13 +34,12 @@ public class Train extends SWAffordance implements SWActionInterface {
 	 */
 	@Override
 	public String getDescription() {
-		return "Accept training from " + this.target.getShortDescription();
+		return "Mind Control " + this.target.getShortDescription();
 	}
 	
 	/**
 	 * Determine whether a particular <code>SWActor a</code> can attack the target.
-	 * 
-	 * @author 	dsquire
+
 	 * @param 	a the <code>SWActor</code> being queried
 	 * @return 	true any <code>SWActor</code> can always try an attack, it just won't do much 
 	 * 			good unless this <code>SWActor a</code> has a suitable weapon.
@@ -52,18 +54,24 @@ public class Train extends SWAffordance implements SWActionInterface {
 			targetActor = (SWActor) target;
 		}
 		
-	// Only acotrs on the same team can train someone with lower force ability.
-		if (a.getForce()<targetActor.getForce() && a.getTeam() == targetActor.getTeam() && a.getForce()<10){
+		if (a.getForce() >= 8 && targetActor.getForce() <= 4){
 			return true;
 		}
-		a.say("It seems like " + a.getShortDescription() + " has nothing new to learn anymore from " + target.getShortDescription());
 		return false;
 	}
 	
 	@Override
-	public void act(SWActor a) {
-		a.setMaxHit(a.getmaxHitpoints() + 100);
-		a.setForceAbility();
+	public void act(SWActor a){
+		SWEntityInterface target = this.getTarget();
+		boolean targetIsActor = target instanceof SWActor;
+		SWActor targetActor = null;
+		
+		if (targetIsActor) {
+			targetActor = (SWActor) target;
+		}
+		targetActor.beingMindControlled(true);
+		targetActor.forcedTo();
+		
 	}
-
+	
 }
