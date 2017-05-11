@@ -6,6 +6,7 @@ import java.util.List;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.SWActor;
 import starwars.SWEntityInterface;
+import starwars.SWActionInterface;
 import starwars.SWLocation;
 import starwars.SWWorld;
 import starwars.Team;
@@ -58,7 +59,18 @@ public class Player extends SWActor {
 	 */
 	@Override
 	public void act() {	
+		if (Controlling){
+			SWActor g = this.getPoorOnes();
+			System.out.println("Controlling " + g.getShortDescription() + ". Enter command of what you wish " + g.getShortDescription() + " to do");
+			SWActionInterface c = SWGridController.getUserDecision(g);
+			scheduler.schedule(c, g, 1);
+			this.Controlling = false;
+			this.removeAction(c);
+			
+		}
 		describeScene();
+		SWLocation location = this.world.getEntityManager().whereIs(this);
+
 		scheduler.schedule(SWGridController.getUserDecision(this), this, 1);
 		
 	}
@@ -67,6 +79,8 @@ public class Player extends SWActor {
 	public void forcedTo() {	
 		
 	}
+	
+	
 	/**
 	 * This method will describe, 
 	 * <ul>

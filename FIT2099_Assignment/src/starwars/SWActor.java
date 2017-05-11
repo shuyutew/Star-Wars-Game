@@ -57,6 +57,10 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	
 	protected boolean mindControlled = false;
 	
+	protected boolean Controlling = false;
+	
+	private SWActor poorOne;
+	
 	/**A string symbol that represents this <code>SWActor</code>, suitable for display*/
 	private String symbol;
 	
@@ -333,6 +337,18 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	
 	public void beingMindControlled(boolean isit){
 		mindControlled = isit;
+	}
+	
+	public void controlling(boolean doit){
+		Controlling = doit;
+	}
+	
+	public void setPoorOnes(SWActor a){
+		poorOne = a;
+	}
+	
+	public SWActor getPoorOnes(){
+		return poorOne;
 	}
 	
 

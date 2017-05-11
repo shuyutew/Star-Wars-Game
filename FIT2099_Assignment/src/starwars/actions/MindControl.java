@@ -69,8 +69,11 @@ public class MindControl extends SWAffordance implements SWActionInterface{
 		if (targetIsActor) {
 			targetActor = (SWActor) target;
 		}
+		
 		targetActor.beingMindControlled(true);
-		targetActor.forcedTo();
+		a.controlling(true);
+		a.setPoorOnes(targetActor);
+		//targetActor.forcedTo();
 		
 	}
 	

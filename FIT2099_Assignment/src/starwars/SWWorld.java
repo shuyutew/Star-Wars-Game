@@ -128,6 +128,7 @@ public class SWWorld extends World {
 		owen.setSymbol("UO");
 		loc = myGrid.getLocationByCoordinates(6,5);
 		entityManager.setLocation(owen, loc);
+		owen.resetMoveCommands(loc);
 		
 		//Aunt Beru
 		TestActor beru = new TestActor("AuntBeru", iface, this);
