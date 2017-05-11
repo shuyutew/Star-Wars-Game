@@ -1,8 +1,6 @@
 package starwars.actions;
 
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
-import starwars.Capability;
-import starwars.SWAction;
 import starwars.SWActionInterface;
 import starwars.SWActor;
 import starwars.SWAffordance;
@@ -13,7 +11,6 @@ public class Train extends SWAffordance implements SWActionInterface {
 
 	public Train(SWEntityInterface theTarget, MessageRenderer m) {
 		super(theTarget, m);
-		priority = 1;
 	}
 	
 	/**
@@ -55,8 +52,8 @@ public class Train extends SWAffordance implements SWActionInterface {
 			targetActor = (SWActor) target;
 		}
 		
-		if (a.getForce()<10 && a.getTeam() == targetActor.getTeam()){
-			System.out.println("same team yo");
+	// Only acotrs on the same team can train someone with lower force ability.
+		if (a.getForce()<targetActor.getForce() && a.getTeam() == targetActor.getTeam() && a.getForce()<10){
 			return true;
 		}
 		a.say("It seems like " + a.getShortDescription() + " has nothing new to learn anymore from " + target.getShortDescription());
@@ -65,12 +62,8 @@ public class Train extends SWAffordance implements SWActionInterface {
 	
 	@Override
 	public void act(SWActor a) {
-		int theForce = a.getForce();
-		if (theForce < 10){
-			a.setMaxHit(a.getmaxHitpoints() + 100);
-			a.setForceAbility();
-		}
-		System.out.println(a.getForce());
+		a.setMaxHit(a.getmaxHitpoints() + 100);
+		a.setForceAbility();
 	}
 
 }

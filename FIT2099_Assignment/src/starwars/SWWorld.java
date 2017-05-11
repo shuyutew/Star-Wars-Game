@@ -174,7 +174,7 @@ public class SWWorld extends World {
 		
 		// A blaster 
 		Blaster blaster = new Blaster(iface);
-		loc = myGrid.getLocationByCoordinates(3, 4);
+		loc = myGrid.getLocationByCoordinates(4, 5);
 		entityManager.setLocation(blaster, loc);
 
 /**We decided to setSymbol "T" for all TuskenRaider because we realised that if we set different symbol to 
@@ -200,7 +200,7 @@ public class SWWorld extends World {
 		TuskenRaider zac = new TuskenRaider(10, "Zac", iface, this);
 		
 		zac.setSymbol("T");
-		loc = myGrid.getLocationByCoordinates(6,5);
+		loc = myGrid.getLocationByCoordinates(6,7);
 		entityManager.setLocation(zac, loc);
 		
 		// A Tusken Raider

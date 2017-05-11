@@ -85,12 +85,17 @@ public class BenKenobi extends SWLegend {
 						}
 					}
 				}
+/** for this assignment, we assume that Ben will only train Luke, but we added train affordance to all SWActor
+ * because we would like to implement this game in a way that people with higher force ability will be able to train
+ * people with lower force ability. This means that Luke can be trained by some other people with higher force ability.
+ * */
 				else if(entity != this && entity instanceof SWActor){
 					if (entity.getSymbol() == "@"){
 						tobeTrained = entity;
-						LukeAround = true;
-						System.out.println(tobeTrained.getForce());
-						System.out.println("HI there LUKE");
+						if(tobeTrained.getForce() < this.getForce()){
+							LukeAround = true;
+						}
+						System.out.println(this.getForce());
 					}
 				}
 			}
@@ -114,7 +119,10 @@ public class BenKenobi extends SWLegend {
 			scheduler.schedule(attack.affordance, ben, 1);
 		}
 		
-		else if(LukeAround && tobeTrained.getForce()<10){
+//If luke is around and his force is less than the Ben's force, Ben will stop moving because he will ask to
+// train luke. Only when Luke moves away, indicating that he declines the training, then only Ben will continue
+// patrol.
+		else if(LukeAround){
 			System.out.println("NOT MOVING");
 		}
 		
