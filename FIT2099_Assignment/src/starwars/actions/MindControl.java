@@ -1,20 +1,16 @@
 package starwars.actions;
 
 import starwars.SWAffordance;
-import edu.monash.fit2099.gridworld.Grid.CompassBearing;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.SWActionInterface;
 import starwars.SWActor;
 import starwars.SWEntityInterface;
-import starwars.swinterfaces.SWGridController;
 
 public class MindControl extends SWAffordance implements SWActionInterface{
 	
-	private MessageRenderer m;
 
 	public MindControl(SWEntityInterface theTarget, MessageRenderer m) {
 		super(theTarget, m);
-		this.m = m;
 	}
 
 	/**
@@ -73,7 +69,6 @@ public class MindControl extends SWAffordance implements SWActionInterface{
 		targetActor.beingMindControlled(true);
 		a.controlling(true);
 		a.setPoorOnes(targetActor);
-		//targetActor.forcedTo();
 		
 	}
 	
