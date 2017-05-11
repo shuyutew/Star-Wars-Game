@@ -63,8 +63,7 @@ public class Player extends SWActor {
 			SWActor g = this.getPoorOnes();
 			System.out.println("--------------------");
 			System.out.println("Controlling " + g.getShortDescription() + ". Enter command of what you wish " + g.getShortDescription() + " to do");
-			SWActionInterface c = SWGridController.getUserDecision(g);
-			scheduler.schedule(c, g, 1);
+			scheduler.schedule(SWGridController.getUserDecision(g), g, 1);
 			this.Controlling = false;
 			
 		}
@@ -72,11 +71,6 @@ public class Player extends SWActor {
 			describeScene();
 			scheduler.schedule(SWGridController.getUserDecision(this), this, 1);
 		}
-		
-	}
-	
-	@Override
-	public void forcedTo() {	
 		
 	}
 	

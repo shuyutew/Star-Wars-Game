@@ -75,11 +75,6 @@ public class TuskenRaider extends SWActor {
 	}
 	
 	@Override
-	public void forcedTo() {
-		return;
-	}
-
-	@Override
 	public String getShortDescription() {
 		return name + " the Tusken Raider";
 	}

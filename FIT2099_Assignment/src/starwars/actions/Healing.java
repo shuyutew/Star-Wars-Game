@@ -36,10 +36,9 @@ public class Healing extends SWAffordance implements SWActionInterface {
 
 	@Override
 	/**
-	 * This should always returns true -- anything that's got a visible Leave affordance
+	 * This should always returns true -- anything that's got a visible Healing affordance
 	 * should be being held by the actor that can see the affordance.
 	 * 
-	 * @author dsquire
 	 * @param a the SWActor we are querying
 	 * @return true
 	 */

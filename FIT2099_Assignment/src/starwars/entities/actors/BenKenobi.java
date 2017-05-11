@@ -39,7 +39,7 @@ public class BenKenobi extends SWLegend {
 	private Patrol path;
 	private MessageRenderer m;
 	private boolean taken;
-	private SWEntityInterface benSS;
+	private SWEntityInterface benSS;	// ben's original holding stuff
 	private BenKenobi(MessageRenderer m, SWWorld world, Direction [] moves) {
 		super(Team.GOOD, 800, m, world);
 		this.m = m;
@@ -59,17 +59,12 @@ public class BenKenobi extends SWLegend {
 	}
 	
 	@Override
-	public void forcedTo() {	
-		
-	}
-	
-	@Override
 	protected void legendAct() {
 		
 		boolean isCanteen = false;
 		boolean LukeAround = false;
 		SWEntityInterface fullCan = null;
-		SWEntityInterface tobeTrained = null;
+		SWEntityInterface tobeTrained = null;		//the Actor that ben is going to train
 		
 		SWLocation location = this.world.getEntityManager().whereIs(this);
 

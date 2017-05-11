@@ -89,6 +89,5 @@ public interface SWEntityInterface extends EntityInterface {
 	 */
 	public void takeDamage(int damage);
 	
-	public void forcedTo();
 
 }

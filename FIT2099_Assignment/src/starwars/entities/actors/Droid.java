@@ -1,63 +1,86 @@
 package starwars.entities.actors;
 
-import java.util.List;
+import java.util.ArrayList;
 
+import edu.monash.fit2099.gridworld.Grid;
+import edu.monash.fit2099.gridworld.Grid.CompassBearing;
 import edu.monash.fit2099.simulator.space.Direction;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
-import starwars.SWEntityInterface;
 import starwars.SWActor;
-import starwars.SWRobots;
 import starwars.SWLocation;
+import starwars.SWRobots;
 import starwars.SWWorld;
 import starwars.Team;
-import starwars.Capability;
 import starwars.actions.Move;
-import starwars.actions.Leave;
-import starwars.actions.Take;
 import starwars.entities.actors.behaviors.Patrol;
+import starwars.entities.actors.behaviors.AttackInformation;
+import starwars.entities.actors.behaviors.AttackNeighbours;
 
-/**
- * Droids
- * 
- *
- */
-public class Droid extends SWRobots {
-
-	private static Droid droid = null;
-	private Patrol path;
+public class Droid extends SWRobots{
+	
 	private String name;
-	private int i;
-	public Droid(int i, String name, MessageRenderer m, SWWorld world, Direction [] moves) {
-		super(Team.NEUTRAL, 200, m, world);
-		this.name = name;
-		path = new Patrol(moves);
-		this.setShortDescription("Droid " + name);
-		this.setLongDescription("This is a droid named " + name);
-	}
 
-	public Droid(int i, String name, MessageRenderer m, SWWorld world) {
+	public Droid(int hitpoints, String name, MessageRenderer m, SWWorld world) {
 		super(Team.NEUTRAL, 200, m, world);
-		this.m = m;
-		this.name = name;
-		this.setShortDescription("Droid " + name);
-		this.setLongDescription("This is a droid named " + name);
+		this.name = name;	
 	}
 	
-
 	@Override
-	protected void robotAct() {
-
-		if(isDead()) {
-			return;
-		}
+	public void act() {
+		say(describeLocation());
 		
-		else if (getPatrol()) {
+/**
+ * While not owned, droids which ahve the property of patrolling will patrol.
+ */
+		if (this.getPatrol() && !(this.getStatus())) {
+			Direction [] patrolmoves = {CompassBearing.EAST, CompassBearing.EAST,
+	                CompassBearing.EAST,
+	                CompassBearing.EAST, CompassBearing.EAST,
+	                CompassBearing.WEST,
+	                CompassBearing.WEST, CompassBearing.WEST,
+	                CompassBearing.WEST, CompassBearing.WEST};
+			
+			Patrol path = new Patrol(patrolmoves);
 			Direction newdirection = path.getNext();
-			say(getShortDescription() + " moves " + newdirection);
+			say(getShortDescription() + " is heading " + newdirection + " next.");
 			Move myMove = new Move(newdirection, messageRenderer, world);
 
 			scheduler.schedule(myMove, this, 1);
 		}
+		
+/**
+ * this allows droids to say something at a 10% chance rate given that the droids had willTalk property
+ */
+		if(this.willTalk()){
+			if(Math.random() > 0.1){
+				ArrayList<String> possibleQuotes = new ArrayList<String>();
+				possibleQuotes.add("Don’t call me a mindless philosopher, you overweight glob of grease!");
+				possibleQuotes.add("This sandStorm is killing me.");
+				possibleQuotes.add("I've forgotten how much I hate space travel.");
+				possibleQuotes.add("This is suicide.");
+				possibleQuotes.add("Something's not right because now I can't see.");
+				
+				String saying = possibleQuotes.get((int) (Math.floor(Math.random() * possibleQuotes.size())));
+				say(this.getShortDescription() + " says: ' " + saying + " ' ");
+			}
+		}
+
+	}
+	
+	@Override
+	public String getShortDescription() {
+		return name + " the Droid";
+	}
+
+	@Override
+	public String getLongDescription() {
+		return this.getShortDescription();
+	}
+
+	private String describeLocation() {
+		SWLocation location = this.world.getEntityManager().whereIs(this);
+		return this.getShortDescription() + " [" + this.getHitpoints() +", " + this.getForce()  + "] is at " + location.getShortDescription();
+
 	}
 
 }

@@ -112,6 +112,7 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 //Thus, in the MindControl class, under the canDo() method, we would set some conditions so that actors with a certain
 //force ability would not be able to be mind controlled.
 		this.addAffordance(new MindControl(this, m));
+		
 	}
 	
 	/**
@@ -362,10 +363,6 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 		return humanControlled;
 	}
 	
-	public SWWorld getWorld(){
-		return world;
-	}
-	
 	public void beingMindControlled(boolean isit){
 		mindControlled = isit;
 	}
@@ -373,6 +370,11 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	public void controlling(boolean doit){
 		Controlling = doit;
 	}
+	
+	/** 
+	 * remembers the Actor that is being mind controlled so that 
+	 * @param a
+	 */
 	
 	public void setPoorOnes(SWActor a){
 		poorOne = a;

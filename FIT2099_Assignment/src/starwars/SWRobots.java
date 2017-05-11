@@ -1,6 +1,7 @@
 package starwars;
 
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
+import starwars.actions.Repair;
 
 /**
  * This class represents "droids" in the Star Wars universe.  
@@ -20,13 +21,19 @@ import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
  * Rather than implement act() like regular SWActors, Robots should implement
  * robotAct().  
  * 
- * @author Robert Merkel
+ * @author shuyu
  *
  */
 public abstract class SWRobots extends SWActor {
 
-	private boolean hasOwner;
-	private boolean willPatrol;
+	/**If or not this <code>SWRobot</code> has owner. <code>SWRobot</code>s does not have a owner by default*/
+	private boolean hasOwner = false;
+	
+	/**If or not this <code>SWRobot</code> will patrol while not Owned. <code>SWRobot</code>s will not patrol by default*/
+	private boolean willPatrol = false;
+	
+	/**If or not this <code>SWRobot</code> will patrol while not Owned. <code>SWRobot</code>s will not patrol by default*/
+	private boolean talk = false;
 	
 	/** 
 	 * Protected constructor to prevent random other code from creating 
@@ -39,31 +46,47 @@ public abstract class SWRobots extends SWActor {
 	
 	protected SWRobots(Team team, int hitpoints,  MessageRenderer m, SWWorld world) {
 		super(team, hitpoints, m, world);
-		hasOwner = false;
-		willPatrol = true;
+		this.addAffordance(new Repair(this, m));
 	}
-
 	
-	protected boolean isOwned() {
+	public void isOwned() {
+		this.hasOwner = true;
+	}
+	
+	public void disowned(){
+		this.hasOwner = false;
+	}
+	
+	public boolean getStatus(){
 		return hasOwner;
 	}
 	
-	protected boolean getPatrol() {
+	public void YesPatrol() {
+		this.willPatrol = true;
+	}
+	
+	public boolean getPatrol(){
 		return willPatrol;
 	}
 	
-	protected void owned() {
-		hasOwner = true;
-		willPatrol = false;
+	public void RandomTalk(){
+		this.talk = true;
+	}
+	
+	public boolean willTalk(){
+		return talk;
+	}
+	
+	public boolean isImmobile(){
+		return this.isDead();
 	}
 	
 	@Override
 	public void act() {
-		if (isOwned() || (willPatrol = true)) {
-			this.robotAct();
+		if (hasOwner || (willPatrol)) {
+			
 		}
 		return;
 	}
 
-	protected abstract void robotAct();
 }

@@ -7,6 +7,7 @@ import edu.monash.fit2099.simulator.space.Location;
 import edu.monash.fit2099.simulator.space.World;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.actions.Take;
+import starwars.actions.Repair;
 import starwars.entities.*;
 import starwars.entities.actors.*;
 
@@ -232,6 +233,23 @@ public class SWWorld extends World {
 		ben.setSymbol("B");
 		loc = myGrid.getLocationByCoordinates(4,  5);
 		entityManager.setLocation(ben, loc);
+		
+		
+		// A Droid
+		Droid R2D2 = new Droid(200, "R2-D2", iface, this);
+		
+		R2D2.setSymbol("RD");
+		R2D2.YesPatrol();
+		loc = myGrid.getLocationByCoordinates(3,3);
+		entityManager.setLocation(R2D2, loc);
+		
+		// A Droid
+		Droid C3PO = new Droid(200, "C-3PO", iface, this);
+				
+		C3PO.setSymbol("C-3PO");
+		C3PO.RandomTalk();
+		loc = myGrid.getLocationByCoordinates(2,2);
+		entityManager.setLocation(C3PO, loc);
 		
 	}
 
