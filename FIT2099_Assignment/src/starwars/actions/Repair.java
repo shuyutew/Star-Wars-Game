@@ -21,6 +21,11 @@ public class Repair extends SWAffordance{
 		return false;
 	}
 	
+	public void act(SWActor a){
+		
+	}
+	
+	
 	/**
 	 * A String describing what this action will do, suitable for display in a user interface
 	 * 

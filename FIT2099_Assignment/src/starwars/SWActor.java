@@ -345,7 +345,7 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 		EntityManager<SWEntityInterface, SWLocation> entityManager = SWAction.getEntitymanager();
 		entityManager.setLocation(newD, entityManager.whereIs(this));
 		
-		this.droidOwned = target;
+		this.droidOwned = newD;
 	}
 	
 	public void disownDroid(){
