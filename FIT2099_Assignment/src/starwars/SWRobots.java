@@ -69,6 +69,10 @@ public abstract class SWRobots extends SWActor {
 		this.hasOwner = false;
 	}
 	
+	/**
+	 * 
+	 * @return True if that robot is already owned by an actor. False otherwise.
+	 */
 	public boolean getStatus(){
 		return hasOwner;
 	}
@@ -77,6 +81,10 @@ public abstract class SWRobots extends SWActor {
 		this.willPatrol = isit;
 	}
 	
+	/**
+	 * 
+	 * @return true if that robot will patrol by itself each round. (for now is only R2D2)
+	 */
 	public boolean getPatrol(){
 		return willPatrol;
 	}
@@ -85,10 +93,18 @@ public abstract class SWRobots extends SWActor {
 		this.talk = true;
 	}
 	
+	/**
+	 * 
+	 * @return true if that robot will talk in random rounds.
+	 */
 	public boolean willTalk(){
 		return talk;
 	}
 	
+	/**
+	 * 
+	 * @return true when the robot hitpoints = 0.
+	 */
 	public boolean isImmobile(){
 		return this.isDead();
 	}
