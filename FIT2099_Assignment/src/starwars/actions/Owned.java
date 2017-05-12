@@ -56,11 +56,6 @@ public class Owned extends SWAffordance {
 			SWEntityInterface theDroid = (SWEntityInterface) target;
 			a.setDroidOwned(theDroid, theDroid.getHitpoints(), theDroid.getShortDescription(), this);
 			
-			//remove the take affordance
-			target.removeAffordance(this);
-			
-			// add a leave affordance
-			target.addAffordance(new Disowned(theDroid, messageRenderer));
 		}
 	}
 	

@@ -28,6 +28,7 @@ import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.actions.Attack;
 import starwars.actions.MindControl;
 import starwars.actions.Disowned;
+import starwars.actions.Owned;
 import starwars.actions.Train;
 import starwars.entities.actors.Droid;
 import starwars.actions.Move;
@@ -57,8 +58,6 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	
 	/**The droid owned by this <code>SWActor</code>. <code>droidOwned</code> is null if this <code>SWActor</code> is not owning a droid*/
 	private SWEntityInterface droidOwned;
-	
-	private boolean owned = false;
 	
 	private SWEntityInterface previousD;
 	
@@ -332,6 +331,23 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	public void setDroidOwned(SWEntityInterface target, int i, String name, Affordance a) {
 		assert target instanceof SWRobots;
 		
+		boolean targetIsActor = target instanceof SWRobots;
+		SWRobots targetActor = null;
+		
+		if (targetIsActor) {
+			targetActor = (SWRobots) target;
+		}
+		
+		targetActor.removeAffordance(a);
+		targetActor.isOwned();
+		targetActor.addAffordance(new Disowned(targetActor, messageRenderer));
+		EntityManager<SWEntityInterface, SWLocation> entityManager = SWAction.getEntitymanager();
+		entityManager.remove(target);
+		entityManager.setLocation(targetActor, entityManager.whereIs(this));
+		
+		this.droidOwned = targetActor;
+
+		/**
 		SWAction.getEntitymanager().remove(target);
 		
 		Droid newD = new Droid(i, name, messageRenderer, world);
@@ -346,11 +362,15 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 		entityManager.setLocation(newD, entityManager.whereIs(this));
 		
 		this.droidOwned = newD;
+		*/
 	}
 	
 	public void disownDroid(){
+		droidOwned.addAffordance(new Owned(droidOwned, messageRenderer));
+		SWRobots tar = (SWRobots)droidOwned;
+		tar.disowned();
 		EntityManager<SWEntityInterface, SWLocation> entityManager = SWAction.getEntitymanager();
-		entityManager.setLocation(previousD, entityManager.whereIs(this));
+		entityManager.setLocation(tar, entityManager.whereIs(this));
 		
 		this.droidOwned = null;
 	}

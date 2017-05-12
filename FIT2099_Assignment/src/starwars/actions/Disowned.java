@@ -45,6 +45,7 @@ public class Disowned extends SWAffordance {
 				((SWRobots) target).disowned();
 				a.setNotOwner();
 				target.removeAffordance(this);
+				target.addAffordance(new Owned((SWEntityInterface)target, messageRenderer));
 			}
 		}
 	}

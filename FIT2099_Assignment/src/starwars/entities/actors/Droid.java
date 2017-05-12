@@ -56,7 +56,7 @@ public class Droid extends SWRobots{
 						say(getShortDescription() + " is heading " + newdirection + " next.");
 						Move myMove = new Move(newdirection, messageRenderer, world);
 
-						scheduler.schedule(myMove, this, 1);
+						scheduler.schedule(myMove, this, 0);
 					}
 					
 			/**
