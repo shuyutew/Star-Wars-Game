@@ -60,8 +60,6 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	
 	private boolean owned = false;
 	
-	private SWEntityInterface previousD;
-	
 	/**If or not this <code>SWActor</code> is human controlled. <code>SWActor</code>s are not human controlled by default*/
 	protected boolean humanControlled = false;
 	
@@ -271,7 +269,7 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	 * @see 	#droidOwned
 	 */
 	public SWEntityInterface getDroidOwned() {
-		return this.droidOwned;
+		return droidOwned;
 	}
 
 	/**
@@ -335,7 +333,7 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 		SWAction.getEntitymanager().remove(target);
 		
 		Droid newD = new Droid(i, name, messageRenderer, world);
-
+		
 		newD.setSymbol("RD");
 		newD.internalOil();
 		newD.isOwned();
@@ -345,14 +343,7 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 		EntityManager<SWEntityInterface, SWLocation> entityManager = SWAction.getEntitymanager();
 		entityManager.setLocation(newD, entityManager.whereIs(this));
 		
-		this.droidOwned = target;
-	}
-	
-	public void disownDroid(){
-		EntityManager<SWEntityInterface, SWLocation> entityManager = SWAction.getEntitymanager();
-		entityManager.setLocation(previousD, entityManager.whereIs(this));
-		
-		this.droidOwned = null;
+		this.droidOwned = newD;
 	}
 	
 	
