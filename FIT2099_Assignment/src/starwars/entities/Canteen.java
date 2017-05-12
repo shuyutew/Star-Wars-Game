@@ -11,14 +11,27 @@ import starwars.actions.Fill;
  * It can be filled at a Reservoir, or any other Entity
  * that has a Dip affordance.
  * 
- * Please note that drinking from the canteen is currently 
- * unimplemented
- * 
- * 
- * @author Robert Merkel
- * 
  */
 public class Canteen extends SWEntity implements Fillable {
+	
+	/**
+	 * Constructor for the <code>Canteen</code> class. This constructor will,
+	 * <ul>
+	 * 	<li>Initialize the message renderer for the <code>Canteen</code></li>
+	 * 	<li>Set the short description of this <code>Canteen</code> to "a canteen"</li>
+	 * 	<li>Set the long description of this <code>Canteen</code> to "a slightly battered aluminium canteen"</li>
+	 * 	<li>Set the hit points of this <code>Canteen</code> to initial level</li>
+	 * 	<li>Add a capacity for the <code>Canteen</code> to determine its max level it can be filled</li>
+	 * 	<li>Add a <code>Take</code> affordance to this <code>Canteen</code> so it can be taken</li> 
+	 *	<li>Add a <code>FILLABLE Capability</code> to this <code>Canteen</code> so it can be used to <code>Fill</code></li>
+	 *	<li>Add a <code>DRINKABLE Capability</code> to this <code>Canteen</code> so it can be used to <code>Heal</code></li>
+	 * </ul>
+	 * 
+	 * @param m <code>MessageRenderer</code> to display messages.
+	 * 
+	 * @see {@link starwars.actions.Take}
+	 * @see {@link starwars.Capability}
+	 */
 
 	private int capacity;
 	private int level;
@@ -39,13 +52,15 @@ public class Canteen extends SWEntity implements Fillable {
 		this.addAffordance(new Fill(this, m));
 	}
 
+	/**
+	 * This method fills the <code>Canteen<code> object when the level does not reach its capacity
+	 */
 	public void fill() {
 	
 		level = capacity;
 		capabilities.add(Capability.DRINKABLE);
 	}
 
-	
 	@Override 
 	public String getShortDescription() {
 		return shortDescription + " [" + level + "/" + capacity + "]";
@@ -56,6 +71,10 @@ public class Canteen extends SWEntity implements Fillable {
 		return longDescription + " [" + level + "/" + capacity + "]";
 	}
 	
+	/**
+	 * When <code>Canteen</code> object is used, the level of the object decrement by 1
+	 * When level reaches 0, the objects's capability Drinkable is removed
+	 */
 	@Override
 	public void takeDamage(int damage) {
 		this.level -= 1;
@@ -70,6 +89,9 @@ public class Canteen extends SWEntity implements Fillable {
 		
 	}
 	
+	/**
+	 * Shows the level of the <code>Canteen</code> object
+	 */
 	public int getLevel(){
 		return level;
 	}

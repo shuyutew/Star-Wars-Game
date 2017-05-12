@@ -50,12 +50,15 @@ public class MindControl extends SWAffordance implements SWActionInterface{
 			targetActor = (SWActor) target;
 		}
 		
-		if (a.getForce() >= 8 && targetActor.getForce() <= 4){
+		if (a.getForce() >= 8 && targetActor.getForce() <= 4 && targetActor.getForce()!=0){
 			return true;
 		}
 		return false;
 	}
 	
+	/**
+	 * If the target is able to be mind controlled, perform the mind control action of the target
+	 */
 	@Override
 	public void act(SWActor a){
 		SWEntityInterface target = this.getTarget();

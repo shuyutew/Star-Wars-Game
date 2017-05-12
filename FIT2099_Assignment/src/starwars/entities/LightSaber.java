@@ -46,8 +46,6 @@ public class LightSaber extends SWEntity {
 		this.capabilities.add(Capability.WEAPON);// it's a weapon.  
 	}
 	
-	
-	
 	/**
 	 * Lightsabers are indestructible, so doing damage to them has no effect
 	 * @param damage - the amount of damage that would be inflicted on a non-mystical Entity
@@ -68,7 +66,4 @@ public class LightSaber extends SWEntity {
 	public String getSymbol() {
 		return "|";
 	}
-	
-	
-
 }

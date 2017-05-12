@@ -10,12 +10,23 @@ import starwars.SWEntityInterface;
 
 
 public class Healing extends SWAffordance implements SWActionInterface {
-
+	
+	/**
+	 * Constructor for <code>Move</code> class. Will initialize the direction and the world for the <code>Move</code>.
+	 * 
+	 * @param target of what needs to be filled
+	 * @param m <code>MessageRenderer</code> to display messages
+	 */
 	public Healing(SWEntityInterface theTarget, MessageRenderer m) {
 		super(theTarget, m);
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 *Returns the time taken to perform this <code>Move</code> action.
+	 *
+	 *@return the duration of the <code>Move</code> action. Currently hard coded to return 1
+	 */
 	@Override
 	public int getDuration() {
 		// TODO Auto-generated method stub
@@ -46,6 +57,10 @@ public class Healing extends SWAffordance implements SWActionInterface {
 		return a.getItemCarried().equals(target);
 	}
 
+	/**
+	 * If SWActor is carrying an item, the item carry has capability Drinkable, 
+	 * SWActor will use it to heal themselves
+	 */
 	@Override
 	public void act(SWActor a) {
 		
@@ -55,19 +70,18 @@ public class Healing extends SWAffordance implements SWActionInterface {
 				int current = a.getHitpoints();
 				int difference = a.getmaxHitpoints() - current;
 				if (difference >= a.getItemCarried().getHitpoints()){
-					a.takeDamage(a.getItemCarried().getHitpoints() * -1); // blunt weapon won't do much, but it will still do some damage
+					a.takeDamage(a.getItemCarried().getHitpoints() * -1);
 				}
 				else{
 					a.takeDamage(difference * -1);
 				}
-				a.getItemCarried().takeDamage(1); // weapon gets blunt
+				a.getItemCarried().takeDamage(1);
 				a.say(a.getShortDescription() + " is healing");
 			}
 			else{
 				a.say(a.getItemCarried().getShortDescription() + " is empty. Need to fill it with water.");
 			}
 		}
-
 	}
 	
 	@Override
