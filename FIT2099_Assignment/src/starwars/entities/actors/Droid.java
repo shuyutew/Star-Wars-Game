@@ -76,30 +76,30 @@ public class Droid extends SWRobots{
 						}
 					}
 					
-		}
-		
-		if(this.checkInternal()){
+					if(this.checkInternal()){
 
-			SWLocation location = this.world.getEntityManager().whereIs(this);
-			
-			List<SWEntityInterface> contents = this.world.getEntityManager().contents(location);
-			for (SWEntityInterface entity : contents) {
-				if (entity instanceof SWRobots){
-					if (entity.getHitpoints() < entity.getmaxHitpoints()){
+						SWLocation location = this.world.getEntityManager().whereIs(this);
 						
-						boolean targetIsActor = entity instanceof SWActor;
-						SWActor targetActor = null;
-						
-						if (targetIsActor) {
-							targetActor = (SWActor) entity;
+						List<SWEntityInterface> contents = this.world.getEntityManager().contents(location);
+						for (SWEntityInterface entity : contents) {
+							if (entity instanceof SWRobots){
+								if (entity.getHitpoints() < entity.getmaxHitpoints()){
+									
+									boolean targetIsActor = entity instanceof SWActor;
+									SWActor targetActor = null;
+									
+									if (targetIsActor) {
+										targetActor = (SWActor) entity;
+									}
+									
+									System.out.println("MOTHEHERREE");
+									Healing heal = new Healing(targetActor, m);
+									scheduler.schedule(heal, targetActor, 0);
+								}
+							}
 						}
-						
-						System.out.println("MOTHEHERREE");
-						Healing heal = new Healing(targetActor, m);
-						scheduler.schedule(heal, targetActor, 0);
 					}
-				}
-			}
+					
 		}
 
 
