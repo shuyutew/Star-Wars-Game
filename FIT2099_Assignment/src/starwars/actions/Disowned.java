@@ -23,9 +23,20 @@ public class Disowned extends SWAffordance {
 	 * @param a the SWActor we are querying
 	 * @return true
 	 */
-	public boolean canDo(SWActor a) {
-		return a.getDroidOwned().equals(target);
-	}
+ 	public boolean canDo(SWActor a) {
+ 		SWEntityInterface target = this.getTarget();
+ 		boolean targetIsActor = target instanceof SWRobots;
+ 		SWRobots targetActor = null;
+ 		
+ 		if (targetIsActor) {
+ 			targetActor = (SWRobots) target;
+ 		}
+ 		
+ 		if (a.getDroidOwned() == null && !(targetActor.getStatus())){
+ 			return true;
+ 		}
+ 		return false;
+ 	}
 	
 	@Override
 	/**
@@ -36,19 +47,20 @@ public class Disowned extends SWAffordance {
 	 * @author dsquire
 	 * @param a the SWActor that is disowning the target
 	 */
-	public void act(SWActor a) {
-		if (a.getDroidOwned() == null) { // the actor does not own any droids
-			// This should really throw an exception, but let's just use a message for now.
-			a.say("Disowned affordance called by actor that does not own any droids. This should never happen");
-		}
-		else {
-			if (target instanceof SWRobots) {
-				target.removeAffordance(this);
-				target.addAffordance(new Take((SWEntityInterface)target, this.messageRenderer)); // add a Take affordance
-			}
-		}
-	}
-
+ 	public void act(SWActor a) {
+ 		if (a.getDroidOwned() == null) { // the actor does not own any droids
+ 			// This should really throw an exception, but let's just use a message for now.
+ 			a.say("Disowned affordance called by actor that does not own any droids. This should never happen");
+ 		}
+ 		else {
+ 			if (target instanceof SWRobots) {
+  				((SWRobots) target).disowned();
+  				a.setNotOwner();
+  				target.removeAffordance(this);
+				target.addAffordance(new Owned((SWEntityInterface)target, messageRenderer));
+  			}
+  		}
+  	}
 
 	@Override
 	/**

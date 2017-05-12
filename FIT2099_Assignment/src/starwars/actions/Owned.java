@@ -25,37 +25,39 @@ public class Owned extends SWAffordance {
 	 */
 	
 	@Override
-	public boolean canDo(SWActor a) {
-		if (a.getDroidOwned() == null && !(this.getTarget().getisOwned())){
-			return true;
-		}
-		return false;
-	}
+ 	public boolean canDo(SWActor a) {
+ 		SWEntityInterface target = this.getTarget();
+ 		boolean targetIsActor = target instanceof SWRobots;
+ 		SWRobots targetActor = null;
+ 		
+ 		if (targetIsActor) {
+ 			targetActor = (SWRobots) target;
+ 		}
+ 		
+ 		if (a.getDroidOwned() == null && !(targetActor.getStatus())){
+ 			return true;
+ 		}
+ 		return false;
+ 	}
 	
-	/**
-	 * Perform the <code>Owned</code> action by setting the droids by the <code>SWActor</code> to the target (
-	 * the <code>SWActor a</code>'s droids would be the target of this <code>Owned</code>).
-	 * <p>
-	 * This method should only be called if the <code>SWActor a</code> is alive.
-	 * 
-
-	 * @param 	a the <code>SWActor</code> that is taking the target
-	 * @see 	{@link #theTarget}
-	 * @see		{@link starwars.SWActor#isDead()}
-	 */
-	@Override
-	public void act(SWActor a) {
-		if (target instanceof SWRobots) {
-			SWEntityInterface theDroid = (SWEntityInterface) target;
-			a.setDroidOwned(theDroid, theDroid.getHitpoints(), theDroid.getShortDescription());
-			
-			//remove the take affordance
-			target.removeAffordance(this);
-			
-			// add a leave affordance
-			target.addAffordance(new Disowned(theDroid, messageRenderer));
-		}
-	}
+ 	/**
+ 	 * Perform the <code>Owned</code> action by setting the droids by the <code>SWActor</code> to the target (
+ 	 * the <code>SWActor a</code>'s droids would be the target of this <code>Owned</code>).
+ 	 * <p>
+ 	 * This method should only be called if the <code>SWActor a</code> is alive.
+  	 * 
+  
+  	 * @param 	a the <code>SWActor</code> that is taking the target
+  	 */
+	
+ 	@Override
+  	public void act(SWActor a) {
+  		if (target instanceof SWRobots) {
+  			SWEntityInterface theDroid = (SWEntityInterface) target;
+			a.setDroidOwned(theDroid, this);
+ 
+  		}
+  	}
 	
 	
 	/**

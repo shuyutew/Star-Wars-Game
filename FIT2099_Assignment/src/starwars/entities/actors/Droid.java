@@ -89,10 +89,13 @@ public class Droid extends SWRobots{
 		if (this.isImmobile()){
 			parts = 0;
 		}
+		
+		//this is where when the droid is being owned. The droid does not do anything. It follows the owner.
+		//all those happens in the SWActor class in the setDroidOwner() method
+	  	if (this.getStatus()){
+	  		return;
+	  	}
 
-		if (this.getStatus()){
-			System.out.println("MYGOOOODDDDD");
-		}
 		
 		else{
 			say(describeLocation());
@@ -113,7 +116,7 @@ public class Droid extends SWRobots{
 			 * this allows droids to say something at a 10% chance rate given that the droids had willTalk property
 			 */
 					if(this.willTalk()){
-						if(Math.random() > 0.1){
+						if(Math.random() > 0.9){
 							ArrayList<String> possibleQuotes = new ArrayList<String>();
 							possibleQuotes.add("Don�t call me a mindless philosopher, you overweight glob of grease!");
 							possibleQuotes.add("This sandStorm is killing me.");
@@ -148,7 +151,6 @@ public class Droid extends SWRobots{
 							targetActor = (SWActor) entity;
 						}
 						
-						System.out.println("MOTHEHERREE");
 						Healing heal = new Healing(targetActor, m);
 						scheduler.schedule(heal, targetActor, 0);
 					}
@@ -169,7 +171,7 @@ public class Droid extends SWRobots{
 
 	private String describeLocation() {
 		SWLocation location = this.world.getEntityManager().whereIs(this);
-		return this.getShortDescription() + " [" + this.getHitpoints() +", " + this.getParts()  + "] is at " + location.getShortDescription();
+		return this.getShortDescription() + " [" + this.getHitpoints() +", " + this.getForce()  + "]"+ "[ "+ this.getParts() + " ]" + " is at " + location.getShortDescription();
 
 	}
 

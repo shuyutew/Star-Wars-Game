@@ -27,8 +27,9 @@ import edu.monash.fit2099.simulator.time.Scheduler;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.actions.Attack;
 import starwars.actions.MindControl;
+import starwars.actions.Disowned;
+import starwars.actions.Owned;
 import starwars.actions.Train;
-import starwars.entities.actors.Droid;
 import starwars.actions.Move;
 
 public abstract class SWActor extends Actor<SWActionInterface> implements SWEntityInterface {
@@ -241,80 +242,89 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 		return actionList;
 	}
 	
-	/**
-	 * Returns the item carried by this <code>SWActor</code>. 
-	 * <p>
-	 * This method only returns the reference of the item carried 
-	 * and does not remove the item held from this <code>SWActor</code>.
-	 * <p>
-	 * If this <code>SWActor</code> is not carrying an item this method will return null.
-	 * 
-	 * @return 	the item carried by this <code>SWActor</code> or null if no item is held by this <code>SWActor</code>
-	 * @see 	#itemCarried
-	 */
-	public SWEntityInterface getItemCarried() {
-		return itemCarried;
-	}
+ 	/**
+ 	 * Returns the item carried by this <code>SWActor</code>. 
+ 	 * <p>
+ 	 * This method only returns the reference of the item carried 
+ 	 * and does not remove the item held from this <code>SWActor</code>.
+ 	 * <p>
+ 	 * If this <code>SWActor</code> is not carrying an item this method will return null.
+ 	 * 
+ 	 * @return 	the item carried by this <code>SWActor</code> or null if no item is held by this <code>SWActor</code>
+ 	 * @see 	#itemCarried
+ 	 */
+ 	public SWEntityInterface getItemCarried() {
+ 		return itemCarried;
+ 	}
+ 	
+ 	/**
+ 	 * Returns the droid owned by this <code>SWActor</code>. 
+ 	 * <p>
+ 	 * This method only returns the reference of the droid owned
+ 	 * and does not remove the ownership held from this <code>SWActor</code>.
+ 	 * <p>
+ 	 * If this <code>SWActor</code> does not own a droid this method will return null.
+ 	 * 
+ 	 * @return 	the droid owned by this <code>SWActor</code> or null if no droid owned by this <code>SWActor</code>
+ 	 * @see 	#droidOwned
+ 	 */
+ 	public SWEntityInterface getDroidOwned() {
+ 		return droidOwned;
+ 	}
+ 
+ 	/**
+ 	 * Sets the team of this <code>SWActor</code> to a new team <code>team</code>.
+ 	 * <p>
+ 	 * Useful when the <code>SWActor</code>'s team needs to change dynamically during the simulation.
+ 	 * For example, a bite from an evil actor makes a good actor bad.
+ 	 *
+ 	 * @param 	team the new team of this <code>SWActor</code>
+ 	 * @see 	#team
+ 	 */
+ 	public void setTeam(Team team) {
+ 		this.team = team;
+ 	}
 	
-	/**
-	 * Returns the droid owned by this <code>SWActor</code>. 
-	 * <p>
-	 * This method only returns the reference of the droid owned
-	 * and does not remove the ownership held from this <code>SWActor</code>.
-	 * <p>
-	 * If this <code>SWActor</code> does not own a droid this method will return null.
-	 * 
-	 * @return 	the droid owned by this <code>SWActor</code> or null if no droid owned by this <code>SWActor</code>
-	 * @see 	#droidOwned
-	 */
-	public SWEntityInterface getDroidOwned() {
-		return droidOwned;
-	}
-
-	/**
-	 * Sets the team of this <code>SWActor</code> to a new team <code>team</code>.
-	 * <p>
-	 * Useful when the <code>SWActor</code>'s team needs to change dynamically during the simulation.
-	 * For example, a bite from an evil actor makes a good actor bad.
-	 *
-	 * @param 	team the new team of this <code>SWActor</code>
-	 * @see 	#team
-	 */
-	public void setTeam(Team team) {
-		this.team = team;
-	}
-	
-	public void setMaxHit(int maxxie){
-		this.maxHitpoint = maxxie;
-	}
-
-	/**
-	 * Method insists damage on this <code>SWActor</code> by reducing a 
-	 * certain amount of <code>damage</code> from this <code>SWActor</code>'s <code>hitpoints</code>
-	 * 
-	 * @param 	damage the amount of <code>hitpoints</code> to be reduced
-	 * @pre 	<code>damage</code> should not be negative
-	 */
-	@Override
-	public void takeDamage(int damage) {
-		//Precondition 1: Ensure the damage is not negative. Negative damage could increase the SWActor's hitpoints
-		assert (damage >= 0)	:"damage on SWActor must not be negative";
-		this.hitpoints -= damage;
-	}
-
-	/**
-	 * Assigns this <code>SWActor</code>'s <code>itemCarried</code> to 
-	 * a new item <code>target</code>
-	 * <p>
-	 * This method will replace items already held by the <code>SWActor</code> with the <code>target</code>.
-	 * A null <code>target</code> would signify that this <code>SWActor</code> is not carrying an item anymore.
-	 * 
-	 * @param 	target the new item to be set as item carried
-	 * @see 	#itemCarried
-	 */
-	public void setItemCarried(SWEntityInterface target) {
-		this.itemCarried = target;
-	}
+ 	public void setMaxHit(int maxxie){
+ 		this.maxHitpoint = maxxie;
+ 	}
+ 
+ 	/**
+ 	 * Method insists damage on this <code>SWActor</code> by reducing a 
+ 	 * certain amount of <code>damage</code> from this <code>SWActor</code>'s <code>hitpoints</code>
+ 	 * 
+ 	 * @param 	damage the amount of <code>hitpoints</code> to be reduced
+ 	 * @pre 	<code>damage</code> should not be negative
+ 	 */
+ 	@Override
+ 	public void takeDamage(int damage) {
+ 		//Precondition 1: Ensure the damage is not negative. Negative damage could increase the SWActor's hitpoints
+ 		//assert (damage >= 0)	:"damage on SWActor must not be negative";
+ 		//We don't need these preconditions because we could use them during healing to increase the SWActor's hitpoints.
+ 		this.hitpoints -= damage;
+ 	}
+ 
+ 	/**
+ 	 * Assigns this <code>SWActor</code>'s <code>itemCarried</code> to 
+ 	 * a new item <code>target</code>
+ 	 * <p>
+ 	 * This method will replace items already held by the <code>SWActor</code> with the <code>target</code>.
+ 	 * A null <code>target</code> would signify that this <code>SWActor</code> is not carrying an item anymore.
+ 	 * 
+ 	 * @param 	target the new item to be set as item carried
+ 	 * @see 	#itemCarried
+ 	 */
+ 	public void setItemCarried(SWEntityInterface target) {
+ 		this.itemCarried = target;
+ 	}
+ 	
+ 	/**
+ 	 * Assigns this <code>SWActor</code>'s <code>droidOwned</code> to 
+ 	 * a new droid <code>target</code>
+ 	 * <p>
+ 	 * This method will replace droid already owned by the <code>SWActor</code> with the <code>target</code>.
+ 	 * A null <code>target</code> would signify that this <code>SWActor</code> is not owning a droid anymore.
+ 	 * 
 	
 	/**
 	 * Assigns this <code>SWActor</code>'s <code>droidOwned</code> to 
@@ -326,26 +336,51 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	 * @param 	target the new droid to be set as droid owned
 	 * @see 	#droidOwned
 	 */
-	public void setDroidOwned(SWEntityInterface target, int i, String name) {
-		boolean targetIsActor = target instanceof SWRobots;
-		SWRobots targetActor = null;
-		
-		if (targetIsActor) {
-			targetActor = (SWRobots) target;
-		}
-		
-		SWAction.getEntitymanager().remove(target);
-		
-		Droid newD = new Droid(i, name, messageRenderer, world);
-		
-		newD.setSymbol("RD");
-		newD.internalOil();
-		newD.isOwned();
-		EntityManager<SWEntityInterface, SWLocation> entityManager = SWAction.getEntitymanager();
-		entityManager.setLocation(newD, entityManager.whereIs(this));
-		
-		this.droidOwned = newD;
+	public void setDroidOwned(SWEntityInterface target, Affordance a) {
+  		assert target instanceof SWRobots;
+  		
+  		boolean targetIsActor = target instanceof SWRobots;
+ 		SWRobots targetActor = null;
+ 		
+ 		if (targetIsActor) {
+ 			targetActor = (SWRobots) target;
+ 		}
+ 		
+ 		targetActor.removeAffordance(a);
+ 		targetActor.isOwned();
+ 		targetActor.addAffordance(new Disowned(targetActor, messageRenderer));
+ 		EntityManager<SWEntityInterface, SWLocation> entityManager = SWAction.getEntitymanager();
+ 		entityManager.remove(target);
+ 		entityManager.setLocation(targetActor, entityManager.whereIs(this));
+ 		
+ 		this.droidOwned = targetActor;
+ 
+ 		/**
+ 		SWAction.getEntitymanager().remove(target);
+ 		
+ 		Droid newD = new Droid(i, name, messageRenderer, world);
+ 		newD.setSymbol("RD");
+ 		newD.internalOil();
+ 		newD.isOwned();
+ 		newD.removeAffordance(a);
+ 		newD.addAffordance(new Disowned(newD, messageRenderer));
+ 
+ 		EntityManager<SWEntityInterface, SWLocation> entityManager = SWAction.getEntitymanager();
+ 		entityManager.setLocation(newD, entityManager.whereIs(this));
+ 		
+ 		this.droidOwned = newD;
+ 		*/
 	}
+	
+ 	public void disownDroid(){
+ 		droidOwned.addAffordance(new Owned(droidOwned, messageRenderer));
+ 		SWRobots tar = (SWRobots)droidOwned;
+ 		tar.disowned();
+ 		EntityManager<SWEntityInterface, SWLocation> entityManager = SWAction.getEntitymanager();
+ 		entityManager.setLocation(tar, entityManager.whereIs(this));
+ 		
+ 		this.droidOwned = null;
+ 	}
 	
 	
 	/**
@@ -444,16 +479,20 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 		/* Actually, that's not the case: all non-movement actions are transferred to newActions before the movements are transferred. --ram */
 	}
 	
-	public void setisOwned(){
-		owned = true;
-	}
-	
-	public boolean getisOwned(){
-		return owned;
-	}
-
-
-	
+ 	public void setNotOwner(){
+ 		droidOwned = null;
+ 	}
+ 
+ 	/**
+ 	 * Only actors can be owners thus this method is not in the interface.
+ 	 * @return boolean returns true if actor has already own a droid, false otherwise.  
+ 	 */
+ 	public boolean getisOwner(){
+ 		if (droidOwned != null){
+ 			return true;
+ 		}
+ 		return false;
+ 	}
 	
 	
 }

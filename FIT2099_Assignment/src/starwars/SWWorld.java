@@ -137,7 +137,7 @@ public class SWWorld extends World {
 		TestActor owen = new TestActor("UncleOwen", iface, this);
 		
 		owen.setSymbol("UO");
-		loc = myGrid.getLocationByCoordinates(6,5);
+		loc = myGrid.getLocationByCoordinates(7,8);
 		entityManager.setLocation(owen, loc);
 		owen.resetMoveCommands(loc);
 		
@@ -147,6 +147,7 @@ public class SWWorld extends World {
 		beru.setSymbol("AB");
 		loc = myGrid.getLocationByCoordinates(8,8);
 		entityManager.setLocation(beru, loc);
+		beru.resetMoveCommands(loc);
 		
 		// Ben Kenobi's hut
 		/*

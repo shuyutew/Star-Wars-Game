@@ -89,9 +89,5 @@ public interface SWEntityInterface extends EntityInterface {
 	 */
 	public void takeDamage(int damage);
 	
-	public boolean getisOwned();
-	
-	public void setisOwned();
-	
 
 }
