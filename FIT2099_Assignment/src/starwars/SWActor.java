@@ -21,12 +21,14 @@ import java.util.HashSet;
 import edu.monash.fit2099.gridworld.Grid.CompassBearing;
 import edu.monash.fit2099.simulator.matter.Actor;
 import edu.monash.fit2099.simulator.matter.Affordance;
+import edu.monash.fit2099.simulator.matter.EntityManager;
 import edu.monash.fit2099.simulator.space.Location;
 import edu.monash.fit2099.simulator.time.Scheduler;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.actions.Attack;
 import starwars.actions.MindControl;
 import starwars.actions.Train;
+import starwars.entities.actors.Droid;
 import starwars.actions.Move;
 
 public abstract class SWActor extends Actor<SWActionInterface> implements SWEntityInterface {
@@ -52,11 +54,10 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	/**The item carried by this <code>SWActor</code>. <code>itemCarried</code> is null if this <code>SWActor</code> is not carrying an item*/
 	private SWEntityInterface itemCarried;
 	
-	/** this is for droids, because there might be droids that has an internal oil resorvior*/
-	private SWEntityInterface itemCarriedalong;
-	
-	/**The item carried by this <code>SWActor</code>. <code>droidOwned</code> is null if this <code>SWActor</code> is not owning a droid*/
+	/**The droid owned by this <code>SWActor</code>. <code>droidOwned</code> is null if this <code>SWActor</code> is not owning a droid*/
 	private SWEntityInterface droidOwned;
+	
+	private boolean owned;
 	
 	/**If or not this <code>SWActor</code> is human controlled. <code>SWActor</code>s are not human controlled by default*/
 	protected boolean humanControlled = false;
@@ -325,8 +326,25 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	 * @param 	target the new droid to be set as droid owned
 	 * @see 	#droidOwned
 	 */
-	public void setDroidOwned(SWEntityInterface target) {
-		this.droidOwned = target;
+	public void setDroidOwned(SWEntityInterface target, int i, String name) {
+		boolean targetIsActor = target instanceof SWRobots;
+		SWRobots targetActor = null;
+		
+		if (targetIsActor) {
+			targetActor = (SWRobots) target;
+		}
+		
+		SWAction.getEntitymanager().remove(target);
+		
+		Droid newD = new Droid(i, name, messageRenderer, world);
+		
+		newD.setSymbol("RD");
+		newD.internalOil();
+		newD.isOwned();
+		EntityManager<SWEntityInterface, SWLocation> entityManager = SWAction.getEntitymanager();
+		entityManager.setLocation(newD, entityManager.whereIs(this));
+		
+		this.droidOwned = newD;
 	}
 	
 	
@@ -424,6 +442,14 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 		
 		// TODO: This assumes that the only actions are the Move actions. This will clobber any others. Needs to be fixed.
 		/* Actually, that's not the case: all non-movement actions are transferred to newActions before the movements are transferred. --ram */
+	}
+	
+	public void setisOwned(){
+		owned = true;
+	}
+	
+	public boolean getisOwned(){
+		return owned;
 	}
 
 

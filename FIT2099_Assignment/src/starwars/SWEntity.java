@@ -29,6 +29,8 @@ public class SWEntity extends Entity implements SWEntityInterface {
 	protected int level = 0; // Not all non actor entities will make use of this.(currently only canteen uses this)
 	
 	protected int forceAbilityLevel = 0; //Non actor entites will have force of ) which means no force
+	
+	protected boolean owned = false;
 
 	/**
 	 * Constructor for this <code>SWEntity</code>. Will initialize this <code>SWEntity</code>'s
@@ -105,5 +107,19 @@ public class SWEntity extends Entity implements SWEntityInterface {
 		assert (damage >= 0)	:"damage on SWEntity must not be negative";
 		this.hitpoints -= damage;
 	}
+	
+	/**
+	 * These 2 methods is to check where this entity is owned by any actors or not. Mainly is for droids.
+	 * else it will return false
+	 */
+	public boolean getisOwned(){
+		return owned;
+	}
+	
+	public void setisOwned(){
+		owned = true;
+	}
+	
+	
 	
 }

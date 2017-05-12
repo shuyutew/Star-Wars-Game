@@ -233,15 +233,18 @@ public class SWWorld extends World {
 		ben.setSymbol("B");
 		loc = myGrid.getLocationByCoordinates(4,  5);
 		entityManager.setLocation(ben, loc);
-		
-		
+
+		Direction [] patrolD = {CompassBearing.EAST, CompassBearing.EAST,
+                CompassBearing.EAST, CompassBearing.EAST, CompassBearing.EAST,
+                CompassBearing.WEST, CompassBearing.WEST, CompassBearing.WEST,
+                CompassBearing.WEST, CompassBearing.WEST};
 		// A Droid
-		Droid R2D2 = new Droid(200, "R2-D2", iface, this);
+		Droid R2D2 = new Droid(200, "R2-D2", iface, this, patrolD);
 		
 		R2D2.setSymbol("RD");
-		R2D2.YesPatrol();
+		R2D2.setPatrol(true);
 		R2D2.internalOil();
-		loc = myGrid.getLocationByCoordinates(3,3);
+		loc = myGrid.getLocationByCoordinates(2,3);
 		entityManager.setLocation(R2D2, loc);
 		
 		// A Droid
@@ -269,7 +272,10 @@ public class SWWorld extends World {
 	 */
 	public boolean canMove(SWActor a, Direction whichDirection) {
 		SWLocation where = (SWLocation)entityManager.whereIs(a); // requires a cast for no reason I can discern
-		return where.hasExit(whichDirection);
+		if (where!= null){
+			return where.hasExit(whichDirection);
+		}
+		return false;
 	}
 	
 	/**

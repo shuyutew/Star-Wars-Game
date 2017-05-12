@@ -3,6 +3,7 @@ package starwars;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.actions.Leave;
 import starwars.actions.Repair;
+import starwars.actions.Owned;
 import starwars.entities.Canteen;
 
 /**
@@ -40,6 +41,9 @@ public abstract class SWRobots extends SWActor {
 	/**If or not this <code>SWRobot</code> has an internal oil reservoir. <code>SWRobot</code>s will not have it by default*/
 	private boolean internal = false;
 	
+	/** this is for droids, because there might be droids that has an internal oil resorvior*/
+	private SWEntityInterface itemCarriedalong;
+	
 	private MessageRenderer m;
 	
 	/** 
@@ -54,11 +58,13 @@ public abstract class SWRobots extends SWActor {
 	protected SWRobots(Team team, int hitpoints,  MessageRenderer m, SWWorld world) {
 		super(team, hitpoints, m, world);
 		this.m = m;
-		this.addAffordance(new Repair(this, m));
+		//this.addAffordance(new Repair(this, m));
+		this.addAffordance(new Owned(this, m));
 	}
 	
 	public void isOwned() {
 		this.hasOwner = true;
+		this.willPatrol = false;
 	}
 	
 	public void disowned(){
@@ -69,8 +75,8 @@ public abstract class SWRobots extends SWActor {
 		return hasOwner;
 	}
 	
-	public void YesPatrol() {
-		this.willPatrol = true;
+	public void setPatrol(boolean isit) {
+		this.willPatrol = isit;
 	}
 	
 	public boolean getPatrol(){
