@@ -24,7 +24,6 @@ public class Disowned extends SWAffordance {
 	 * @return true
 	 */
 	public boolean canDo(SWActor a) {
-		System.out.println(a.getShortDescription());
 		return a.getDroidOwned().equals(target);
 	}
 	
@@ -46,7 +45,6 @@ public class Disowned extends SWAffordance {
 				((SWRobots) target).disowned();
 				a.setNotOwner();
 				target.removeAffordance(this);
-				a.disownDroid();
 			}
 		}
 	}
