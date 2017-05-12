@@ -332,7 +332,19 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	public void setDroidOwned(SWEntityInterface target, int i, String name, Affordance a) {
 		assert target instanceof SWRobots;
 		
-		SWAction.getEntitymanager().remove(target);
+		boolean targetIsActor = target instanceof SWRobots;
+		SWRobots targetActor = null;
+		
+		if (targetIsActor) {
+			targetActor = (SWRobots) target;
+		}
+		
+		targetActor.removeAffordance(a);
+		targetActor.isOwned();
+		targetActor.addAffordance(new Disowned(targetActor, messageRenderer));
+		EntityManager<SWEntityInterface, SWLocation> entityManager = SWAction.getEntitymanager();
+		entityManager.remove(targetActor);
+		entityManager.setLocation(targetActor, entityManager.whereIs(this));
 		
 		Droid newD = new Droid(i, name, messageRenderer, world);
 
@@ -342,10 +354,10 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 		newD.removeAffordance(a);
 		newD.addAffordance(new Disowned(newD, messageRenderer));
 
-		EntityManager<SWEntityInterface, SWLocation> entityManager = SWAction.getEntitymanager();
-		entityManager.setLocation(newD, entityManager.whereIs(this));
+		//EntityManager<SWEntityInterface, SWLocation> entityManager = SWAction.getEntitymanager();
+		//entityManager.setLocation(newD, entityManager.whereIs(this));
 		
-		this.droidOwned = target;
+		this.droidOwned = targetActor;
 	}
 	
 	public void disownDroid(){
