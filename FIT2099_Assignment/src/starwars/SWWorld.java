@@ -198,7 +198,7 @@ public class SWWorld extends World {
 		TuskenRaider tim = new TuskenRaider(10, "Tim", iface, this);
 		
 		tim.setSymbol("T");
-		loc = myGrid.getLocationByCoordinates(4,3);
+		loc = myGrid.getLocationByCoordinates(3,3);
 		entityManager.setLocation(tim, loc);
 		
 		// A Tusken Raider
@@ -240,6 +240,7 @@ public class SWWorld extends World {
 		
 		R2D2.setSymbol("RD");
 		R2D2.YesPatrol();
+		R2D2.internalOil();
 		loc = myGrid.getLocationByCoordinates(3,3);
 		entityManager.setLocation(R2D2, loc);
 		

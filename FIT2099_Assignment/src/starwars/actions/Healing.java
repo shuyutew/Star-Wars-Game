@@ -50,7 +50,6 @@ public class Healing extends SWAffordance implements SWActionInterface {
 	public void act(SWActor a) {
 		
 		if (a.getItemCarried() != null) {//if the actor is carrying an item 
-			assert(this.getTarget().hasCapability(Capability.DRINKABLE));
 			
 			if (a.getItemCarried().hasCapability(Capability.DRINKABLE)) {
 				int current = a.getHitpoints();

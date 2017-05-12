@@ -1,7 +1,9 @@
 package starwars;
 
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
+import starwars.actions.Leave;
 import starwars.actions.Repair;
+import starwars.entities.Canteen;
 
 /**
  * This class represents "droids" in the Star Wars universe.  
@@ -38,6 +40,8 @@ public abstract class SWRobots extends SWActor {
 	/**If or not this <code>SWRobot</code> has an internal oil reservoir. <code>SWRobot</code>s will not have it by default*/
 	private boolean internal = false;
 	
+	private MessageRenderer m;
+	
 	/** 
 	 * Protected constructor to prevent random other code from creating 
 	 * SWDroid or their descendants.
@@ -49,6 +53,7 @@ public abstract class SWRobots extends SWActor {
 	
 	protected SWRobots(Team team, int hitpoints,  MessageRenderer m, SWWorld world) {
 		super(team, hitpoints, m, world);
+		this.m = m;
 		this.addAffordance(new Repair(this, m));
 	}
 	
@@ -84,8 +89,20 @@ public abstract class SWRobots extends SWActor {
 		return this.isDead();
 	}
 	
+	/**
+	 * if the droid has an internal oil reservoir, it can heal itself or other robots around. Thus, in this assignment
+	 * we reuse the Canteen class as oil reservoir. We are assuming that the internal oil reservoir will eventually runs out
+	 * but not that easy to run out? Thus, we put 10000 for it's initial level.
+	 */
 	public void internalOil(){
 		this.internal = true;
+		SWEntity fullOil = new Canteen(m, 10, 10000); 
+		fullOil.removeAffordance(new Leave(fullOil, m));
+		this.setItemCarried(fullOil);
+	}
+	
+	public boolean checkInternal(){
+		return internal;
 	}
 	
 	@Override

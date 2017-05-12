@@ -52,6 +52,9 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	/**The item carried by this <code>SWActor</code>. <code>itemCarried</code> is null if this <code>SWActor</code> is not carrying an item*/
 	private SWEntityInterface itemCarried;
 	
+	/** this is for droids, because there might be droids that has an internal oil resorvior*/
+	private SWEntityInterface itemCarriedalong;
+	
 	/**The item carried by this <code>SWActor</code>. <code>droidOwned</code> is null if this <code>SWActor</code> is not owning a droid*/
 	private SWEntityInterface droidOwned;
 	
