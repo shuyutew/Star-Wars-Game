@@ -27,6 +27,7 @@ import edu.monash.fit2099.simulator.time.Scheduler;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.actions.Attack;
 import starwars.actions.MindControl;
+import starwars.actions.Disowned;
 import starwars.actions.Train;
 import starwars.entities.actors.Droid;
 import starwars.actions.Move;
@@ -57,7 +58,7 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	/**The droid owned by this <code>SWActor</code>. <code>droidOwned</code> is null if this <code>SWActor</code> is not owning a droid*/
 	private SWEntityInterface droidOwned;
 	
-	private boolean owned;
+	private boolean owned = false;
 	
 	/**If or not this <code>SWActor</code> is human controlled. <code>SWActor</code>s are not human controlled by default*/
 	protected boolean humanControlled = false;
@@ -326,13 +327,8 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	 * @param 	target the new droid to be set as droid owned
 	 * @see 	#droidOwned
 	 */
-	public void setDroidOwned(SWEntityInterface target, int i, String name) {
-		boolean targetIsActor = target instanceof SWRobots;
-		SWRobots targetActor = null;
-		
-		if (targetIsActor) {
-			targetActor = (SWRobots) target;
-		}
+	public void setDroidOwned(SWEntityInterface target, int i, String name, Affordance a) {
+		assert target instanceof SWRobots;
 		
 		SWAction.getEntitymanager().remove(target);
 		
@@ -341,6 +337,9 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 		newD.setSymbol("RD");
 		newD.internalOil();
 		newD.isOwned();
+		newD.removeAffordance(a);
+		newD.addAffordance(new Disowned(newD, messageRenderer));
+
 		EntityManager<SWEntityInterface, SWLocation> entityManager = SWAction.getEntitymanager();
 		entityManager.setLocation(newD, entityManager.whereIs(this));
 		
@@ -444,16 +443,19 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 		/* Actually, that's not the case: all non-movement actions are transferred to newActions before the movements are transferred. --ram */
 	}
 	
-	public void setisOwned(){
-		owned = true;
-	}
-	
-	public boolean getisOwned(){
-		return owned;
+	public void setNotOwner(){
+		droidOwned = null;
 	}
 
+	/**
+	 * Only actors can be owners thus this method is not in the interface.
+	 * @return boolean returns true if actor has already own a droid, false otherwise.  
+	 */
+	public boolean getisOwner(){
+		if (droidOwned != null){
+			return true;
+		}
+		return false;
+	}
 
-	
-	
-	
 }

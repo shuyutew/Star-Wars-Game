@@ -33,7 +33,6 @@ public class Disowned extends SWAffordance {
 	 * 
 	 * Release the droid from the actor's control
 	 * 
-	 * @author dsquire
 	 * @param a the SWActor that is disowning the target
 	 */
 	public void act(SWActor a) {
@@ -43,8 +42,9 @@ public class Disowned extends SWAffordance {
 		}
 		else {
 			if (target instanceof SWRobots) {
+				((SWRobots) target).disowned();
+				a.setNotOwner();
 				target.removeAffordance(this);
-				target.addAffordance(new Take((SWEntityInterface)target, this.messageRenderer)); // add a Take affordance
 			}
 		}
 	}
@@ -58,8 +58,7 @@ public class Disowned extends SWAffordance {
 	 * @return String comprising "leave " and the short description of the target of this Affordance
 	 */
 	public String getDescription() {
-		return "leave " + target.getShortDescription();
+		return "Disowned " + target.getShortDescription();
 	}
 	
-
 }

@@ -107,7 +107,7 @@ public class Droid extends SWRobots{
 	
 	@Override
 	public String getShortDescription() {
-		return name + " the Droid";
+		return name;
 	}
 
 	@Override

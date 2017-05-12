@@ -1,8 +1,6 @@
 package starwars;
 
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
-import starwars.actions.Leave;
-import starwars.actions.Repair;
 import starwars.actions.Owned;
 import starwars.entities.Canteen;
 
@@ -103,7 +101,6 @@ public abstract class SWRobots extends SWActor {
 	public void internalOil(){
 		this.internal = true;
 		SWEntity fullOil = new Canteen(m, 10, 10000); 
-		fullOil.removeAffordance(new Leave(fullOil, m));
 		this.setItemCarried(fullOil);
 	}
 	

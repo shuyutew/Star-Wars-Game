@@ -108,18 +108,5 @@ public class SWEntity extends Entity implements SWEntityInterface {
 		this.hitpoints -= damage;
 	}
 	
-	/**
-	 * These 2 methods is to check where this entity is owned by any actors or not. Mainly is for droids.
-	 * else it will return false
-	 */
-	public boolean getisOwned(){
-		return owned;
-	}
-	
-	public void setisOwned(){
-		owned = true;
-	}
-	
-	
 	
 }

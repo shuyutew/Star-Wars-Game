@@ -1,7 +1,6 @@
 package starwars.actions;
 
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
-import starwars.SWAction;
 import starwars.SWActor;
 import starwars.SWRobots;
 import starwars.SWAffordance;
@@ -26,7 +25,15 @@ public class Owned extends SWAffordance {
 	
 	@Override
 	public boolean canDo(SWActor a) {
-		if (a.getDroidOwned() == null && !(this.getTarget().getisOwned())){
+		SWEntityInterface target = this.getTarget();
+		boolean targetIsActor = target instanceof SWRobots;
+		SWRobots targetActor = null;
+		
+		if (targetIsActor) {
+			targetActor = (SWRobots) target;
+		}
+		
+		if (a.getDroidOwned() == null && !(targetActor.getStatus())){
 			return true;
 		}
 		return false;
@@ -47,7 +54,7 @@ public class Owned extends SWAffordance {
 	public void act(SWActor a) {
 		if (target instanceof SWRobots) {
 			SWEntityInterface theDroid = (SWEntityInterface) target;
-			a.setDroidOwned(theDroid, theDroid.getHitpoints(), theDroid.getShortDescription());
+			a.setDroidOwned(theDroid, theDroid.getHitpoints(), theDroid.getShortDescription(), this);
 			
 			//remove the take affordance
 			target.removeAffordance(this);
