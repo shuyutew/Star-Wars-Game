@@ -328,7 +328,7 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	 * @param 	target the new droid to be set as droid owned
 	 * @see 	#droidOwned
 	 */
-	public void setDroidOwned(SWEntityInterface target, int i, String name, Affordance a) {
+	public void setDroidOwned(SWEntityInterface target, Affordance a) {
 		assert target instanceof SWRobots;
 		
 		boolean targetIsActor = target instanceof SWRobots;

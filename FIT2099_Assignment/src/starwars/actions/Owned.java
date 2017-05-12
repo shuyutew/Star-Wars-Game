@@ -20,7 +20,6 @@ public class Owned extends SWAffordance {
 	 *  
 	 * @param 	a the <code>SWActor</code> being queried
 	 * @return 	true if the <code>SWActor</code> is can own this droid, false otherwise
-	 * @see		{@link starwars.SWActor#getItemCarried()}
 	 */
 	
 	@Override
@@ -47,14 +46,13 @@ public class Owned extends SWAffordance {
 	 * 
 
 	 * @param 	a the <code>SWActor</code> that is taking the target
-	 * @see 	{@link #theTarget}
-	 * @see		{@link starwars.SWActor#isDead()}
+
 	 */
 	@Override
 	public void act(SWActor a) {
 		if (target instanceof SWRobots) {
 			SWEntityInterface theDroid = (SWEntityInterface) target;
-			a.setDroidOwned(theDroid, theDroid.getHitpoints(), theDroid.getShortDescription(), this);
+			a.setDroidOwned(theDroid, this);
 			
 		}
 	}
@@ -64,7 +62,7 @@ public class Owned extends SWAffordance {
 	 * A String describing what this action will do, suitable for display in a user interface
 	 * 
 	 * @author ram
-	 * @return String comprising "take " and the short description of the target of this <code>Take</code>
+	 * @return String comprising "Own " and the short description of the target of this <code>Own</code>
 	 */
 	@Override
 	public String getDescription() {

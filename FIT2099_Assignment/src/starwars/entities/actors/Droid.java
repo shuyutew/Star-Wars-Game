@@ -7,7 +7,6 @@ import edu.monash.fit2099.gridworld.Grid;
 import edu.monash.fit2099.gridworld.Grid.CompassBearing;
 import edu.monash.fit2099.simulator.space.Direction;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
-import starwars.Capability;
 import starwars.SWActor;
 import starwars.SWEntityInterface;
 import starwars.SWLocation;
@@ -41,7 +40,9 @@ public class Droid extends SWRobots{
 	public void act() {
 		
 		if (this.getStatus()){
-			System.out.println("MYGOOOODDDDD");
+			//this is where when the droid is being owned. The droid does not do anything. It follows the owner.
+			//all those happens in the SWActor class in the setDroidOwner() method
+			return;
 		}
 		
 		else{
@@ -78,6 +79,8 @@ public class Droid extends SWRobots{
 					
 		}
 		
+/**When the droid has an internal oil reservoir and can heal itself and others around.
+ * */
 		if(this.checkInternal()){
 
 			SWLocation location = this.world.getEntityManager().whereIs(this);
@@ -94,7 +97,6 @@ public class Droid extends SWRobots{
 							targetActor = (SWActor) entity;
 						}
 						
-						System.out.println("MOTHEHERREE");
 						Healing heal = new Healing(targetActor, m);
 						scheduler.schedule(heal, targetActor, 0);
 					}
