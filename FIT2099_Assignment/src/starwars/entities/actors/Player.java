@@ -5,12 +5,12 @@ import java.util.List;
 
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.SWActor;
-import starwars.SWRobots;
 import starwars.SWEntityInterface;
 import starwars.SWActionInterface;
 import starwars.SWLocation;
 import starwars.SWWorld;
 import starwars.Team;
+import starwars.actions.Train;
 import starwars.swinterfaces.SWGridController;
 
 /**
@@ -68,25 +68,8 @@ public class Player extends SWActor {
 			
 		}
 		else{
-			if(this.getisOwner()){
-				SWActionInterface f = SWGridController.getUserDecision(this);
-				
-				SWEntityInterface target = this.getDroidOwned();
-				boolean targetIsActor = target instanceof SWRobots;
-				SWActor targetActor = null;
-				
-				if (targetIsActor) {
-					targetActor = (SWActor) target;
-				}
-				
-				describeScene();
-				scheduler.schedule(f, targetActor, 1);
-				scheduler.schedule(f, this, 1);
-			}
-			else{
-				describeScene();
-				scheduler.schedule(SWGridController.getUserDecision(this), this, 1);
-			}
+			describeScene();
+			scheduler.schedule(SWGridController.getUserDecision(this), this, 1);
 		}
 		
 	}

@@ -132,12 +132,12 @@ public class SWWorld extends World {
 		entityManager.setLocation(luke, loc);
 		luke.resetMoveCommands(loc);
 
-		// we need to resetMOveCommands for incase they are mindControlled.
+		
 		//Uncle Owen
 		TestActor owen = new TestActor("UncleOwen", iface, this);
 		
 		owen.setSymbol("UO");
-		loc = myGrid.getLocationByCoordinates(8,7);
+		loc = myGrid.getLocationByCoordinates(6,5);
 		entityManager.setLocation(owen, loc);
 		owen.resetMoveCommands(loc);
 		
@@ -147,7 +147,6 @@ public class SWWorld extends World {
 		beru.setSymbol("AB");
 		loc = myGrid.getLocationByCoordinates(8,8);
 		entityManager.setLocation(beru, loc);
-		beru.resetMoveCommands(loc);
 		
 		// Ben Kenobi's hut
 		/*
@@ -235,12 +234,11 @@ public class SWWorld extends World {
 		loc = myGrid.getLocationByCoordinates(4,  5);
 		entityManager.setLocation(ben, loc);
 
-		//Droids
 		Direction [] patrolD = {CompassBearing.EAST, CompassBearing.EAST,
                 CompassBearing.EAST, CompassBearing.EAST, CompassBearing.EAST,
                 CompassBearing.WEST, CompassBearing.WEST, CompassBearing.WEST,
                 CompassBearing.WEST, CompassBearing.WEST};
-		// R2D2
+		// A Droid
 		Droid R2D2 = new Droid(200, "R2-D2", iface, this, patrolD);
 		
 		R2D2.setSymbol("RD");
@@ -249,13 +247,24 @@ public class SWWorld extends World {
 		loc = myGrid.getLocationByCoordinates(2,3);
 		entityManager.setLocation(R2D2, loc);
 		
-		// A Droid - C3PO
-		Droid C3PO = new Droid(200, "C-3PO", iface, this);
+		// A Droid
+		Droid C3PO = new Droid(200, "C3", iface, this);
 				
-		C3PO.setSymbol("C-3PO");
+		C3PO.setSymbol("C3");
 		C3PO.RandomTalk();
 		loc = myGrid.getLocationByCoordinates(2,2);
 		entityManager.setLocation(C3PO, loc);
+		
+		// Disabled Droid
+		Droid DD = new Droid(0, "DD", iface, this);
+		DD.setSymbol("DD");
+		loc = myGrid.getLocationByCoordinates(4,3);
+		entityManager.setLocation(DD, loc);
+		
+		// Droid Part
+		DroidParts parts = new DroidParts(iface);
+		loc = myGrid.getLocationByCoordinates(4,2);
+		entityManager.setLocation(parts, loc);
 		
 	}
 

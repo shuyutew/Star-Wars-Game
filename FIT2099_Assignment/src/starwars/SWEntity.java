@@ -104,10 +104,22 @@ public class SWEntity extends Entity implements SWEntityInterface {
 	@Override
 	public void takeDamage(int damage) {
 		//Precondition 1: Ensure that the damage is not negative
-		//assert (damage >= 0)	:"damage on SWEntity must not be negative";
-		//These preconditions are not needed because we could use negative numbers to increase hitpoints when healing.
+		assert (damage >= 0)	:"damage on SWEntity must not be negative";
 		this.hitpoints -= damage;
 	}
+	
+	/**
+	 * These 2 methods is to check where this entity is owned by any actors or not. Mainly is for droids.
+	 * else it will return false
+	 */
+	public boolean getisOwned(){
+		return owned;
+	}
+	
+	public void setisOwned(){
+		owned = true;
+	}
+	
 	
 	
 }

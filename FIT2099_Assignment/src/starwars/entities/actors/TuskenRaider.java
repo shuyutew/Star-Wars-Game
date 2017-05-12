@@ -10,6 +10,8 @@ import starwars.SWLocation;
 import starwars.SWWorld;
 import starwars.Team;
 import starwars.actions.Move;
+import starwars.entities.Blaster;
+import starwars.entities.LightSaber;
 import starwars.entities.actors.behaviors.AttackInformation;
 import starwars.entities.actors.behaviors.AttackNeighbours;
 
@@ -41,6 +43,8 @@ public class TuskenRaider extends SWActor {
 		super(Team.TUSKEN, 200, m, world);
 		// TODO Auto-generated constructor stub
 		this.name = name;
+		Blaster tuckenweapon = new Blaster(m);
+		setItemCarried(tuckenweapon);
 	}
 
 	@Override

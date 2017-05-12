@@ -1,6 +1,7 @@
 package starwars.actions;
 
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
+import starwars.SWAction;
 import starwars.SWActor;
 import starwars.SWRobots;
 import starwars.SWAffordance;
@@ -20,19 +21,12 @@ public class Owned extends SWAffordance {
 	 *  
 	 * @param 	a the <code>SWActor</code> being queried
 	 * @return 	true if the <code>SWActor</code> is can own this droid, false otherwise
+	 * @see		{@link starwars.SWActor#getItemCarried()}
 	 */
 	
 	@Override
 	public boolean canDo(SWActor a) {
-		SWEntityInterface target = this.getTarget();
-		boolean targetIsActor = target instanceof SWRobots;
-		SWRobots targetActor = null;
-		
-		if (targetIsActor) {
-			targetActor = (SWRobots) target;
-		}
-		
-		if (a.getDroidOwned() == null && !(targetActor.getStatus())){
+		if (a.getDroidOwned() == null && !(this.getTarget().getisOwned())){
 			return true;
 		}
 		return false;
@@ -46,14 +40,20 @@ public class Owned extends SWAffordance {
 	 * 
 
 	 * @param 	a the <code>SWActor</code> that is taking the target
-
+	 * @see 	{@link #theTarget}
+	 * @see		{@link starwars.SWActor#isDead()}
 	 */
 	@Override
 	public void act(SWActor a) {
 		if (target instanceof SWRobots) {
 			SWEntityInterface theDroid = (SWEntityInterface) target;
-			a.setDroidOwned(theDroid, this);
+			a.setDroidOwned(theDroid, theDroid.getHitpoints(), theDroid.getShortDescription());
 			
+			//remove the take affordance
+			target.removeAffordance(this);
+			
+			// add a leave affordance
+			target.addAffordance(new Disowned(theDroid, messageRenderer));
 		}
 	}
 	
@@ -62,7 +62,7 @@ public class Owned extends SWAffordance {
 	 * A String describing what this action will do, suitable for display in a user interface
 	 * 
 	 * @author ram
-	 * @return String comprising "Own " and the short description of the target of this <code>Own</code>
+	 * @return String comprising "take " and the short description of the target of this <code>Take</code>
 	 */
 	@Override
 	public String getDescription() {
