@@ -32,7 +32,7 @@ public class Disowned extends SWAffordance {
  			targetActor = (SWRobots) target;
  		}
  		
- 		if (a.getDroidOwned() == null && !(targetActor.getStatus())){
+ 		if (a.getDroidOwned() != null && targetActor.getStatus()){
  			return true;
  		}
  		return false;
@@ -70,7 +70,7 @@ public class Disowned extends SWAffordance {
 	 * @return String comprising "leave " and the short description of the target of this Affordance
 	 */
 	public String getDescription() {
-		return "disowned " + target.getShortDescription();
+		return "Disowned " + target.getShortDescription();
 	}
 	
 

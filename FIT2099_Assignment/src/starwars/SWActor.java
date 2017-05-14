@@ -42,7 +42,7 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	
 	private int maxHitpoint;
 	
-	private int forceAbilityLevel;
+	public int forceAbilityLevel;
 	
 	private int level = 0; //
 	
@@ -337,10 +337,9 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	 * @see 	#droidOwned
 	 */
 	public void setDroidOwned(SWEntityInterface target, Affordance a) {
-<<<<<<< HEAD
-  		assert target instanceof SWRobots;
-  		
-  		boolean targetIsActor = target instanceof SWRobots;
+ 		assert target instanceof SWRobots;
+ 		
+ 		boolean targetIsActor = target instanceof SWRobots;
  		SWRobots targetActor = null;
  		
  		if (targetIsActor) {
@@ -371,52 +370,6 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
  		
  		this.droidOwned = newD;
  		*/
-=======
-		assert target instanceof SWRobots;
-		
-		boolean targetIsActor = target instanceof SWRobots;
-		SWRobots targetActor = null;
-		
-		if (targetIsActor) {
-			targetActor = (SWRobots) target;
-		}
-		
-		targetActor.removeAffordance(a);
-		targetActor.isOwned();
-		targetActor.addAffordance(new Disowned(targetActor, messageRenderer));
-		EntityManager<SWEntityInterface, SWLocation> entityManager = SWAction.getEntitymanager();
-		entityManager.remove(target);
-		entityManager.setLocation(targetActor, entityManager.whereIs(this));
-		
-		this.droidOwned = targetActor;
-
-		/**
-		SWAction.getEntitymanager().remove(target);
-		
-		Droid newD = new Droid(i, name, messageRenderer, world);
-
-		newD.setSymbol("RD");
-		newD.internalOil();
-		newD.isOwned();
-		newD.removeAffordance(a);
-		newD.addAffordance(new Disowned(newD, messageRenderer));
-
-		EntityManager<SWEntityInterface, SWLocation> entityManager = SWAction.getEntitymanager();
-		entityManager.setLocation(newD, entityManager.whereIs(this));
-		
-		this.droidOwned = newD;
-		*/
-	}
-	
-	public void disownDroid(){
-		droidOwned.addAffordance(new Owned(droidOwned, messageRenderer));
-		SWRobots tar = (SWRobots)droidOwned;
-		tar.disowned();
-		EntityManager<SWEntityInterface, SWLocation> entityManager = SWAction.getEntitymanager();
-		entityManager.setLocation(tar, entityManager.whereIs(this));
-		
-		this.droidOwned = null;
->>>>>>> parent of e3e1bba... updates javadoc and so on.
 	}
 	
  	public void disownDroid(){
@@ -526,10 +479,6 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 		/* Actually, that's not the case: all non-movement actions are transferred to newActions before the movements are transferred. --ram */
 	}
 	
-<<<<<<< HEAD
- 	public void setNotOwner(){
- 		droidOwned = null;
- 	}
  
  	/**
  	 * Only actors can be owners thus this method is not in the interface.
@@ -543,21 +492,8 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
  	}
 	
 	
-=======
 	public void setNotOwner(){
 		droidOwned = null;
 	}
 
-	/**
-	 * Only actors can be owners thus this method is not in the interface.
-	 * @return boolean returns true if actor has already own a droid, false otherwise.  
-	 */
-	public boolean getisOwner(){
-		if (droidOwned != null){
-			return true;
-		}
-		return false;
-	}
-
->>>>>>> parent of e3e1bba... updates javadoc and so on.
 }

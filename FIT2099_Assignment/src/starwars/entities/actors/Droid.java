@@ -93,12 +93,14 @@ public class Droid extends SWRobots{
 		//this is where when the droid is being owned. The droid does not do anything. It follows the owner.
 		//all those happens in the SWActor class in the setDroidOwner() method
 	  	if (this.getStatus()){
+	  		System.out.println("HIHIHI");
 	  		return;
 	  	}
 
 		
 		else{
 			say(describeLocation());
+			System.out.println("whatatataat");
 			
 			/**
 			 * While not owned, droids which have the property of patrolling will patrol.
@@ -109,7 +111,7 @@ public class Droid extends SWRobots{
 						say(getShortDescription() + " is heading " + newdirection + " next.");
 						Move myMove = new Move(newdirection, messageRenderer, world);
 
-						scheduler.schedule(myMove, this, 1);
+						scheduler.schedule(myMove, this, 0);
 					}
 					
 			/**
@@ -128,6 +130,28 @@ public class Droid extends SWRobots{
 							say(this.getShortDescription() + " says: ' " + saying + " ' ");
 						}
 					}
+					if(this.checkInternal()){
+
+						SWLocation location = this.world.getEntityManager().whereIs(this);
+						
+						List<SWEntityInterface> contents = this.world.getEntityManager().contents(location);
+						for (SWEntityInterface entity : contents) {
+							if (entity instanceof SWRobots){
+								if (entity.getHitpoints() < entity.getmaxHitpoints()){
+									
+									boolean targetIsActor = entity instanceof SWActor;
+									SWActor targetActor = null;
+									
+									if (targetIsActor) {
+										targetActor = (SWActor) entity;
+									}
+									
+									Healing heal = new Healing(targetActor, m);
+									scheduler.schedule(heal, targetActor, 0);
+								}
+							}
+						}
+					}
 					
 		}
 		
@@ -135,28 +159,7 @@ public class Droid extends SWRobots{
 		 * If droid has an internal oil reservoir, when droid sees another droid 
 		 * in his location that needs to fill up hitpoints, it will apply oil on the droid
 		 */
-		if(this.checkInternal()){
 
-			SWLocation location = this.world.getEntityManager().whereIs(this);
-			
-			List<SWEntityInterface> contents = this.world.getEntityManager().contents(location);
-			for (SWEntityInterface entity : contents) {
-				if (entity instanceof SWRobots){
-					if (entity.getHitpoints() < entity.getmaxHitpoints()){
-						
-						boolean targetIsActor = entity instanceof SWActor;
-						SWActor targetActor = null;
-						
-						if (targetIsActor) {
-							targetActor = (SWActor) entity;
-						}
-						
-						Healing heal = new Healing(targetActor, m);
-						scheduler.schedule(heal, targetActor, 0);
-					}
-				}
-			}
-		}
 	}
 	
 	@Override

@@ -23,7 +23,6 @@ public class Owned extends SWAffordance {
 	 */
 	
 	@Override
-<<<<<<< HEAD
  	public boolean canDo(SWActor a) {
  		SWEntityInterface target = this.getTarget();
  		boolean targetIsActor = target instanceof SWRobots;
@@ -38,41 +37,7 @@ public class Owned extends SWAffordance {
  		}
  		return false;
  	}
-	
- 	/**
- 	 * Perform the <code>Owned</code> action by setting the droids by the <code>SWActor</code> to the target (
- 	 * the <code>SWActor a</code>'s droids would be the target of this <code>Owned</code>).
- 	 * <p>
- 	 * This method should only be called if the <code>SWActor a</code> is alive.
-  	 * 
-  
-  	 * @param 	a the <code>SWActor</code> that is taking the target
-  	 */
-	
- 	@Override
-  	public void act(SWActor a) {
-  		if (target instanceof SWRobots) {
-  			SWEntityInterface theDroid = (SWEntityInterface) target;
-			a.setDroidOwned(theDroid, this);
- 
-  		}
-  	}
-=======
-	public boolean canDo(SWActor a) {
-		SWEntityInterface target = this.getTarget();
-		boolean targetIsActor = target instanceof SWRobots;
-		SWRobots targetActor = null;
-		
-		if (targetIsActor) {
-			targetActor = (SWRobots) target;
-		}
-		
-		if (a.getDroidOwned() == null && !(targetActor.getStatus())){
-			return true;
-		}
-		return false;
-	}
-	
+
 	/**
 	 * Perform the <code>Owned</code> action by setting the droids by the <code>SWActor</code> to the target (
 	 * the <code>SWActor a</code>'s droids would be the target of this <code>Owned</code>).
@@ -88,10 +53,8 @@ public class Owned extends SWAffordance {
 		if (target instanceof SWRobots) {
 			SWEntityInterface theDroid = (SWEntityInterface) target;
 			a.setDroidOwned(theDroid, this);
-			
 		}
 	}
->>>>>>> parent of e3e1bba... updates javadoc and so on.
 	
 	
 	/**

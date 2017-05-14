@@ -61,7 +61,6 @@ public class TestActor extends SWActor {
 	
 	public void forcedTo(){
 		if (this.mindControlled){
-			System.out.println("MOVEEIFNFNINIFNIN");
 			Move myMove = new Move(CompassBearing.EAST, messageRenderer, world);
 			scheduler.schedule(myMove, this, 1);
 		}

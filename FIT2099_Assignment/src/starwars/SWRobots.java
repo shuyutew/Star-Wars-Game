@@ -60,6 +60,12 @@ public abstract class SWRobots extends SWActor {
 		this.addAffordance(new Owned(this, m));
 	}
 	
+//Droids has no force ability	
+	@Override
+	public void setForceAbility(){
+		this.forceAbilityLevel = 0;
+	}
+	
 	public void isOwned() {
 		this.hasOwner = true;
 		this.willPatrol = false;

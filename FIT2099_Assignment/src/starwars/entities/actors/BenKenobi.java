@@ -96,7 +96,6 @@ public class BenKenobi extends SWLegend {
 						if(tobeTrained.getForce() < this.getForce()){
 							LukeAround = true;
 						}
-						System.out.println(this.getForce());
 					}
 				}
 			}

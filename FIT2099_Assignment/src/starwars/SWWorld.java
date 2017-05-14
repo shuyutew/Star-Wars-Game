@@ -127,7 +127,7 @@ public class SWWorld extends World {
 		loc = myGrid.getLocationByCoordinates(4, 5);
 		
 		// Luke
-		Player luke = new Player(Team.GOOD, 1000, iface, this);
+		Player luke = new Player(Team.GOOD, 100, iface, this);
 		luke.setShortDescription("Luke");
 		entityManager.setLocation(luke, loc);
 		luke.resetMoveCommands(loc);
@@ -137,11 +137,7 @@ public class SWWorld extends World {
 		TestActor owen = new TestActor("UncleOwen", iface, this);
 		
 		owen.setSymbol("UO");
-<<<<<<< HEAD
-		loc = myGrid.getLocationByCoordinates(7,8);
-=======
 		loc = myGrid.getLocationByCoordinates(8,7);
->>>>>>> parent of e3e1bba... updates javadoc and so on.
 		entityManager.setLocation(owen, loc);
 		owen.resetMoveCommands(loc);
 		
@@ -256,7 +252,7 @@ public class SWWorld extends World {
 		// A Droid - C3PO
 		Droid C3PO = new Droid(200, "C-3PO", iface, this);
 				
-		C3PO.setSymbol("C-3PO");
+		C3PO.setSymbol("C3");
 		C3PO.RandomTalk();
 		loc = myGrid.getLocationByCoordinates(2,2);
 		entityManager.setLocation(C3PO, loc);
