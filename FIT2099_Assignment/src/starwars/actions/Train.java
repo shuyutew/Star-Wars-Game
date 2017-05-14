@@ -52,7 +52,7 @@ public class Train extends SWAffordance implements SWActionInterface {
 			targetActor = (SWActor) target;
 		}
 		
-	// Only actors on the same team can train someone with lower force ability.
+	// Only acotrs on the same team can train someone with lower force ability.
 		if (a.getForce()<targetActor.getForce() && a.getTeam() == targetActor.getTeam() && a.getForce()<10){
 			return true;
 		}
