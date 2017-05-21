@@ -5,19 +5,34 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import edu.monash.fit2099.simulator.space.Direction;
+import starwars.SWActor;
+import starwars.SWWorld;
+import starwars.actions.Move;
 
-public class Patrol {
+public class PatrolBehaviour extends BehaviourInterface {
 
 	private ArrayList<Direction> moves;
 	private int position = 0;
 	
-	public Patrol(Direction [] moves) {
+	public PatrolBehaviour(SWActor actor, SWWorld world, Direction [] moves) {
+		super(actor, world);
 		this.moves = new ArrayList<Direction>(Arrays.asList(moves));
 		
 		// TODO Auto-generated constructor stub
 	}
+	
+    @Override
+    public boolean ExecuteBehaviour() {
 
-	public Patrol(Collection<Direction> moves) {
+    	Direction newdirection = getNext();
+    	actor.say(actor.getShortDescription() + " moves " + newdirection);
+    	Move move = new Move(newdirection, messageRenderer, world);
+
+    	actor.schedule(move);
+    	return true;
+    }
+
+	public PatrolBehaviour(Collection<Direction> moves) {
 		this.moves = new ArrayList<Direction>(moves);
 	}
 	

@@ -16,7 +16,7 @@ import starwars.SWWorld;
 import starwars.Team;
 import starwars.actions.Healing;
 import starwars.actions.Move;
-import starwars.entities.actors.behaviors.Patrol;
+import starwars.entities.actors.behaviors.PatrolBehaviour;
 
 /**
  * 
@@ -42,7 +42,7 @@ public class Droid extends SWRobots{
 	
 	private String name;
 	private MessageRenderer m;
-	private Patrol path;
+	private PatrolBehaviour path;
 	private int maxparts;
 	private int parts;
 
@@ -50,7 +50,7 @@ public class Droid extends SWRobots{
 		super(Team.NEUTRAL, hitpoints, m, world);
 		this.name = name;
 		this.m = m;
-		path = new Patrol(patrolmoves);
+		path = new PatrolBehaviour(patrolmoves);
 		maxparts = 2;
 		parts = 2;
 	}

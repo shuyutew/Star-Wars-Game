@@ -29,6 +29,8 @@ public class SWWorld extends World {
 	 */
 	private SWGrid myGrid;
 	
+	private MessageRenderer messageRenderer;
+	
 	/**The entity manager of the world which keeps track of <code>SWEntities</code> and their <code>SWLocation</code>s*/
 	private static final EntityManager<SWEntityInterface, SWLocation> entityManager = new EntityManager<SWEntityInterface, SWLocation>();
 	
@@ -62,6 +64,10 @@ public class SWWorld extends World {
 	public int width() {
 		return space.getWidth();
 	}
+	
+    public MessageRenderer getMessageRenderer() {
+    	return messageRenderer;
+    }
 	
 	/**
 	 * Set up the world, setting descriptions for locations and placing items and actors
@@ -249,13 +255,10 @@ public class SWWorld extends World {
 		loc = myGrid.getLocationByCoordinates(2,3);
 		entityManager.setLocation(R2D2, loc);
 		
-		// A Droid - C3PO
-		Droid C3PO = new Droid(200, "C-3PO", iface, this);
-				
-		C3PO.setSymbol("C3");
-		C3PO.RandomTalk();
-		loc = myGrid.getLocationByCoordinates(2,2);
-		entityManager.setLocation(C3PO, loc);
+		//C3PO
+		SWRobots C3Po = new C3PO(200, iface, this);
+		loc = myGrid.getLocationByCoordinates(3,3);
+		entityManager.setLocation(C3Po, loc);
 		
 	}
 

@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import edu.monash.fit2099.gridworld.Grid.CompassBearing;
+import edu.monash.fit2099.simulator.matter.ActionInterface;
 import edu.monash.fit2099.simulator.matter.Actor;
 import edu.monash.fit2099.simulator.matter.Affordance;
 import edu.monash.fit2099.simulator.matter.EntityManager;
@@ -30,6 +31,7 @@ import starwars.actions.MindControl;
 import starwars.actions.Disowned;
 import starwars.actions.Owned;
 import starwars.actions.Train;
+import starwars.entities.actors.behaviors.BehaviourInterface;
 import starwars.actions.Move;
 
 public abstract class SWActor extends Actor<SWActionInterface> implements SWEntityInterface {
@@ -58,7 +60,7 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	/**The droid owned by this <code>SWActor</code>. <code>droidOwned</code> is null if this <code>SWActor</code> is not owning a droid*/
 	private SWEntityInterface droidOwned;
 	
-	private SWEntityInterface previousD;
+	protected ArrayList<BehaviourInterface> behaviours = new ArrayList<BehaviourInterface>();
 	
 	/**If or not this <code>SWActor</code> is human controlled. <code>SWActor</code>s are not human controlled by default*/
 	protected boolean humanControlled = false;
@@ -495,5 +497,44 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	public void setNotOwner(){
 		droidOwned = null;
 	}
+	
+    public void schedule(ActionInterface action) {
+    	scheduler.schedule(action, this, action.getDuration());
+    }
+
+    @Override
+    public void act() {
+    	if (this.getSymbol()=="??"){
+    		System.out.println("YES?????");
+    	}
+    	
+    	if (isDead())
+    		return;
+    	
+    	executeBehaviours();
+    }
+
+    protected void executeBehaviours() {
+    	if (this.getSymbol()=="??"){
+    		System.out.println("YES?????2");
+    	}
+    	for (BehaviourInterface behaviour : behaviours) {
+    		if (behaviour.ExecuteBehaviour())
+    			return;
+	}
+    }
+    
+    public BehaviourInterface getBehaviour(Class<? extends BehaviourInterface> type){
+    	for (BehaviourInterface b : behaviours) {
+    		if (b.getClass() == type){
+    			return (BehaviourInterface)b;
+    		}
+    	}
+    	return null;
+    }
+    
+    public void removeBehaviour(Class<? extends BehaviourInterface> type) {
+    	behaviours.remove(getBehaviour(type));
+    }
 
 }

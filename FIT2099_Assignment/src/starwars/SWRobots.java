@@ -33,14 +33,10 @@ public abstract class SWRobots extends SWActor {
 	/**If or not this <code>SWRobot</code> will patrol while not Owned. <code>SWRobot</code>s will not patrol by default*/
 	private boolean willPatrol = false;
 	
-	/**If or not this <code>SWRobot</code> will talk randomly. <code>SWRobot</code>s will not by default*/
-	private boolean talk = false;
-	
 	/**If or not this <code>SWRobot</code> has an internal oil reservoir. <code>SWRobot</code>s will not have it by default*/
 	private boolean internal = false;
 	
 	/** this is for droids, because there might be droids that has an internal oil resorvior*/
-	private SWEntityInterface itemCarriedalong;
 	
 	private MessageRenderer m;
 	
@@ -95,18 +91,6 @@ public abstract class SWRobots extends SWActor {
 		return willPatrol;
 	}
 	
-	public void RandomTalk(){
-		this.talk = true;
-	}
-	
-	/**
-	 * 
-	 * @return true if that robot will talk in random rounds.
-	 */
-	public boolean willTalk(){
-		return talk;
-	}
-	
 	/**
 	 * 
 	 * @return true when the robot hitpoints = 0.
@@ -129,13 +113,11 @@ public abstract class SWRobots extends SWActor {
 	public boolean checkInternal(){
 		return internal;
 	}
-	
-	@Override
-	public void act() {
-		if (hasOwner || (willPatrol)) {
-			
-		}
-		return;
+
+	private String describeLocation() {
+		SWLocation location = this.world.getEntityManager().whereIs(this);
+		return this.getShortDescription() + " [" + this.getHitpoints() +", " + this.getForce()  + "]" + " is at " + location.getShortDescription();
+
 	}
 
 }

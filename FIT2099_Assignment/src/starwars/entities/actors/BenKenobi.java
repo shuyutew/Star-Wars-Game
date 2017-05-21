@@ -19,7 +19,7 @@ import starwars.actions.Healing;
 import starwars.entities.LightSaber;
 import starwars.entities.actors.behaviors.AttackInformation;
 import starwars.entities.actors.behaviors.AttackNeighbours;
-import starwars.entities.actors.behaviors.Patrol;
+import starwars.entities.actors.behaviors.PatrolBehaviour;
 import starwars.swinterfaces.SWGridController;
 
 /**
@@ -36,14 +36,14 @@ import starwars.swinterfaces.SWGridController;
 public class BenKenobi extends SWLegend {
 
 	private static BenKenobi ben = null; // yes, it is OK to return the static instance!
-	private Patrol path;
+	private PatrolBehaviour path;
 	private MessageRenderer m;
 	private boolean taken;
 	private SWEntityInterface benSS;	// ben's original holding stuff
 	private BenKenobi(MessageRenderer m, SWWorld world, Direction [] moves) {
 		super(Team.GOOD, 800, m, world);
 		this.m = m;
-		path = new Patrol(moves);
+		path = new PatrolBehaviour(moves);
 		this.setShortDescription("Ben Kenobi");
 		this.setLongDescription("Ben Kenobi, an old man who has perhaps seen too much");
 		LightSaber bensweapon = new LightSaber(m);

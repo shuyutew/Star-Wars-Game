@@ -78,6 +78,12 @@ public abstract class SWAction extends Action implements SWActionInterface {
 	@Override
 	public abstract void act(SWActor a);
 	
+	
+    @Override
+    public int getDuration() {
+	return 1;
+    }
+	
 
 	/**
 	 * Returns the <code>EntityManager</code> which keeps track of <code>SWEntities</code> and their <code>SWLocation</code>s
