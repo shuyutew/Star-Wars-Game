@@ -105,6 +105,8 @@ public interface SWEntityInterface extends EntityInterface {
 	 */
 	public void takeDamage(int damage);
 	
+    public void heal(int hitPoints);
+	
 	public void movedToLocation(SWLocation loc);
 	
     public SWAffordance getAffordance(Class<?> type);

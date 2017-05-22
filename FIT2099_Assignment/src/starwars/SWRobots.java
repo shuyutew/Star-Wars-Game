@@ -1,8 +1,11 @@
 package starwars;
 
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
+import starwars.actions.DissambleDroid;
 import starwars.actions.Owned;
+import starwars.actions.RebuildDroid;
 import starwars.entities.Canteen;
+import starwars.entities.actors.behaviors.FollowBehaviour;
 
 /**
  * This class represents "droids" in the Star Wars universe.  
@@ -25,17 +28,14 @@ import starwars.entities.Canteen;
  * @author shuyu
  *
  */
-public abstract class SWRobots extends SWActor {
-
-	/**If or not this <code>SWRobot</code> has owner. <code>SWRobot</code>s does not have a owner by default*/
-	private boolean hasOwner = false;
+public abstract class SWRobots extends SWActor implements SWRobotsInterface {
 	
 	/**If or not this <code>SWRobot</code> has an internal oil reservoir. <code>SWRobot</code>s will not have it by default*/
 	private boolean internal = false;
 	
 	/** this is for droids, because there might be droids that has an internal oil resorvior*/
 	
-	private MessageRenderer m;
+	protected FollowBehaviour followBehaviour;
 	
 	/** 
 	 * Protected constructor to prevent random other code from creating 
@@ -48,9 +48,10 @@ public abstract class SWRobots extends SWActor {
 	
 	protected SWRobots(Team team, int hitpoints,  MessageRenderer m, SWWorld world) {
 		super(team, hitpoints, m, world);
-		this.m = m;
 		//this.addAffordance(new Repair(this, m));
-		this.addAffordance(new Owned(this, m));
+		this.addAffordance(new Owned(this, messageRenderer));
+		
+		followBehaviour = new FollowBehaviour(this, world, null);
 	}
 	
 //Droids has no force ability	
@@ -59,29 +60,34 @@ public abstract class SWRobots extends SWActor {
 		this.forceAbilityLevel = 0;
 	}
 	
-	public void isOwned() {
-		this.hasOwner = true;
-	}
-	
-	public void disowned(){
-		this.hasOwner = false;
-	}
-	
-	/**
-	 * 
-	 * @return True if that robot is already owned by an actor. False otherwise.
-	 */
-	public boolean getStatus(){
-		return hasOwner;
-	}
-	
-	/**
-	 * 
-	 * @return true when the robot hitpoints = 0.
-	 */
-	public boolean isImmobile(){
-		return this.isDead();
-	}
+    @Override
+    public boolean hasOwner() {
+    	return followBehaviour.hasOwner();
+    }
+
+    @Override
+    public void setOwner(SWActor newOwner) {
+    	followBehaviour.setOwner(newOwner);
+    }
+    
+    @Override
+    public void takeDamage(int hitPoints) {
+    	super.takeDamage(hitPoints);
+    	if (isDead()) {
+    		addAffordance(new DissambleDroid(this, messageRenderer));
+    		addAffordance(new RebuildDroid(this, messageRenderer));
+    	}
+    }
+    
+    @Override
+    public void heal(int hitPoints){
+    	boolean wasDead = isDead();
+    	super.heal(hitPoints);
+    	if(wasDead && !isDead()){
+    		removeAffordance(DissambleDroid.class);
+    		removeAffordance(RebuildDroid.class);
+    	}
+    }
 	
 	/**
 	 * if the droid has an internal oil reservoir, it can heal itself or other robots around. Thus, in this assignment
@@ -90,7 +96,7 @@ public abstract class SWRobots extends SWActor {
 	 */
 	public void internalOil(){
 		this.internal = true;
-		SWEntity fullOil = new Canteen(m, 10, 10000); 
+		SWEntity fullOil = new Canteen(messageRenderer, 10, 10000); 
 		this.setItemCarried(fullOil);
 	}
 	
@@ -103,5 +109,12 @@ public abstract class SWRobots extends SWActor {
 		return this.getShortDescription() + " [" + this.getHitpoints() +", " + this.getForce()  + "]" + " is at " + location.getShortDescription();
 
 	}
+	
+    @Override
+    public void movedToLocation(SWLocation loc) {
+    	if(loc.getSymbol() == 'b'){ //This is the only defining characterist of the badlands.
+    		takeDamage(5);
+    	}
+    }
 
 }

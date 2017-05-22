@@ -21,7 +21,7 @@ public class RebuildDroid extends SWAffordance {
     @Override
     public void act(SWActor actor) {
     	actor.setItemCarried(null);
-    	getTarget().takeDamage((getTarget().getmaxHitpoints() / 2) * -1);
+    	getTarget().heal(getTarget().getmaxHitpoints() / 2);
     	actor.say(String.format("%s rebuilds %s.", actor.getShortDescription(), target.getShortDescription()));
     }
     

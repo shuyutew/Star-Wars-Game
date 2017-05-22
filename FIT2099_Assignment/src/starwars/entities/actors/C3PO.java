@@ -25,8 +25,8 @@ public class C3PO extends SWRobots {
 		possibleQuotes.add("If I told you half the things I've heard about this Jabba the Hutt, you'd probably short circuit.");
 		possibleQuotes.add("Something's not right because now I can't see.");
 		
+		behaviours.add(followBehaviour);
 		behaviours.add(new TalkingBehaviour(this, world, possibleQuotes));
-		
 	}
 
 }

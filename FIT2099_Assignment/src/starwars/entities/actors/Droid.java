@@ -81,21 +81,11 @@ public class Droid extends SWRobots{
 	@Override
 	public void act() {
 		
-		/**
-		 * If hitpoint is 0, droid is immobile/disabled, droid parts = 0 so it needs droid parts to be repaired
-		 */
-		if (this.isImmobile()){
-			parts = 0;
-		}
-		
 		//this is where when the droid is being owned. The droid does not do anything. It follows the owner.
 		//all those happens in the SWActor class in the setDroidOwner() method
-	  	if (this.getStatus()){
-	  		return;
-	  	}
 
 		
-		else{
+		if (this.checkInternal()){
 			say(describeLocation());
 					
 			if(this.checkInternal()){

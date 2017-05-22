@@ -28,9 +28,7 @@ import edu.monash.fit2099.simulator.time.Scheduler;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.actions.Attack;
 import starwars.actions.MindControl;
-import starwars.actions.Disowned;
 import starwars.actions.Owned;
-import starwars.actions.Train;
 import starwars.entities.actors.behaviors.BehaviourInterface;
 import starwars.actions.Move;
 
@@ -298,6 +296,11 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
  	public void takeDamage(int damage) {
  		innerEntity.takeDamage(damage);
  	}
+ 	
+    @Override
+    public void heal(int hpoint) {
+    	innerEntity.heal(hpoint);
+    }
  
  	/**
  	 * Assigns this <code>SWActor</code>'s <code>itemCarried</code> to 
@@ -311,70 +314,6 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
  	 */
  	public void setItemCarried(SWEntityInterface target) {
  		this.itemCarried = target;
- 	}
- 	
- 	/**
- 	 * Assigns this <code>SWActor</code>'s <code>droidOwned</code> to 
- 	 * a new droid <code>target</code>
- 	 * <p>
- 	 * This method will replace droid already owned by the <code>SWActor</code> with the <code>target</code>.
- 	 * A null <code>target</code> would signify that this <code>SWActor</code> is not owning a droid anymore.
- 	 * 
-	
-	/**
-	 * Assigns this <code>SWActor</code>'s <code>droidOwned</code> to 
-	 * a new droid <code>target</code>
-	 * <p>
-	 * This method will replace droid already owned by the <code>SWActor</code> with the <code>target</code>.
-	 * A null <code>target</code> would signify that this <code>SWActor</code> is not owning a droid anymore.
-	 * 
-	 * @param 	target the new droid to be set as droid owned
-	 * @see 	#droidOwned
-	 */
-	public void setDroidOwned(SWEntityInterface target, Affordance a) {
- 		assert target instanceof SWRobots;
- 		
- 		boolean targetIsActor = target instanceof SWRobots;
- 		SWRobots targetActor = null;
- 		
- 		if (targetIsActor) {
- 			targetActor = (SWRobots) target;
- 		}
- 		
- 		targetActor.removeAffordance(a);
- 		targetActor.isOwned();
- 		targetActor.addAffordance(new Disowned(targetActor, messageRenderer));
- 		EntityManager<SWEntityInterface, SWLocation> entityManager = SWAction.getEntitymanager();
- 		entityManager.remove(target);
- 		entityManager.setLocation(targetActor, entityManager.whereIs(this));
- 		
- 		this.droidOwned = targetActor;
- 
- 		/**
- 		SWAction.getEntitymanager().remove(target);
- 		
- 		Droid newD = new Droid(i, name, messageRenderer, world);
- 		newD.setSymbol("RD");
- 		newD.internalOil();
- 		newD.isOwned();
- 		newD.removeAffordance(a);
- 		newD.addAffordance(new Disowned(newD, messageRenderer));
- 
- 		EntityManager<SWEntityInterface, SWLocation> entityManager = SWAction.getEntitymanager();
- 		entityManager.setLocation(newD, entityManager.whereIs(this));
- 		
- 		this.droidOwned = newD;
- 		*/
-	}
-	
- 	public void disownDroid(){
- 		droidOwned.addAffordance(new Owned(droidOwned, messageRenderer));
- 		SWRobots tar = (SWRobots)droidOwned;
- 		tar.disowned();
- 		EntityManager<SWEntityInterface, SWLocation> entityManager = SWAction.getEntitymanager();
- 		entityManager.setLocation(tar, entityManager.whereIs(this));
- 		
- 		this.droidOwned = null;
  	}
 	
 	
@@ -496,13 +435,26 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
  	}
 	
 	
-	public void setNotOwner(){
-		droidOwned = null;
-	}
-	
     public void schedule(ActionInterface action) {
     	scheduler.schedule(action, this, action.getDuration());
     }
+    
+	/**
+	 * Assigns this <code>SWActor</code>'s <code>droidOwned</code> to 
+	 * a new droid <code>target</code>
+	 * <p>
+	 * This method will replace droid already owned by the <code>SWActor</code> with the <code>target</code>.
+	 * A null <code>target</code> would signify that this <code>SWActor</code> is not owning a droid anymore.
+	 * 
+	 * @param 	target the new droid to be set as droid owned
+	 * @see 	#droidOwned
+	 */
+	public void setDroidOwned(SWEntityInterface target) {
+		
+ 		this.droidOwned = target;
+ 
+	}
+    
 
     @Override
     public void act() {
@@ -510,6 +462,12 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
     		return;
     	
     	executeBehaviours();
+    	
+    	if (droidOwned != null){
+    		EntityManager<SWEntityInterface, SWLocation> entityManager = SWAction.getEntitymanager();
+     		entityManager.remove(droidOwned);
+     		entityManager.setLocation(droidOwned, entityManager.whereIs(this));
+    	}
     }
 
     protected void executeBehaviours() {

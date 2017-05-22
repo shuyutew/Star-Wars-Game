@@ -131,7 +131,7 @@ public class SWWorld extends World {
 			}
 		}
 		
-		loc = myGrid.getLocationByCoordinates(6, 5);
+		loc = myGrid.getLocationByCoordinates(3, 3);
 		
 		// Luke
 		Player luke = new Player(Team.GOOD, 100, iface, this);
@@ -249,13 +249,13 @@ public class SWWorld extends World {
 		// R2D2 new
 		SWRobots RD = new R2D2(200, r2d2Patrol, iface, this);
 		
-		loc = myGrid.getLocationByCoordinates(5,5);
+		loc = myGrid.getLocationByCoordinates(3,3);
 		entityManager.setLocation(RD, loc);
 		
 		
 		//C3PO new
 		SWRobots C3Po = new C3PO(200, iface, this);
-		loc = myGrid.getLocationByCoordinates(3,3);
+		loc = myGrid.getLocationByCoordinates(5,5);
 		entityManager.setLocation(C3Po, loc);
 		
 	}

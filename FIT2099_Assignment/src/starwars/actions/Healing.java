@@ -70,10 +70,11 @@ public class Healing extends SWAffordance implements SWActionInterface {
 				int current = a.getHitpoints();
 				int difference = a.getmaxHitpoints() - current;
 				if (difference >= a.getItemCarried().getHitpoints()){
-					a.takeDamage(a.getItemCarried().getHitpoints() * -1);
+					a.heal(a.getItemCarried().getHitpoints());
+					System.out.println(a.getHitpoints() + "BENN");
 				}
 				else{
-					a.takeDamage(difference * -1);
+					a.heal(difference);
 				}
 				a.getItemCarried().takeDamage(1);
 				a.say(a.getShortDescription() + " is healing");

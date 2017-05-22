@@ -15,6 +15,7 @@ public class R2D2 extends SWRobots{
 		this.setLongDescription("R2-D2, an Industrial Automaton astromech droid");
 		this.setSymbol("R");
 		
+		behaviours.add(followBehaviour);
 		behaviours.add(new PatrolBehaviour(this, world, patrol));
 	}
 

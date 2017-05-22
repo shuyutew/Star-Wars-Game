@@ -3,6 +3,7 @@ package starwars.actions;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.SWActor;
 import starwars.SWRobots;
+import starwars.SWRobotsInterface;
 import starwars.SWAffordance;
 import starwars.SWEntityInterface;
 
@@ -10,7 +11,6 @@ public class Owned extends SWAffordance {
 
 	public Owned(SWEntityInterface theTarget, MessageRenderer m) {
 		super(theTarget, m);
-		priority = 1;
 	}
 	
 	/**
@@ -22,21 +22,12 @@ public class Owned extends SWAffordance {
 	 * @return 	true if the <code>SWActor</code> is can own this droid, false otherwise
 	 */
 	
-	@Override
- 	public boolean canDo(SWActor a) {
- 		SWEntityInterface target = this.getTarget();
- 		boolean targetIsActor = target instanceof SWRobots;
- 		SWRobots targetActor = null;
- 		
- 		if (targetIsActor) {
- 			targetActor = (SWRobots) target;
- 		}
- 		
- 		if (a.getDroidOwned() == null && !(targetActor.getStatus())){
- 			return true;
- 		}
- 		return false;
- 	}
+    @Override
+    public boolean canDo(SWActor actor) {
+    	assert(target instanceof SWRobotsInterface);
+    	SWRobotsInterface droid = (SWRobotsInterface)target;
+    	return !droid.hasOwner();
+    }
 
 	/**
 	 * Perform the <code>Owned</code> action by setting the droids by the <code>SWActor</code> to the target (
@@ -49,11 +40,9 @@ public class Owned extends SWAffordance {
 
 	 */
 	@Override
-	public void act(SWActor a) {
-		if (target instanceof SWRobots) {
-			SWEntityInterface theDroid = (SWEntityInterface) target;
-			a.setDroidOwned(theDroid, this);
-		}
+	public void act(SWActor actor) {
+		((SWRobotsInterface)target).setOwner(actor);
+		actor.say(String.format("%s owns %s now.", actor.getShortDescription(), target.getShortDescription()));
 	}
 	
 	
