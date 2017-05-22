@@ -76,7 +76,8 @@ public interface SWEntityInterface extends EntityInterface {
      * @return true if and only if this <code>SWActor</code> is dead, false otherwise
      * @see #hitpoints
      */
-    public boolean isDead();
+	
+	public boolean isDead();
 	
 	/**
 	 * Returns the level of this <code>SWEntity</code> or <code>SWActor</code>.(currently only canteen uses this)

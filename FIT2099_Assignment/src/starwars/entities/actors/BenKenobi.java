@@ -73,14 +73,13 @@ public class BenKenobi extends SWLegend {
 		
 		boolean isCanteen = false;
 		SWEntityInterface fullCan = null;
+		boolean done = false;
 		
 		SWLocation location = this.world.getEntityManager().whereIs(this);
 
 		if(isDead()) {
 			return;
 		}
-		
-		executeBehaviours();
 		
 		List<SWEntityInterface> contents = this.world.getEntityManager().contents(location);
 		
@@ -105,11 +104,12 @@ public class BenKenobi extends SWLegend {
 		
 		
 //if a canteen exist and ben's hitpoint is not maximum and he is not holding a canteen
-		else if(isCanteen && this.getHitpoints()!= this.getmaxHitpoints() && !taken){
+		if(isCanteen && this.getHitpoints()!= this.getmaxHitpoints() && !taken){
 			if (this.getItemCarried() == null && !(taken)){
 				Take theCan = new Take(fullCan,m);
 				this.taken = true;
 				scheduler.schedule(theCan, this, 1);
+				done = true;
 			}
 			else{
 				this.benSS = this.getItemCarried();      // to store whatever Ben is holding previously
@@ -119,6 +119,7 @@ public class BenKenobi extends SWLegend {
 				Take theCan = new Take(fullCan,m);
 				this.taken = true;
 				scheduler.schedule(theCan, this, 1);
+				done = true;
 			}
 		}
 		
@@ -126,6 +127,7 @@ public class BenKenobi extends SWLegend {
 		else if (taken && this.getHitpoints()!= this.getmaxHitpoints() && this.getItemCarried().getLevel() > 0){
 			Healing heal = new Healing(ben, m);
 			scheduler.schedule(heal, this, 1);
+			done = true;
 		}
 		
 //when his hitpoints are fully recovered and he is holding a canteen. Drop canteen and pick up his light saber.
@@ -134,6 +136,7 @@ public class BenKenobi extends SWLegend {
 			Leave byecanteen = new Leave(this.getItemCarried(), m);
 			taken = false;
 			scheduler.schedule(byecanteen, this, 0);
+			done = true;
 			
 			if (contents.size() > 1) { // if it is equal to one, the only thing here is this Player, so there is nothing to report
 				for (SWEntityInterface entity : contents) {
@@ -145,6 +148,10 @@ public class BenKenobi extends SWLegend {
 					}
 				}
 			}
+		}
+		
+		if (!done){
+			executeBehaviours();
 		}
 	}
 

@@ -16,4 +16,6 @@ public enum Capability {
 	DRINKABLE,//DRINKABLE capability allows an entity to be consumed by another entity 
 	SPAREPARTs,//SPAREPARTs capability allows an entity to Repair another entity which has the Repair Affordance
 	JEDI_Student,
+	DROID_MECHANIC,
+	DROID_REPAIR
 }

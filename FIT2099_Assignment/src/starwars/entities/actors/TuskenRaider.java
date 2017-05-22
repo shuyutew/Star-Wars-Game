@@ -1,16 +1,10 @@
 package starwars.entities.actors;
 
-import java.util.ArrayList;
-
-import edu.monash.fit2099.gridworld.Grid;
-import edu.monash.fit2099.simulator.space.Direction;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
-import starwars.Capability;
 import starwars.SWActor;
 import starwars.SWLocation;
 import starwars.SWWorld;
 import starwars.Team;
-import starwars.actions.Move;
 import starwars.entities.Blaster;
 import starwars.entities.actors.behaviors.AttackNeighboursBehaviour;
 import starwars.entities.actors.behaviors.WanderAround;

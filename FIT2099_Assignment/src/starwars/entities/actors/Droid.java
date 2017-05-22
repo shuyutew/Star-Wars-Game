@@ -91,14 +91,12 @@ public class Droid extends SWRobots{
 		//this is where when the droid is being owned. The droid does not do anything. It follows the owner.
 		//all those happens in the SWActor class in the setDroidOwner() method
 	  	if (this.getStatus()){
-	  		System.out.println("HIHIHI");
 	  		return;
 	  	}
 
 		
 		else{
 			say(describeLocation());
-			System.out.println("whatatataat");
 					
 			if(this.checkInternal()){
 
