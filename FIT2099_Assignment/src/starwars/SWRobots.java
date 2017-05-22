@@ -4,6 +4,7 @@ import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.actions.DissambleDroid;
 import starwars.actions.Owned;
 import starwars.actions.RebuildDroid;
+import starwars.actions.Repair;
 import starwars.entities.Canteen;
 import starwars.entities.actors.behaviors.FollowBehaviour;
 
@@ -50,6 +51,7 @@ public abstract class SWRobots extends SWActor implements SWRobotsInterface {
 		super(team, hitpoints, m, world);
 		//this.addAffordance(new Repair(this, m));
 		this.addAffordance(new Owned(this, messageRenderer));
+		this.addAffordance(new Repair(this, messageRenderer));
 		
 		followBehaviour = new FollowBehaviour(this, world, null);
 	}

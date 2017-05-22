@@ -1,7 +1,6 @@
 package starwars.actions;
 
 import starwars.SWAffordance;
-import edu.monash.fit2099.simulator.matter.Affordance;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.Capability;
 import starwars.SWActionInterface;
@@ -19,7 +18,6 @@ public class Healing extends SWAffordance implements SWActionInterface {
 	 */
 	public Healing(SWEntityInterface theTarget, MessageRenderer m) {
 		super(theTarget, m);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -29,19 +27,16 @@ public class Healing extends SWAffordance implements SWActionInterface {
 	 */
 	@Override
 	public int getDuration() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int getPriority() {
-		// TODO Auto-generated method stub
 		return 1;
 	}
 
 	@Override
 	public boolean isMoveCommand() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

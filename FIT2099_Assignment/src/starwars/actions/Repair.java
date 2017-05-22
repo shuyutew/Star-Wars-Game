@@ -4,26 +4,35 @@ import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.SWActor;
 import starwars.SWAffordance;
 import starwars.SWEntityInterface;
+import starwars.entities.Fillable;
 import starwars.Capability;
 
 public class Repair extends SWAffordance{
 
 	public Repair(SWEntityInterface theTarget, MessageRenderer m) {
 		super(theTarget, m);
-		priority = 1;
 	}
 	
-	@Override
-	public boolean canDo(SWActor a) {
-		if (a.getItemCarried().hasCapability(Capability.SPAREPARTs) && this.getTarget().getHitpoints() == 0){
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean canDo(SWActor actor) {
+    	boolean canRepair = actor.hasCapability(Capability.DROID_REPAIR) || (actor.getItemCarried() != null && actor.getItemCarried().hasCapability(Capability.DROID_REPAIR));
+    	return getTarget().getHitpoints() < getTarget().getmaxHitpoints() && !getTarget().isDead() && canRepair;
+    }
 	
-	public void act(SWActor a){
-		
+    @Override
+    public void act(SWActor actor) {
+    	getTarget().heal(20);
+    	if (actor.hasCapability(Capability.DROID_REPAIR)) {
+    		actor.say(String.format("%s repairs %s.", actor.getShortDescription(), target.getShortDescription()));
+	    return;
+    	}
+    	
+    	if (actor.getItemCarried() instanceof Fillable) { //TODO Some kind of Use method/interface? Why would this class think the repair item was Fillable?
+    	    actor.say(String.format("%s drinks from the %s.", actor.getShortDescription(), target.getShortDescription()));
+			actor.schedule(new Healing(actor, messageRenderer));
+    	}
 	}
+
 	
 	
 	/**
@@ -34,7 +43,7 @@ public class Repair extends SWAffordance{
 	 */
 	@Override
 	public String getDescription() {
-		return "take " + target.getShortDescription();
+		return "Repair " + target.getShortDescription();
 	}
 
 }

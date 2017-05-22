@@ -115,16 +115,16 @@ public class SWEntity extends Entity implements SWEntityInterface {
 	
     @Override
     public void takeDamage(int damage) {
-	//Precondition 1: Ensure that the damage is not negative
-	assert (damage >= 0) : "damage on SWEntity must not be negative";
-	this.hitpoints = Math.max(hitpoints - damage, 0);
+    	//Precondition 1: Ensure that the damage is not negative
+    	assert (damage >= 0) : "damage on SWEntity must not be negative";
+    	this.hitpoints = Math.max(hitpoints - damage, 0);
     }
 	
     @Override
     public void heal(int healPoints) {
-	//Precondition 1: Ensure that the damage is not negative
-	assert (healPoints >= 0) : "healing on SWEntity must not be negative";
-	this.hitpoints += healPoints;
+    	//Precondition 1: Ensure that the damage is not negative
+    	assert (healPoints >= 0) : "healing on SWEntity must not be negative";
+    	this.hitpoints += healPoints;
     }
 	
 	@Override
@@ -148,9 +148,6 @@ public class SWEntity extends Entity implements SWEntityInterface {
 	@Override
 	public boolean isDead() {
 		return hitpoints <= 0;
-}
-	 
-	 
-	
+	}
 	
 }
