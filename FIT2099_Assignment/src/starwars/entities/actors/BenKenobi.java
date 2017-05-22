@@ -18,7 +18,7 @@ import starwars.actions.Train;
 import starwars.actions.Healing;
 import starwars.entities.LightSaber;
 import starwars.entities.actors.behaviors.AttackInformation;
-import starwars.entities.actors.behaviors.AttackNeighbours;
+import starwars.entities.actors.behaviors.AttackNeighboursBehaviour;
 import starwars.entities.actors.behaviors.PatrolBehaviour;
 import starwars.swinterfaces.SWGridController;
 
@@ -36,20 +36,19 @@ import starwars.swinterfaces.SWGridController;
 public class BenKenobi extends SWLegend {
 
 	private static BenKenobi ben = null; // yes, it is OK to return the static instance!
-	private PatrolBehaviour path;
 	private MessageRenderer m;
 	private boolean taken;
 	private SWEntityInterface benSS;	// ben's original holding stuff
 	private BenKenobi(MessageRenderer m, SWWorld world, Direction [] moves) {
 		super(Team.GOOD, 800, m, world);
 		this.m = m;
-		path = new PatrolBehaviour(moves);
 		this.setShortDescription("Ben Kenobi");
 		this.setLongDescription("Ben Kenobi, an old man who has perhaps seen too much");
 		LightSaber bensweapon = new LightSaber(m);
 		setItemCarried(bensweapon);
 		this.taken = false;
 		this.benSS = null;
+		behaviours.add(new PatrolBehaviour(this, world, moves));
 	}
 
 	public static BenKenobi getBenKenobi(MessageRenderer m, SWWorld world, Direction [] moves) {
@@ -72,7 +71,7 @@ public class BenKenobi extends SWLegend {
 			return;
 		}
 		AttackInformation attack;
-		attack = AttackNeighbours.attackLocals(ben,  ben.world, true, true);
+		attack = AttackNeighboursBehaviour.attackLocals(ben,  ben.world, true, true);
 		
 		List<SWEntityInterface> contents = this.world.getEntityManager().contents(location);
 		
@@ -114,8 +113,7 @@ public class BenKenobi extends SWLegend {
  */
 		
 		if (attack != null) {
-			say(getShortDescription() + " suddenly looks sprightly and attacks " +
-		attack.entity.getShortDescription());
+			say(getShortDescription() + " suddenly looks sprightly and attacks " + attack.entity.getShortDescription());
 			scheduler.schedule(attack.affordance, ben, 1);
 		}
 		
@@ -167,14 +165,6 @@ public class BenKenobi extends SWLegend {
 					}
 				}
 			}
-		}
-		
-		else {
-			Direction newdirection = path.getNext();
-			say(getShortDescription() + " moves " + newdirection);
-			Move myMove = new Move(newdirection, messageRenderer, world);
-
-			scheduler.schedule(myMove, this, 1);
 		}
 	}
 

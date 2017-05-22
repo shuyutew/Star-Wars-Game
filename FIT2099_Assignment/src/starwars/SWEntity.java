@@ -109,5 +109,8 @@ public class SWEntity extends Entity implements SWEntityInterface {
 		this.hitpoints -= damage;
 	}
 	
+	 @Override
+	    public void movedToLocation(SWLocation loc) { }
+	
 	
 }

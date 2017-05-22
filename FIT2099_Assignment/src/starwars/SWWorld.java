@@ -77,6 +77,7 @@ public class SWWorld extends World {
 	 * @param 	iface a MessageRenderer to be passed onto newly-created entities
 	 */
 	public void initializeWorld(MessageRenderer iface) {
+		messageRenderer = iface;
 		SWLocation loc;
 		// Set default location string
 		for (int row=0; row < height(); row++) {
@@ -242,20 +243,17 @@ public class SWWorld extends World {
 		entityManager.setLocation(ben, loc);
 
 		//Droids
-		Direction [] patrolD = {CompassBearing.EAST, CompassBearing.EAST,
-                CompassBearing.EAST, CompassBearing.EAST, CompassBearing.EAST,
-                CompassBearing.WEST, CompassBearing.WEST, CompassBearing.WEST,
-                CompassBearing.WEST, CompassBearing.WEST};
-		// R2D2
-		Droid R2D2 = new Droid(200, "R2-D2", iface, this, patrolD);
+		Direction[] r2d2Patrol = { CompassBearing.EAST, CompassBearing.EAST, CompassBearing.EAST, CompassBearing.EAST, CompassBearing.EAST,
+				CompassBearing.WEST, CompassBearing.WEST, CompassBearing.WEST, CompassBearing.WEST, CompassBearing.WEST };
 		
-		R2D2.setSymbol("RD");
-		R2D2.setPatrol(true);
-		R2D2.internalOil();
-		loc = myGrid.getLocationByCoordinates(2,3);
-		entityManager.setLocation(R2D2, loc);
+		// R2D2 new
+		SWRobots RD = new R2D2(200, r2d2Patrol, iface, this);
 		
-		//C3PO
+		loc = myGrid.getLocationByCoordinates(5,5);
+		entityManager.setLocation(RD, loc);
+		
+		
+		//C3PO new
 		SWRobots C3Po = new C3PO(200, iface, this);
 		loc = myGrid.getLocationByCoordinates(3,3);
 		entityManager.setLocation(C3Po, loc);

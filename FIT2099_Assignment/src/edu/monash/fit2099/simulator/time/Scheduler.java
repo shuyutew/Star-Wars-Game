@@ -221,6 +221,9 @@ public class Scheduler {
 			Event e = events.poll();
 			
 			//execute that event
+		    if (e == null){
+		    	System.out.println("NULLLLLLL");
+		    }
 			e.getAction().execute(e.getActor());			
 		}
 		//update the present time after the tick has happened

@@ -17,8 +17,7 @@ public class PatrolBehaviour extends BehaviourInterface {
 	public PatrolBehaviour(SWActor actor, SWWorld world, Direction [] moves) {
 		super(actor, world);
 		this.moves = new ArrayList<Direction>(Arrays.asList(moves));
-		
-		// TODO Auto-generated constructor stub
+
 	}
 	
     @Override
@@ -31,17 +30,10 @@ public class PatrolBehaviour extends BehaviourInterface {
     	actor.schedule(move);
     	return true;
     }
-
-	public PatrolBehaviour(Collection<Direction> moves) {
-		this.moves = new ArrayList<Direction>(moves);
-	}
 	
 	public Direction getNext() {
-		Direction nextMove =  moves.get(position);
-		position++;
-		if (position >= moves.size()) {
-			position = 0;
-		}
+		Direction nextMove = moves.get(position);
+		position = ++position % moves.size();
 		return nextMove;
 	}
 }

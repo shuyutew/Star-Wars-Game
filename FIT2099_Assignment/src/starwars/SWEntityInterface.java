@@ -89,5 +89,7 @@ public interface SWEntityInterface extends EntityInterface {
 	 */
 	public void takeDamage(int damage);
 	
+	public void movedToLocation(SWLocation loc);
+	
 
 }

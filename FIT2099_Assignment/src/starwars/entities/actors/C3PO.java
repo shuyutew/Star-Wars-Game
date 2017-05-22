@@ -15,7 +15,7 @@ public class C3PO extends SWRobots {
 		
 		this.setShortDescription("C-3PO");
 		this.setLongDescription("C-3PO, Protocol Droid");
-		this.setSymbol("??");
+		this.setSymbol("CP");
 		
 		ArrayList<String> possibleQuotes = new ArrayList<String>();
 		possibleQuotes.add("Don't call me a mindless philosopher, you overweight glob of grease!");

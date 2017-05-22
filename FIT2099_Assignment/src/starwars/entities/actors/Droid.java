@@ -42,7 +42,6 @@ public class Droid extends SWRobots{
 	
 	private String name;
 	private MessageRenderer m;
-	private PatrolBehaviour path;
 	private int maxparts;
 	private int parts;
 
@@ -50,7 +49,6 @@ public class Droid extends SWRobots{
 		super(Team.NEUTRAL, hitpoints, m, world);
 		this.name = name;
 		this.m = m;
-		path = new PatrolBehaviour(patrolmoves);
 		maxparts = 2;
 		parts = 2;
 	}
@@ -101,57 +99,29 @@ public class Droid extends SWRobots{
 		else{
 			say(describeLocation());
 			System.out.println("whatatataat");
-			
-			/**
-			 * While not owned, droids which have the property of patrolling will patrol.
-			 */
-					if (this.getPatrol() && !(this.getStatus())) {		
-						
-						Direction newdirection = path.getNext();
-						say(getShortDescription() + " is heading " + newdirection + " next.");
-						Move myMove = new Move(newdirection, messageRenderer, world);
-
-						scheduler.schedule(myMove, this, 0);
-					}
 					
-			/**
-			 * this allows droids to say something at a 10% chance rate given that the droids had willTalk property
-			 */
-					if(this.willTalk()){
-						if(Math.random() > 0.9){
-							ArrayList<String> possibleQuotes = new ArrayList<String>();
-							possibleQuotes.add("Don�t call me a mindless philosopher, you overweight glob of grease!");
-							possibleQuotes.add("This sandStorm is killing me.");
-							possibleQuotes.add("I've forgotten how much I hate space travel.");
-							possibleQuotes.add("This is suicide.");
-							possibleQuotes.add("Something's not right because now I can't see.");
-							
-							String saying = possibleQuotes.get((int) (Math.floor(Math.random() * possibleQuotes.size())));
-							say(this.getShortDescription() + " says: ' " + saying + " ' ");
-						}
-					}
-					if(this.checkInternal()){
+			if(this.checkInternal()){
 
-						SWLocation location = this.world.getEntityManager().whereIs(this);
+				SWLocation location = this.world.getEntityManager().whereIs(this);
 						
-						List<SWEntityInterface> contents = this.world.getEntityManager().contents(location);
-						for (SWEntityInterface entity : contents) {
-							if (entity instanceof SWRobots){
-								if (entity.getHitpoints() < entity.getmaxHitpoints()){
+				List<SWEntityInterface> contents = this.world.getEntityManager().contents(location);
+				for (SWEntityInterface entity : contents) {
+					if (entity instanceof SWRobots){
+						if (entity.getHitpoints() < entity.getmaxHitpoints()){
 									
-									boolean targetIsActor = entity instanceof SWActor;
-									SWActor targetActor = null;
+							boolean targetIsActor = entity instanceof SWActor;
+							SWActor targetActor = null;
 									
-									if (targetIsActor) {
-										targetActor = (SWActor) entity;
-									}
-									
-									Healing heal = new Healing(targetActor, m);
-									scheduler.schedule(heal, targetActor, 0);
-								}
+							if (targetIsActor) {
+								targetActor = (SWActor) entity;
 							}
+									
+							Healing heal = new Healing(targetActor, m);
+							scheduler.schedule(heal, targetActor, 0);
 						}
 					}
+				}
+			}
 					
 		}
 		

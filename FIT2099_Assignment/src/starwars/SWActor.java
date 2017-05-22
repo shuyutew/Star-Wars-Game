@@ -536,5 +536,8 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
     public void removeBehaviour(Class<? extends BehaviourInterface> type) {
     	behaviours.remove(getBehaviour(type));
     }
+    
+    @Override
+    public void movedToLocation(SWLocation loc) { }
 
 }

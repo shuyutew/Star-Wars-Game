@@ -1,9 +1,11 @@
 package starwars.actions;
 
 import edu.monash.fit2099.simulator.space.Direction;
+import edu.monash.fit2099.simulator.space.Location;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.SWAction;
 import starwars.SWActor;
+import starwars.SWLocation;
 import starwars.SWWorld;
 
 /**
@@ -52,9 +54,11 @@ public class Move extends SWAction {
 	public void act(SWActor a) {
 		
 		if (world.canMove(a, whichDirection)) {
-			world.moveEntity(a, whichDirection);
-			a.resetMoveCommands(world.find(a));//reset the new possible set of moves based on the new location of the entity
-			messageRenderer.render(a.getShortDescription() + " is moving " + whichDirection);
+		    world.moveEntity(a, whichDirection);
+		    Location currentLocation = world.find(a);
+		    a.movedToLocation((SWLocation)currentLocation);
+		    a.resetMoveCommands(currentLocation);//reset the new possible set of moves based on the new location of the entity
+		    messageRenderer.render(a.getShortDescription() + " moves " + whichDirection);
 		}
 				
 	}
@@ -94,17 +98,6 @@ public class Move extends SWAction {
 	 */
 	public boolean isMoveCommand() {
 		return true;
-	}
-
-	
-	/**
-	 *Returns the time taken to perform this <code>Move</code> action.
-	 *
-	 *@return the duration of the <code>Move</code> action. Currently hard coded to return 1
-	 */
-	@Override
-	public int getDuration() {
-		return 1;
 	}
 
 	/**

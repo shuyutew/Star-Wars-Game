@@ -12,7 +12,7 @@ import starwars.Team;
 import starwars.actions.Move;
 import starwars.entities.Blaster;
 import starwars.entities.actors.behaviors.AttackInformation;
-import starwars.entities.actors.behaviors.AttackNeighbours;
+import starwars.entities.actors.behaviors.AttackNeighboursBehaviour;
 
 public class TuskenRaider extends SWActor {
 
@@ -53,7 +53,7 @@ public class TuskenRaider extends SWActor {
 		}
 		say(describeLocation());
 
-		AttackInformation attack = AttackNeighbours.attackLocals(this, this.world, false, false);
+		AttackInformation attack = AttackNeighboursBehaviour.attackLocals(this, this.world, false, false);
 		if (attack != null) {
 			say(getShortDescription() + " has attacked " + attack.entity.getShortDescription());
 			scheduler.schedule(attack.affordance, this, 1);

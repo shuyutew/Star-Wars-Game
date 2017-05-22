@@ -30,9 +30,6 @@ public abstract class SWRobots extends SWActor {
 	/**If or not this <code>SWRobot</code> has owner. <code>SWRobot</code>s does not have a owner by default*/
 	private boolean hasOwner = false;
 	
-	/**If or not this <code>SWRobot</code> will patrol while not Owned. <code>SWRobot</code>s will not patrol by default*/
-	private boolean willPatrol = false;
-	
 	/**If or not this <code>SWRobot</code> has an internal oil reservoir. <code>SWRobot</code>s will not have it by default*/
 	private boolean internal = false;
 	
@@ -64,7 +61,6 @@ public abstract class SWRobots extends SWActor {
 	
 	public void isOwned() {
 		this.hasOwner = true;
-		this.willPatrol = false;
 	}
 	
 	public void disowned(){
@@ -77,18 +73,6 @@ public abstract class SWRobots extends SWActor {
 	 */
 	public boolean getStatus(){
 		return hasOwner;
-	}
-	
-	public void setPatrol(boolean isit) {
-		this.willPatrol = isit;
-	}
-	
-	/**
-	 * 
-	 * @return true if that robot will patrol by itself each round. (for now is only R2D2)
-	 */
-	public boolean getPatrol(){
-		return willPatrol;
 	}
 	
 	/**

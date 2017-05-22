@@ -81,7 +81,7 @@ public abstract class SWAction extends Action implements SWActionInterface {
 	
     @Override
     public int getDuration() {
-	return 1;
+    	return 1;
     }
 	
 
