@@ -49,6 +49,10 @@ public interface SWEntityInterface extends EntityInterface {
 	 */
 	public boolean hasCapability(Capability c);
 	
+    public void addCapability(Capability c);
+    
+    public void removeCapability(Capability c);
+	
 	/**
 	 * Returns the hitpoints of this <code>SWEntity</code> or <code>SWActor</code>.
 	 * 
@@ -62,6 +66,17 @@ public interface SWEntityInterface extends EntityInterface {
 	 * @return the amount of maxHitpoints
 	 */	
 	public int getmaxHitpoints();
+	
+    /**
+     * Returns true if this <code>SWActor</code> is dead, false otherwise.
+     * <p>
+     * A <code>SWActor</code> is dead when it's <code>hitpoints</code> are less than or equal to zero (0)
+     *
+     * @author ram
+     * @return true if and only if this <code>SWActor</code> is dead, false otherwise
+     * @see #hitpoints
+     */
+    public boolean isDead();
 	
 	/**
 	 * Returns the level of this <code>SWEntity</code> or <code>SWActor</code>.(currently only canteen uses this)
@@ -90,6 +105,10 @@ public interface SWEntityInterface extends EntityInterface {
 	public void takeDamage(int damage);
 	
 	public void movedToLocation(SWLocation loc);
+	
+    public SWAffordance getAffordance(Class<?> type);
+    
+    public void removeAffordance(Class<?> type);
 	
 
 }

@@ -2,6 +2,7 @@ package starwars;
 
 import java.util.HashSet;
 
+import edu.monash.fit2099.simulator.matter.Affordance;
 import edu.monash.fit2099.simulator.matter.Entity;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 
@@ -70,6 +71,17 @@ public class SWEntity extends Entity implements SWEntityInterface {
 	public boolean hasCapability(Capability c) {
 		return capabilities.contains(c);
 	}
+	
+
+    @Override
+    public void addCapability(Capability c) {
+    	capabilities.add(c);
+    }
+
+    @Override
+    public void removeCapability(Capability c) {
+    	capabilities.remove(c);
+    }
 
 	@Override
 	public int getHitpoints() {
@@ -109,8 +121,30 @@ public class SWEntity extends Entity implements SWEntityInterface {
 		this.hitpoints -= damage;
 	}
 	
+	@Override
+	public void movedToLocation(SWLocation loc) { }
+	 
+	@Override
+	public SWAffordance getAffordance(Class<?> type) {
+		for (Affordance a : getAffordances()) {
+			if (a.getClass() == type){
+	 			return (SWAffordance) a;
+			}
+		 }
+		 	return null;
+	 }
+	    
 	 @Override
-	    public void movedToLocation(SWLocation loc) { }
+	 public void removeAffordance(Class<?> type) {
+		 removeAffordance(getAffordance(type));
+	 }
+	 
+	@Override
+	public boolean isDead() {
+		return hitpoints <= 0;
+}
+	 
+	 
 	
 	
 }

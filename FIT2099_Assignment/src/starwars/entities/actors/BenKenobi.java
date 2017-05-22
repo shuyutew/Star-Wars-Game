@@ -48,6 +48,7 @@ public class BenKenobi extends SWLegend {
 		setItemCarried(bensweapon);
 		this.taken = false;
 		this.benSS = null;
+		behaviours.add(new AttackNeighboursBehaviour(this, world, m, true, true, "%s suddenly looks sprightly and attacks %2s"));
 		behaviours.add(new PatrolBehaviour(this, world, moves));
 	}
 
@@ -57,6 +58,12 @@ public class BenKenobi extends SWLegend {
 		return ben;
 	}
 	
+    @Override
+    protected void executeBehaviours() {
+	//say(describeLocation()); // Too verbose, good for debugging though.
+    	super.executeBehaviours();
+    }
+
 	@Override
 	protected void legendAct() {
 		
@@ -70,8 +77,8 @@ public class BenKenobi extends SWLegend {
 		if(isDead()) {
 			return;
 		}
-		AttackInformation attack;
-		attack = AttackNeighboursBehaviour.attackLocals(ben,  ben.world, true, true);
+		
+		executeBehaviours();
 		
 		List<SWEntityInterface> contents = this.world.getEntityManager().contents(location);
 		
@@ -112,15 +119,10 @@ public class BenKenobi extends SWLegend {
  * before healing himself.		
  */
 		
-		if (attack != null) {
-			say(getShortDescription() + " suddenly looks sprightly and attacks " + attack.entity.getShortDescription());
-			scheduler.schedule(attack.affordance, ben, 1);
-		}
-		
 //If luke is around and his force is less than the Ben's force, Ben will stop moving because he will ask to
 // train luke. Only when Luke moves away, indicating that he declines the training, then only Ben will continue
 // patrol.
-		else if(LukeAround){
+		if(LukeAround){
 			System.out.println("NOT MOVING");
 		}
 		

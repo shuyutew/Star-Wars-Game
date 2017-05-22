@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import edu.monash.fit2099.gridworld.Grid;
 import edu.monash.fit2099.simulator.space.Direction;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
+import starwars.Capability;
 import starwars.SWActor;
 import starwars.SWLocation;
 import starwars.SWWorld;
@@ -44,21 +45,25 @@ public class TuskenRaider extends SWActor {
 		this.name = name;
 		Blaster tuckenweapon = new Blaster(m);
 		setItemCarried(tuckenweapon);
+		behaviours.add(new AttackNeighboursBehaviour(this, world, m, false, false, "%s has attacked %2s"));
 	}
 
+    @Override
+    protected void executeBehaviours() {
+	//say(describeLocation()); // Too verbose, good for debugging though.
+    	System.out.println("ATTACK!!!!");
+    	super.executeBehaviours();
+    }
+	
 	@Override
 	public void act() {
 		if (isDead()) {
 			return;
 		}
 		say(describeLocation());
+		executeBehaviours();
 
-		AttackInformation attack = AttackNeighboursBehaviour.attackLocals(this, this.world, false, false);
-		if (attack != null) {
-			say(getShortDescription() + " has attacked " + attack.entity.getShortDescription());
-			scheduler.schedule(attack.affordance, this, 1);
-		}
-		else if (Math.random() > 0.5){
+		if (Math.random() > 0.5){
 			
 			ArrayList<Direction> possibledirections = new ArrayList<Direction>();
 

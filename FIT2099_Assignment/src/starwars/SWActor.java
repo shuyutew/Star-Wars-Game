@@ -39,8 +39,7 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	/**the <code>Team</code> to which this <code>SWActor</code> belongs to**/
 	private Team team;
 	
-	/**The amount of <code>hitpoints</code> of this actor. If the hitpoints are zero or less this <code>Actor</code> is dead*/
-	private int hitpoints;
+	private SWEntity innerEntity;
 	
 	private int maxHitpoint;
 	
@@ -71,9 +70,6 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	
 	private SWActor poorOne;
 	
-	/**A string symbol that represents this <code>SWActor</code>, suitable for display*/
-	private String symbol;
-	
 	/**A set of <code>Capabilities</code> of this <code>SWActor</code>*/
 	private HashSet<Capability> capabilities;
 	
@@ -102,10 +98,13 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 		super(m);
 		actions = new HashSet<SWActionInterface>();
 		this.team = team;
-		this.hitpoints = hitpoints;
-		this.maxHitpoint = hitpoints;
 		this.world = world;
-		this.symbol = "@";
+		
+		innerEntity = new SWEntity(m);
+		innerEntity.setSymbol("@");
+		innerEntity.setHitpoints(hitpoints);
+		
+		this.maxHitpoint = hitpoints;
 		setForceAbility();
 		
 		//SWActors are given the Attack affordance hence they can be attacked
@@ -195,7 +194,7 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	 */
 	@Override
 	public int getHitpoints() {
-		return hitpoints;
+		return innerEntity.getHitpoints();
 	}
 	
 	@Override
@@ -300,10 +299,7 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
  	 */
  	@Override
  	public void takeDamage(int damage) {
- 		//Precondition 1: Ensure the damage is not negative. Negative damage could increase the SWActor's hitpoints
- 		//assert (damage >= 0)	:"damage on SWActor must not be negative";
- 		//We don't need these preconditions because we could use them during healing to increase the SWActor's hitpoints.
- 		this.hitpoints -= damage;
+ 		innerEntity.takeDamage(damage);
  	}
  
  	/**
@@ -395,18 +391,18 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	 * @see 	#hitpoints
 	 */
 	public boolean isDead() {
-		return hitpoints <= 0;
+		return innerEntity.isDead();
 	}
 
 	@Override
 	public String getSymbol() {
-		return symbol;
+		return innerEntity.getSymbol();
 	}
 	
 
 	@Override
 	public void setSymbol(String s) {
-		symbol = s;
+		innerEntity.setSymbol(s);;
 	}
 	
 	/**
@@ -442,11 +438,20 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 		return poorOne;
 	}
 	
-
 	@Override
 	public boolean hasCapability(Capability c) {
-		return capabilities.contains(c);
+		return innerEntity.hasCapability(c);
 	}
+	
+    @Override
+    public void addCapability(Capability c) {
+    	innerEntity.addCapability(c);
+    }
+
+    @Override
+    public void removeCapability(Capability c) {
+    	innerEntity.removeCapability(c);
+    }
 	
 	/**
 	 * This method will poll this <code>SWActor</code>'s current <code>Location loc</code>
@@ -504,10 +509,6 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 
     @Override
     public void act() {
-    	if (this.getSymbol()=="??"){
-    		System.out.println("YES?????");
-    	}
-    	
     	if (isDead())
     		return;
     	
@@ -515,13 +516,12 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
     }
 
     protected void executeBehaviours() {
-    	if (this.getSymbol()=="??"){
-    		System.out.println("YES?????2");
-    	}
     	for (BehaviourInterface behaviour : behaviours) {
-    		if (behaviour.ExecuteBehaviour())
+    		if (behaviour.ExecuteBehaviour()){
     			return;
-	}
+    		}
+
+    	}
     }
     
     public BehaviourInterface getBehaviour(Class<? extends BehaviourInterface> type){
@@ -539,5 +539,35 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
     
     @Override
     public void movedToLocation(SWLocation loc) { }
+    
+    // Entity wrapper methods.
+    // SWActor is an Actor (subclass of Entity), so it can't be a SWEntity because of single inheritance.
+    // I need more affordance methods, which are on SWEntity, so I'm wrapping a SWEntity and delegating all affordance behaviour to it.
+    // It turned out to be only marginally less awkward than copy pasting all the SWEntityInteface code out of SWEntity. But, DRY.
+
+    @Override
+    public void addAffordance(Affordance a) {
+    	innerEntity.addAffordance(a);
+    }
+
+    @Override
+    public void removeAffordance(Affordance a) {
+    	innerEntity.removeAffordance(a);
+    }
+
+    @Override
+    public Affordance[] getAffordances() {
+    	return innerEntity.getAffordances();
+    }
+
+    @Override
+    public SWAffordance getAffordance(Class<?> type) {
+    	return innerEntity.getAffordance(type);
+    }
+
+    @Override
+    public void removeAffordance(Class<?> type) {
+    	innerEntity.removeAffordance(type);
+    }
 
 }
