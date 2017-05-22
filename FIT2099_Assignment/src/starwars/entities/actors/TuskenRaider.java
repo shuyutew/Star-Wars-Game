@@ -12,8 +12,8 @@ import starwars.SWWorld;
 import starwars.Team;
 import starwars.actions.Move;
 import starwars.entities.Blaster;
-import starwars.entities.actors.behaviors.AttackInformation;
 import starwars.entities.actors.behaviors.AttackNeighboursBehaviour;
+import starwars.entities.actors.behaviors.WanderAround;
 
 public class TuskenRaider extends SWActor {
 
@@ -46,12 +46,12 @@ public class TuskenRaider extends SWActor {
 		Blaster tuckenweapon = new Blaster(m);
 		setItemCarried(tuckenweapon);
 		behaviours.add(new AttackNeighboursBehaviour(this, world, m, false, false, "%s has attacked %2s"));
+		behaviours.add(new WanderAround(this, world));
 	}
 
     @Override
     protected void executeBehaviours() {
 	//say(describeLocation()); // Too verbose, good for debugging though.
-    	System.out.println("ATTACK!!!!");
     	super.executeBehaviours();
     }
 	
@@ -62,24 +62,6 @@ public class TuskenRaider extends SWActor {
 		}
 		say(describeLocation());
 		executeBehaviours();
-
-		if (Math.random() > 0.5){
-			
-			ArrayList<Direction> possibledirections = new ArrayList<Direction>();
-
-			// build a list of available directions
-			for (Grid.CompassBearing d : Grid.CompassBearing.values()) {
-				if (SWWorld.getEntitymanager().seesExit(this, d)) {
-					possibledirections.add(d);
-				}
-			}
-
-			Direction heading = possibledirections.get((int) (Math.floor(Math.random() * possibledirections.size())));
-			say(getShortDescription() + " is heading " + heading + " next.");
-			Move myMove = new Move(heading, messageRenderer, world);
-
-			scheduler.schedule(myMove, this, 1);
-		}
 	}
 	
 	@Override

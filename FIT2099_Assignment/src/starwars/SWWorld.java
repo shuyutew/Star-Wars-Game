@@ -131,7 +131,7 @@ public class SWWorld extends World {
 			}
 		}
 		
-		loc = myGrid.getLocationByCoordinates(5, 5);
+		loc = myGrid.getLocationByCoordinates(4, 5);
 		
 		// Luke
 		Player luke = new Player(Team.GOOD, 100, iface, this);
@@ -206,7 +206,7 @@ public class SWWorld extends World {
 		TuskenRaider tim = new TuskenRaider(10, "Tim", iface, this);
 		
 		tim.setSymbol("T");
-		loc = myGrid.getLocationByCoordinates(4,5);
+		loc = myGrid.getLocationByCoordinates(6,5);
 		entityManager.setLocation(tim, loc);
 		
 		// A Tusken Raider

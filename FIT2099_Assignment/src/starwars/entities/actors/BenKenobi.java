@@ -6,21 +6,20 @@ import edu.monash.fit2099.simulator.space.Direction;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.SWEntityInterface;
 import starwars.SWActor;
+import starwars.SWEntity;
 import starwars.SWLegend;
 import starwars.SWLocation;
 import starwars.SWWorld;
 import starwars.Team;
 import starwars.Capability;
-import starwars.actions.Move;
 import starwars.actions.Leave;
 import starwars.actions.Take;
 import starwars.actions.Train;
 import starwars.actions.Healing;
 import starwars.entities.LightSaber;
-import starwars.entities.actors.behaviors.AttackInformation;
 import starwars.entities.actors.behaviors.AttackNeighboursBehaviour;
 import starwars.entities.actors.behaviors.PatrolBehaviour;
-import starwars.swinterfaces.SWGridController;
+import starwars.entities.actors.behaviors.TrainerBehaviour;
 
 /**
  * Ben (aka Obe-Wan) Kenobi.  
@@ -44,10 +43,15 @@ public class BenKenobi extends SWLegend {
 		this.m = m;
 		this.setShortDescription("Ben Kenobi");
 		this.setLongDescription("Ben Kenobi, an old man who has perhaps seen too much");
-		LightSaber bensweapon = new LightSaber(m);
+		SWEntity bensweapon = new LightSaber(m);
+		bensweapon.removeAffordance(Take.class);
+		bensweapon.addAffordance(new Leave(bensweapon, m));
 		setItemCarried(bensweapon);
 		this.taken = false;
 		this.benSS = null;
+
+		this.addAffordance(new Train(this, m));
+		behaviours.add(new TrainerBehaviour(this, world));
 		behaviours.add(new AttackNeighboursBehaviour(this, world, m, true, true, "%s suddenly looks sprightly and attacks %2s"));
 		behaviours.add(new PatrolBehaviour(this, world, moves));
 	}
@@ -68,9 +72,7 @@ public class BenKenobi extends SWLegend {
 	protected void legendAct() {
 		
 		boolean isCanteen = false;
-		boolean LukeAround = false;
 		SWEntityInterface fullCan = null;
-		SWEntityInterface tobeTrained = null;		//the Actor that ben is going to train
 		
 		SWLocation location = this.world.getEntityManager().whereIs(this);
 
@@ -92,18 +94,6 @@ public class BenKenobi extends SWLegend {
 						}
 					}
 				}
-/** for this assignment, we assume that Ben will only train Luke, but we added train affordance to all SWActor
- * because we would like to implement this game in a way that people with higher force ability will be able to train
- * people with lower force ability. This means that Luke can be trained by some other people with higher force ability.
- * */
-				else if(entity != this && entity instanceof SWActor){
-					if (entity.getSymbol() == "@"){
-						tobeTrained = entity;
-						if(tobeTrained.getForce() < this.getForce()){
-							LukeAround = true;
-						}
-					}
-				}
 			}
 		}
 		
@@ -113,18 +103,6 @@ public class BenKenobi extends SWLegend {
 			}
 		}
 		
-/**
- * Ben will prioritise attack first. Let say he is healing halfway, Ben will still attack using that canteen.
- * Or when he reached the coordinate with canteen and a Tusken Raider is there, he would kill the TuskenRaider first
- * before healing himself.		
- */
-		
-//If luke is around and his force is less than the Ben's force, Ben will stop moving because he will ask to
-// train luke. Only when Luke moves away, indicating that he declines the training, then only Ben will continue
-// patrol.
-		if(LukeAround){
-			System.out.println("NOT MOVING");
-		}
 		
 //if a canteen exist and ben's hitpoint is not maximum and he is not holding a canteen
 		else if(isCanteen && this.getHitpoints()!= this.getmaxHitpoints() && !taken){

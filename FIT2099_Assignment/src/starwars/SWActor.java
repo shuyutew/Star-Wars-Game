@@ -111,9 +111,6 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 		SWAffordance attack = new Attack(this, m);
 		this.addAffordance(attack);
 		
-		//SWActors are given the Train affordance hence they can be trained. But for SWRobots we need to remove this affordance!
-		this.addAffordance(new Train(this, m));
-		
 //It does make sense that every actor could be mind controlled if their force ability level is less than a certain level
 //Thus, in the MindControl class, under the canDo() method, we would set some conditions so that actors with a certain
 //force ability would not be able to be mind controlled.

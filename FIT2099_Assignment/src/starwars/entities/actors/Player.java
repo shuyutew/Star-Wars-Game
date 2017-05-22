@@ -7,6 +7,7 @@ import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.SWActor;
 import starwars.SWRobots;
 import starwars.SWEntityInterface;
+import starwars.Capability;
 import starwars.SWActionInterface;
 import starwars.SWLocation;
 import starwars.SWWorld;
@@ -45,7 +46,7 @@ public class Player extends SWActor {
 	public Player(Team team, int hitpoints, MessageRenderer m, SWWorld world) {
 		super(team, hitpoints, m, world);
 		humanControlled = true; // this feels like a hack. Surely this should be dynamic
-		
+		this.addCapability(Capability.JEDI_Student);
 	}
 	
 	/**
