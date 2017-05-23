@@ -258,6 +258,12 @@ public class SWWorld extends World {
 		loc = myGrid.getLocationByCoordinates(5,5);
 		entityManager.setLocation(C3Po, loc);
 		
+		//princess
+		PrincessLeia Princess = new PrincessLeia(200, iface, this);
+		loc = myGrid.getLocationByCoordinates(5,5);
+		entityManager.setLocation(Princess, loc);
+		
+		
 	}
 
 	/*

@@ -11,7 +11,7 @@ import starwars.Team;
 
 public class PrincessLeia extends SWActor{
 
-	public PrincessLeia(int hitpoints, String name, MessageRenderer m, SWWorld world) {
+	public PrincessLeia(int hitpoints, MessageRenderer m, SWWorld world) {
 		super(Team.GOOD, 200, m, world);
 		
 		this.setShortDescription("Leia");
@@ -19,6 +19,12 @@ public class PrincessLeia extends SWActor{
 		this.setSymbol("<3");
 		behaviours.add(followBehaviour);
 	}
+	
+    @Override
+    protected void executeBehaviours() {
+	//say(describeLocation()); // Too verbose, good for debugging though.
+    	super.executeBehaviours();
+    }
 	
 	@Override
 	public void act() {
@@ -34,7 +40,7 @@ public class PrincessLeia extends SWActor{
 		if (contents.size() > 1) { // if it is equal to one, the only thing here is this Player, so there is nothing to report
 			for (SWEntityInterface entity : contents) {
 				if (entity != this && entity instanceof SWActor){
-					if (entity.getShortDescription() == "Luke"){ // check is Ben's previous belongings is still around 
+					if (entity.getShortDescription() == "Luke"){ // check is Ben's previous belongings is still around
 						executeBehaviours();
 					}
 				}
