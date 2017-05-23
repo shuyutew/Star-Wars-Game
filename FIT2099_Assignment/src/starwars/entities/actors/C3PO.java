@@ -26,7 +26,7 @@ public class C3PO extends SWRobots {
 		possibleQuotes.add("Something's not right because now I can't see.");
 		
 		behaviours.add(followBehaviour);
-		behaviours.add(new TalkingBehaviour(this, world, possibleQuotes));
+		behaviours.add(new TalkingBehaviour(this, world, possibleQuotes, 0.9));
 	}
 
 }

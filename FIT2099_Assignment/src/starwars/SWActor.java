@@ -30,9 +30,12 @@ import starwars.actions.Attack;
 import starwars.actions.MindControl;
 import starwars.actions.Owned;
 import starwars.entities.actors.behaviors.BehaviourInterface;
+import starwars.entities.actors.behaviors.FollowBehaviour;
 import starwars.actions.Move;
 
 public abstract class SWActor extends Actor<SWActionInterface> implements SWEntityInterface {
+	
+	protected FollowBehaviour followBehaviour;
 	
 	/**the <code>Team</code> to which this <code>SWActor</code> belongs to**/
 	private Team team;
@@ -114,6 +117,7 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 //force ability would not be able to be mind controlled.
 		this.addAffordance(new MindControl(this, m));
 		
+		followBehaviour = new FollowBehaviour(this, world, null);
 	}
 	
 	/**

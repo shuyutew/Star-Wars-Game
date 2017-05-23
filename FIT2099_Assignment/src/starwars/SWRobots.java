@@ -53,7 +53,7 @@ public abstract class SWRobots extends SWActor implements SWRobotsInterface {
 		this.addAffordance(new Owned(this, messageRenderer));
 		this.addAffordance(new Repair(this, messageRenderer));
 		
-		followBehaviour = new FollowBehaviour(this, world, null);
+		this.followBehaviour = new FollowBehaviour(this, world, null);
 	}
 	
 //Droids has no force ability	

@@ -21,7 +21,6 @@ public class Speak extends SWAction {
 
     @Override
     public void act(SWActor actor) {
-    	System.out.println("WALOAODJSOD");
     	actor.say(String.format("%s says, \"%s\"", actor.getShortDescription(), message));
     }
 
