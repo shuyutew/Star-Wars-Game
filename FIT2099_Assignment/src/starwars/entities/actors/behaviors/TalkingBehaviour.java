@@ -18,7 +18,6 @@ public class TalkingBehaviour extends BehaviourInterface {
 
     @Override
     public boolean ExecuteBehaviour() {
-    	System.out.println("PLSDSUFHJASFAF");
     	actor.schedule(new Speak(messageRenderer, TRandom.itemFrom(quotes)));
     	return true;
     }
