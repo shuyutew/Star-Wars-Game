@@ -69,11 +69,34 @@ public class Player extends SWActor {
 			
 		}
 		else{
-			if(this.getisOwner()){
+			if(this.getisOwner() && this.princesshere()){
+				SWActionInterface f = SWGridController.getUserDecision(this);
+				
+				SWEntityInterface target = this.getDroidOwned();
+				SWEntityInterface target2 = this.getPrincess();
+				boolean targetIsActor = target instanceof SWRobots;
+				boolean targetIsActor2 = target2.getShortDescription() == "Leia";
+				
+				SWActor targetActor = null;
+				SWActor targetActor2 = null;
+				
+				if (targetIsActor && targetIsActor2) {
+					targetActor = (SWActor) target;
+					targetActor2 = (SWActor) target2;
+				}
+				
+				describeScene();
+				scheduler.schedule(f, targetActor, 1);
+				scheduler.schedule(f, targetActor2, 1);
+				scheduler.schedule(f, this, 1);
+			}
+			
+			else if(this.getisOwner()){
 				SWActionInterface f = SWGridController.getUserDecision(this);
 				
 				SWEntityInterface target = this.getDroidOwned();
 				boolean targetIsActor = target instanceof SWRobots;
+				
 				SWActor targetActor = null;
 				
 				if (targetIsActor) {
@@ -84,6 +107,24 @@ public class Player extends SWActor {
 				scheduler.schedule(f, targetActor, 1);
 				scheduler.schedule(f, this, 1);
 			}
+			
+			else if (princesshere()){
+				SWActionInterface f = SWGridController.getUserDecision(this);
+				
+				SWEntityInterface target2 = this.getPrincess();
+				boolean targetIsActor2 = target2.getShortDescription() == "Leia";
+				
+				SWActor targetActor2 = null;
+				
+				if (targetIsActor2) {
+					targetActor2 = (SWActor) target2;
+				}
+				
+				describeScene();
+				scheduler.schedule(f, targetActor2, 1);
+				scheduler.schedule(f, this, 1);
+			}
+			
 			else{
 				describeScene();
 				scheduler.schedule(SWGridController.getUserDecision(this), this, 1);

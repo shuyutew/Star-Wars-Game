@@ -35,8 +35,6 @@ import starwars.actions.Move;
 
 public abstract class SWActor extends Actor<SWActionInterface> implements SWEntityInterface {
 	
-	protected FollowBehaviour followBehaviour;
-	
 	/**the <code>Team</code> to which this <code>SWActor</code> belongs to**/
 	private Team team;
 	
@@ -59,6 +57,8 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	
 	/**The droid owned by this <code>SWActor</code>. <code>droidOwned</code> is null if this <code>SWActor</code> is not owning a droid*/
 	private SWEntityInterface droidOwned;
+	
+	private SWEntityInterface princess;
 	
 	protected ArrayList<BehaviourInterface> behaviours = new ArrayList<BehaviourInterface>();
 	
@@ -116,8 +116,6 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 //Thus, in the MindControl class, under the canDo() method, we would set some conditions so that actors with a certain
 //force ability would not be able to be mind controlled.
 		this.addAffordance(new MindControl(this, m));
-		
-		followBehaviour = new FollowBehaviour(this, world, null);
 	}
 	
 	/**
@@ -270,6 +268,10 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
  	 */
  	public SWEntityInterface getDroidOwned() {
  		return droidOwned;
+ 	}
+ 	
+ 	public SWEntityInterface getPrincess() {
+ 		return princess;
  	}
  
  	/**
@@ -437,6 +439,13 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
  		}
  		return false;
  	}
+ 	
+ 	public boolean princesshere(){
+ 		if (princess != null){
+ 			return true;
+ 		}
+ 		return false;
+ 	}
 	
 	
     public void schedule(ActionInterface action) {
@@ -453,25 +462,22 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	 * @param 	target the new droid to be set as droid owned
 	 * @see 	#droidOwned
 	 */
-	public void setDroidOwned(SWEntityInterface target) {
-		
+	public void setDroidOwned(SWEntityInterface target) {	
  		this.droidOwned = target;
- 
+	}
+	
+	public void setPrincess(SWEntityInterface target){
+		this.princess = target;
 	}
     
 
     @Override
     public void act() {
-    	if (isDead())
+    	if (isDead()){
     		return;
+    	}
     	
     	executeBehaviours();
-    	
-    	if (droidOwned != null){
-    		EntityManager<SWEntityInterface, SWLocation> entityManager = SWAction.getEntitymanager();
-     		entityManager.remove(droidOwned);
-     		entityManager.setLocation(droidOwned, entityManager.whereIs(this));
-    	}
     }
 
     protected void executeBehaviours() {

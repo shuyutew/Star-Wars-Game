@@ -31,18 +31,27 @@ public class FollowBehaviour extends BehaviourInterface {
     	if (owner == null){
     		return false;
     	}
+    	
+    	if (actor.getShortDescription() == "R2-D2"){
+    		actor.removeBehaviour(PatrolBehaviour.class);
+    	}
 
 	//TODO go the full A* 
-    	System.out.println("FOLLOWING");
     	SWLocation a = entityManager.whereIs(actor);
     	SWLocation b = entityManager.whereIs(owner);
+    	
     	if (a == b){
     		return true;
     	}
-
-    	owner.setDroidOwned(actor);
+    	
+    	if(actor.getShortDescription() == "Leia"){
+    		owner.setPrincess(actor);
+    	}
+    	else{
+    		owner.setDroidOwned(actor);
+    	}
     	//entityManager.setLocation(actor, entityManager.whereIs(owner));
-    	return true;
+    	return false;
     }
 
 }
