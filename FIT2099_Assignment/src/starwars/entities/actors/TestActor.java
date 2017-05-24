@@ -4,7 +4,6 @@ import java.util.List;
 
 import edu.monash.fit2099.gridworld.Grid.CompassBearing;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
-import starwars.SWActor;
 import starwars.SWEntityInterface;
 import starwars.SWLocation;
 import starwars.SWWorld;
@@ -15,7 +14,7 @@ import starwars.actions.Move;
  * A very minimal <code>SWActor</code> that just describes the scene. It just stands still.
  */
 
-public class TestActor extends SWActor {
+public class TestActor extends SWOrganicActor {
 	
 	private String name;
 

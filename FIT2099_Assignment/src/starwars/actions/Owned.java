@@ -2,8 +2,8 @@ package starwars.actions;
 
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.SWActor;
-import starwars.SWRobots;
-import starwars.SWRobotsInterface;
+import starwars.entities.actors.SWRobots;
+import starwars.entities.actors.SWRobotsInterface;
 import starwars.SWAffordance;
 import starwars.SWEntityInterface;
 

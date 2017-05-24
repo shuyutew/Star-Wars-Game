@@ -6,6 +6,7 @@ import starwars.SWActionInterface;
 import starwars.SWActor;
 import starwars.SWAffordance;
 import starwars.SWEntityInterface;
+import starwars.Team;
 
 public class ForceChoke extends SWAffordance implements SWActionInterface {
 
@@ -31,7 +32,7 @@ public class ForceChoke extends SWAffordance implements SWActionInterface {
 	 */
 	@Override
 	public boolean canDo(SWActor a) {
-		if(a.getForce()>8 && this.getTarget() instanceof SWActor){
+		if(a.getForce()>8 && this.getTarget() instanceof SWActor && a.getTeam() == Team.EVIL){
 			return true;
 		}
 		return false;

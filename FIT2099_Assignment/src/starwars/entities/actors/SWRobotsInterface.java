@@ -1,4 +1,4 @@
-package starwars;
+package starwars.entities.actors;
 
 import starwars.SWActor;
 

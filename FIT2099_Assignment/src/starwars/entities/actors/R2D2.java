@@ -3,7 +3,6 @@ package starwars.entities.actors;
 import edu.monash.fit2099.simulator.space.Direction;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.Capability;
-import starwars.SWRobots;
 import starwars.SWWorld;
 import starwars.Team;
 import starwars.entities.actors.behaviors.PatrolBehaviour;

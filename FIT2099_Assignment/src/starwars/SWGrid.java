@@ -23,8 +23,8 @@ public class SWGrid extends Grid<SWLocation> {
 	 * 
 	 * @param factory the maker of the <code>SWLocation</code>s
 	 */
-	public SWGrid(LocationMaker<SWLocation> factory) {
-		super(10,10,factory);
+	public SWGrid(int height, int width, LocationMaker<SWLocation> factory) {
+		super(height, width, factory);
 	}
 	
 

@@ -7,7 +7,6 @@ import edu.monash.fit2099.simulator.space.Location;
 import edu.monash.fit2099.simulator.space.World;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.actions.Take;
-import starwars.actions.Repair;
 import starwars.entities.*;
 import starwars.entities.actors.*;
 
@@ -40,7 +39,7 @@ public class SWWorld extends World {
 	 */
 	public SWWorld() {
 		SWLocation.SWLocationMaker factory = SWLocation.getMaker();
-		myGrid = new SWGrid(factory);
+		myGrid = new SWGrid(10, 10, factory);
 		space = myGrid;
 		
 	}

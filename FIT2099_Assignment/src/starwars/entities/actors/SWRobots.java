@@ -1,6 +1,11 @@
-package starwars;
+package starwars.entities.actors;
 
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
+import starwars.SWActor;
+import starwars.SWEntity;
+import starwars.SWLocation;
+import starwars.SWWorld;
+import starwars.Team;
 import starwars.actions.DissambleDroid;
 import starwars.actions.ForceChoke;
 import starwars.actions.Owned;
@@ -53,7 +58,6 @@ public abstract class SWRobots extends SWActor implements SWRobotsInterface {
 		//this.addAffordance(new Repair(this, m));
 		this.addAffordance(new Owned(this, messageRenderer));
 		this.addAffordance(new Repair(this, messageRenderer));
-		this.removeAffordance(ForceChoke.class);
 		
 		this.followBehaviour = new FollowBehaviour(this, world, null);
 	}

@@ -5,7 +5,6 @@ import java.util.List;
 
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.SWActor;
-import starwars.SWRobots;
 import starwars.SWEntityInterface;
 import starwars.Capability;
 import starwars.SWActionInterface;
@@ -25,7 +24,7 @@ import starwars.swinterfaces.SWGridController;
  * 2017/02/22	Schedule actions in the act method instead of tick. 
  * 				A controller used to get user input rather than the UI directly (Asel)
  */
-public class Player extends SWActor {
+public class Player extends SWOrganicActor {
 
 	/**
 	 * Constructor for the <code>Player</code> class. This constructor will,
@@ -97,10 +96,10 @@ public class Player extends SWActor {
 				SWEntityInterface target = this.getDroidOwned();
 				boolean targetIsActor = target instanceof SWRobots;
 				
-				SWActor targetActor = null;
+				SWRobots targetActor = null;
 				
 				if (targetIsActor) {
-					targetActor = (SWActor) target;
+					targetActor = (SWRobots) target;
 				}
 				
 				describeScene();
@@ -114,10 +113,10 @@ public class Player extends SWActor {
 				SWEntityInterface target2 = this.getPrincess();
 				boolean targetIsActor2 = target2.getShortDescription() == "Leia";
 				
-				SWActor targetActor2 = null;
+				SWOrganicActor targetActor2 = null;
 				
 				if (targetIsActor2) {
-					targetActor2 = (SWActor) target2;
+					targetActor2 = (SWOrganicActor) target2;
 				}
 				
 				describeScene();

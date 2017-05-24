@@ -53,6 +53,7 @@ public class ChokeBehaviour extends BehaviourInterface{
     	SWEntityInterface target = TRandom.itemFrom(targets);
     	actor.say(String.format(message, actor.getShortDescription(), target.getShortDescription()));
 
+//if the target is still alive and there is 50% chance that Darth Vader will force choke the target
     	if (target.getHitpoints()>0 && Math.random()>0.5){
     		actor.schedule(new ForceChoke(target, messageRenderer));
     		return true;

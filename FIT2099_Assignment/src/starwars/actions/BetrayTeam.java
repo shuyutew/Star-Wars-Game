@@ -66,7 +66,7 @@ public class BetrayTeam extends SWAffordance implements SWActionInterface{
 			a.say("Ah shit! Failed to turn " + targetActor.getShortDescription() + " to the dark side.");
 		}
 		else{
-			a.say("Successfully turned " + this.target.getShortDescription() + " to the dark side!!");
+			a.say(a.getShortDescription()+"successfully turned " + this.target.getShortDescription() + " to the dark side!!");
 		}
 		
 	}

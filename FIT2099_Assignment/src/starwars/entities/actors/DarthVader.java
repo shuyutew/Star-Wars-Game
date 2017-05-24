@@ -1,18 +1,18 @@
 package starwars.entities.actors;
 
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
-import starwars.SWActor;
 import starwars.SWEntity;
 import starwars.SWWorld;
 import starwars.Team;
 import starwars.actions.Leave;
 import starwars.actions.Take;
 import starwars.entities.LightSaber;
+import starwars.entities.actors.SWOrganicActor;
 import starwars.entities.actors.behaviors.WanderAround;
 import starwars.entities.actors.behaviors.TortureLukeBehaviour;
 import starwars.entities.actors.behaviors.ChokeBehaviour;
 
-public class DarthVader extends SWActor{
+public class DarthVader extends SWOrganicActor{
 
 	public DarthVader(int hitpoints, MessageRenderer m, SWWorld world) {
 		super(Team.EVIL, hitpoints, m, world);

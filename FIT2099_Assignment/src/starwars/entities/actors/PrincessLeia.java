@@ -4,18 +4,18 @@ import java.util.List;
 
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.SWWorld;
-import starwars.SWActor;
 import starwars.SWEntityInterface;
 import starwars.SWLocation;
 import starwars.Team;
+import starwars.entities.actors.SWOrganicActor;
 import starwars.entities.actors.behaviors.FollowBehaviour;
 
-public class PrincessLeia extends SWActor{
+public class PrincessLeia extends SWOrganicActor{
 	
 	private boolean meeted = false;
 
 	public PrincessLeia(int hitpoints, MessageRenderer m, SWWorld world) {
-		super(Team.GOOD, 200, m, world);
+		super(Team.GOOD, 600, m, world);
 		
 		this.setShortDescription("Leia");
 		this.setLongDescription("Leia, Princess Leia Organa");
@@ -45,9 +45,9 @@ public class PrincessLeia extends SWActor{
 		
 		else if (contents.size() > 1) { // if it is equal to one, the only thing here is this Player, so there is nothing to report
 			for (SWEntityInterface entity : contents) {
-				if (entity != this && entity instanceof SWActor){
+				if (entity != this && entity instanceof SWOrganicActor){
 					if (entity.getShortDescription() == "Luke"){ // check is Ben's previous belongings is still around
-						this.behaviours.add(new FollowBehaviour(this, this.world, (SWActor)entity));
+						this.behaviours.add(new FollowBehaviour(this, this.world, (SWOrganicActor)entity));
 						executeBehaviours();
 						meeted = true;
 						return;

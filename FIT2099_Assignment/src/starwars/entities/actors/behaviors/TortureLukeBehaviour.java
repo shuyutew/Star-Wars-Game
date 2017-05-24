@@ -23,7 +23,6 @@ public class TortureLukeBehaviour extends BehaviourInterface {
 
 	    	for (SWEntityInterface target : getLocalEntites()) {
 	    		if (target.getShortDescription() == "Luke"){
-	    			System.out.println("HI THERE LUke TOrurtet");
 	    			if(Math.random()>0.5){
 	    				actor.schedule(new BetrayTeam(target, messageRenderer, Team.EVIL));
 	    				return true;

@@ -66,7 +66,6 @@ public class Healing extends SWAffordance implements SWActionInterface {
 				int difference = a.getmaxHitpoints() - current;
 				if (difference >= a.getItemCarried().getHitpoints()){
 					a.heal(a.getItemCarried().getHitpoints());
-					System.out.println(a.getHitpoints() + "BENN");
 				}
 				else{
 					a.heal(difference);
@@ -75,7 +74,7 @@ public class Healing extends SWAffordance implements SWActionInterface {
 				a.say(a.getShortDescription() + " is healing");
 			}
 			else{
-				a.say(a.getItemCarried().getShortDescription() + " is empty. Need to fill it with water.");
+				a.say(a.getItemCarried().getShortDescription() + " is empty. Need to refill it if possible.");
 			}
 		}
 	}

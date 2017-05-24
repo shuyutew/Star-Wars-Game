@@ -17,6 +17,7 @@ import starwars.actions.Take;
 import starwars.actions.Train;
 import starwars.actions.Healing;
 import starwars.entities.LightSaber;
+import starwars.entities.actors.SWOrganicActor;
 import starwars.entities.actors.behaviors.AttackNeighboursBehaviour;
 import starwars.entities.actors.behaviors.PatrolBehaviour;
 import starwars.entities.actors.behaviors.TrainerBehaviour;
@@ -32,7 +33,7 @@ import starwars.entities.actors.behaviors.TrainerBehaviour;
  * @author rober_000
  *
  */
-public class BenKenobi extends SWLegend {
+public class BenKenobi extends SWOrganicActor {
 
 	private static BenKenobi ben = null; // yes, it is OK to return the static instance!
 	private MessageRenderer m;
@@ -57,8 +58,9 @@ public class BenKenobi extends SWLegend {
 	}
 
 	public static BenKenobi getBenKenobi(MessageRenderer m, SWWorld world, Direction [] moves) {
-		ben = new BenKenobi(m, world, moves);
-		ben.activate();
+		if(ben == null){
+			ben = new BenKenobi(m, world, moves);
+		}
 		return ben;
 	}
 	
@@ -69,7 +71,7 @@ public class BenKenobi extends SWLegend {
     }
 
 	@Override
-	protected void legendAct() {
+	public void act() {
 		
 		boolean isCanteen = false;
 		SWEntityInterface fullCan = null;
