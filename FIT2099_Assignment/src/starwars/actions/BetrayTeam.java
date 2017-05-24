@@ -52,7 +52,7 @@ public class BetrayTeam extends SWAffordance implements SWActionInterface{
 		}
 		
 		if (targetIsActor && targetActor.getForce()>8){
-			if (Math.random()>0.25){
+			if (Math.random()>0.75){
 				targetActor.setTeam(this.team);
 				turned = true;
 			}
@@ -64,6 +64,9 @@ public class BetrayTeam extends SWAffordance implements SWActionInterface{
 		
 		if (!turned){
 			a.say("Ah shit! Failed to turn " + targetActor.getShortDescription() + " to the dark side.");
+		}
+		else{
+			a.say("Successfully turned " + this.target.getShortDescription() + " to the dark side!!");
 		}
 		
 	}
