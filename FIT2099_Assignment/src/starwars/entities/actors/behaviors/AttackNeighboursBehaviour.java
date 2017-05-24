@@ -59,15 +59,14 @@ public class AttackNeighboursBehaviour extends BehaviourInterface {
     		}
     		
     		if (actor instanceof Stormtrooper && Math.random() > 0.25){
-    			actor.schedule(new Attack(target, messageRenderer));
+    			actor.say("Stormtrooper shoots wildly!");
     			return true;
     		}
-		
     		targets.add(target);
     	}
 
     	if (targets.size() == 0){
-    		if (actor instanceof Stormtrooper && Math.random() > 0.1){
+    		if (actor instanceof Stormtrooper && Math.random() > 0.95){
 			// call for backup / create new ST at the same location as the Stormtrooper
 			Stormtrooper clone = new Stormtrooper(100, "Clonetrooper", messageRenderer, actor.getWorld());
 			clone.setSymbol("S");
