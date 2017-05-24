@@ -17,10 +17,6 @@ public class WanderAround extends BehaviourInterface {
     @Override
     public boolean ExecuteBehaviour() {
 
-    	if (Math.random() > 0.5){
-    	    return false;
-    	}
-
     	ArrayList<Direction> possibledirections = new ArrayList<Direction>();
 
 	// build a list of available directions

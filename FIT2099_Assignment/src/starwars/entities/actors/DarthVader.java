@@ -7,8 +7,9 @@ import starwars.SWWorld;
 import starwars.Team;
 import starwars.actions.Leave;
 import starwars.actions.Take;
-import starwars.entities.actors.behaviors.WanderAround;
 import starwars.entities.LightSaber;
+import starwars.entities.actors.behaviors.WanderAround;
+import starwars.entities.actors.behaviors.TortureLukeBehaviour;
 import starwars.entities.actors.behaviors.ChokeBehaviour;
 
 public class DarthVader extends SWActor{
@@ -24,6 +25,7 @@ public class DarthVader extends SWActor{
 		Vaderweapon.addAffordance(new Leave(Vaderweapon, m));
 		setItemCarried(Vaderweapon);
 		
+		behaviours.add(new TortureLukeBehaviour(this, this.world, m));
 		behaviours.add(new ChokeBehaviour(this, world, m, true, "%s has Force Choked %2s"));
 		behaviours.add(new WanderAround(this, this.world));
 	}

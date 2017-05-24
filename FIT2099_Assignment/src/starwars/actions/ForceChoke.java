@@ -16,7 +16,7 @@ public class ForceChoke extends SWAffordance implements SWActionInterface {
 	/**
 	 * A String describing what this <code>Attack</code> action will do, suitable for display on a user interface
 	 * 
-	 * @return String comprising "attack " and the short description of the target of this <code>Affordance</code>
+	 * @return String comprising "ForceChoke " and the short description of the target of this <code>Affordance</code>
 	 */
 	@Override
 	public String getDescription() {
@@ -31,7 +31,7 @@ public class ForceChoke extends SWAffordance implements SWActionInterface {
 	 */
 	@Override
 	public boolean canDo(SWActor a) {
-		if(a.getForce()>8){
+		if(a.getForce()>8 && this.getTarget() instanceof SWActor){
 			return true;
 		}
 		return false;

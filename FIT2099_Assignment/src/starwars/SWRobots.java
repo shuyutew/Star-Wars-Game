@@ -2,6 +2,7 @@ package starwars;
 
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.actions.DissambleDroid;
+import starwars.actions.ForceChoke;
 import starwars.actions.Owned;
 import starwars.actions.RebuildDroid;
 import starwars.actions.Repair;
@@ -52,6 +53,7 @@ public abstract class SWRobots extends SWActor implements SWRobotsInterface {
 		//this.addAffordance(new Repair(this, m));
 		this.addAffordance(new Owned(this, messageRenderer));
 		this.addAffordance(new Repair(this, messageRenderer));
+		this.removeAffordance(ForceChoke.class);
 		
 		this.followBehaviour = new FollowBehaviour(this, world, null);
 	}

@@ -134,7 +134,7 @@ public class SWWorld extends World {
 		loc = myGrid.getLocationByCoordinates(3, 3);
 		
 		// Luke
-		Player luke = new Player(Team.GOOD, 100, iface, this);
+		Player luke = new Player(Team.GOOD, 1000, iface, this);
 		luke.setShortDescription("Luke");
 		entityManager.setLocation(luke, loc);
 		luke.resetMoveCommands(loc);
@@ -265,7 +265,7 @@ public class SWWorld extends World {
 		
 		//darth Vader
 		DarthVader Anakin = new DarthVader(100000, iface, this);
-		loc = myGrid.getLocationByCoordinates(8,8);
+		loc = myGrid.getLocationByCoordinates(3,3);
 		entityManager.setLocation(Anakin, loc);
 	}
 
