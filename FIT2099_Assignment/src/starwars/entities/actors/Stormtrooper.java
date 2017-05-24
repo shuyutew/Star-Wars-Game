@@ -1,15 +1,15 @@
 package starwars.entities.actors;
 
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
-import starwars.SWActor;
 import starwars.SWLocation;
 import starwars.SWWorld;
 import starwars.Team;
 import starwars.entities.Blaster;
 import starwars.entities.actors.behaviors.AttackNeighboursBehaviour;
 import starwars.entities.actors.behaviors.WanderAround;
+import starwars.entities.actors.behaviors.CallBackUp;
 
-public class Stormtrooper extends SWActor {
+public class Stormtrooper extends SWOrganicActor {
 
 	private String name;
 
@@ -37,10 +37,12 @@ public class Stormtrooper extends SWActor {
 		super(Team.EVIL, hitpoints, m, world);
 		// TODO Auto-generated constructor stub
 		this.name = name;
+		this.setSymbol("S");
 		Blaster troopweapon = new Blaster(m);
 		setItemCarried(troopweapon);
 		//behaviours.add(new StormtrooperAttackBehaviour(this, world, m, true, true, "%s has attacked %2s"));
-		behaviours.add(new AttackNeighboursBehaviour(this, world, m, true, true, "%s has attacked %2s"));
+		behaviours.add(new AttackNeighboursBehaviour(this, world, m, true, true, "%s has attacked %2s", "%s shoots wildly!", 0.75));
+		behaviours.add(new CallBackUp(this, world));
 		behaviours.add(new WanderAround(this, world));
 	}
 

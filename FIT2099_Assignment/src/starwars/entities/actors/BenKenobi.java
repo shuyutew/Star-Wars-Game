@@ -53,7 +53,7 @@ public class BenKenobi extends SWOrganicActor {
 
 		this.addAffordance(new Train(this, m));
 		behaviours.add(new TrainerBehaviour(this, world));
-		behaviours.add(new AttackNeighboursBehaviour(this, world, m, true, true, "%s suddenly looks sprightly and attacks %2s"));
+		behaviours.add(new AttackNeighboursBehaviour(this, world, m, true, true, "%s suddenly looks sprightly and attacks %2s", null, 0.0));
 		behaviours.add(new PatrolBehaviour(this, world, moves));
 	}
 

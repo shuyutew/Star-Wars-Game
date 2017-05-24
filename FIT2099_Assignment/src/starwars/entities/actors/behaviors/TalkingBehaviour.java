@@ -21,7 +21,6 @@ public class TalkingBehaviour extends BehaviourInterface {
     @Override
     public boolean ExecuteBehaviour() {
     	if (Math.random() > probability){
-    		System.out.println("TALKINGG");
     		actor.schedule(new Speak(messageRenderer, TRandom.itemFrom(quotes)));
     	}
     	return true;

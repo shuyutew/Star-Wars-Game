@@ -9,24 +9,26 @@ import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.TRandom;
 import starwars.SWActor;
 import starwars.SWEntityInterface;
-import starwars.SWLocation;
 import starwars.SWWorld;
 import starwars.actions.Attack;
-import starwars.entities.actors.Stormtrooper;
 
 public class AttackNeighboursBehaviour extends BehaviourInterface {
 	
 	private boolean avoidFriendlies;
     private boolean avoidNonActors;
     private String message;
+    private String messageMiss;
     private MessageRenderer messageRenderer;
+    private double probability;
     
-    public AttackNeighboursBehaviour(SWActor attacker, SWWorld world, MessageRenderer m, boolean avoidFriendlies, boolean avoidNonActors, String message) {
+    public AttackNeighboursBehaviour(SWActor attacker, SWWorld world, MessageRenderer m, boolean avoidFriendlies, boolean avoidNonActors, String message, String messageMiss ,double proba) {
 
     	super(attacker, world);
     	this.avoidFriendlies = avoidFriendlies;
     	this.avoidNonActors = avoidNonActors;
     	this.message = message;
+    	this.messageMiss = messageMiss;
+    	this.probability = proba;
     	this.messageRenderer = m;
     }
     
@@ -57,31 +59,28 @@ public class AttackNeighboursBehaviour extends BehaviourInterface {
     		if (avoidFriendlies && (target instanceof SWActor) && ((SWActor) target).getTeam() == actor.getTeam()){// No friendly fire.
     			continue;
     		}
-    		
-    		if (actor instanceof Stormtrooper && Math.random() > 0.25){
-    			actor.say("Stormtrooper shoots wildly!");
-    			return true;
-    		}
+		
     		targets.add(target);
     	}
 
-    	if (targets.size() == 0){
-    		if (actor instanceof Stormtrooper && Math.random() > 0.95){
-			// call for backup / create new ST at the same location as the Stormtrooper
-			Stormtrooper clone = new Stormtrooper(100, "Clonetrooper", messageRenderer, actor.getWorld());
-			clone.setSymbol("S");
-			// SWLocation loc = (actor.getWorld().getEntityManager().whereIs(actor));
-			System.out.println(actor.getLocation());
-    		entityManager.setLocation(clone, actor.getLocation());
+    	if (targets.size() == 0)
+    		return false;
+
+    	if (Math.random()>probability){
+    		SWEntityInterface target = TRandom.itemFrom(targets);
+        	actor.say(String.format(message, actor.getShortDescription(), target.getShortDescription()));
+
+    	// You only need an affordance on an item so the player has an option to attack it.
+        	actor.schedule(new Attack(target, messageRenderer));
+        	return true;
+    	}
+    	else{
+    		if (messageMiss != null){
+    			actor.say(String.format(messageMiss, actor.getShortDescription()));
+    			return true;
     		}
     		return false;
     	}
-
-    	SWEntityInterface target = TRandom.itemFrom(targets);
-    	actor.say(String.format(message, actor.getShortDescription(), target.getShortDescription()));
-
-	// You only need an affordance on an item so the player has an option to attack it.
-    	actor.schedule(new Attack(target, messageRenderer));
-    	return true;
+    	
     }
 }

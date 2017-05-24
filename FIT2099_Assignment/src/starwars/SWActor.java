@@ -110,13 +110,6 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 		//SWActors are given the Attack affordance hence they can be attacked
 		SWAffordance attack = new Attack(this, m);
 		this.addAffordance(attack);
-		
-//It does make sense that every actor could be mind controlled if their force ability level is less than a certain level
-//Thus, in the MindControl class, under the canDo() method, we would set some conditions so that actors with a certain
-//force ability would not be able to be mind controlled.
-		this.addAffordance(new MindControl(this, m));
-		
-		this.addAffordance(new ForceChoke(this, m));
 	}
 	
 	/**
@@ -130,43 +123,43 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	}
 	
 	public void setForceAbility(){
-		if (maxHitpoint>0 && maxHitpoint<= 50){
+		if (maxHitpoint>0 && maxHitpoint<= 100){
 			this.forceAbilityLevel = 1;
 		}
 		
-		else if(maxHitpoint>50 && maxHitpoint<= 70){
+		else if(maxHitpoint>100 && maxHitpoint<= 200){
 			this.forceAbilityLevel = 2;
 		}
 		
-		else if(maxHitpoint>70 && maxHitpoint<= 100){
+		else if(maxHitpoint>200 && maxHitpoint<= 300){
 			this.forceAbilityLevel = 3;
 		}
 		
-		else if(maxHitpoint>100 && maxHitpoint<= 150){
+		else if(maxHitpoint>300 && maxHitpoint<= 400){
 			this.forceAbilityLevel = 4;
 		}
 		
-		else if(maxHitpoint>150 && maxHitpoint<= 190){
+		else if(maxHitpoint>400 && maxHitpoint<= 500){
 			this.forceAbilityLevel = 5;
 		}
 		
-		else if(maxHitpoint>190 && maxHitpoint<= 210){
+		else if(maxHitpoint>500 && maxHitpoint<= 600){
 			this.forceAbilityLevel = 6;
 		}
 		
-		else if(maxHitpoint>210 && maxHitpoint<= 300){
+		else if(maxHitpoint>600 && maxHitpoint<= 700){
 			this.forceAbilityLevel = 7;
 		}
 		
-		else if(maxHitpoint>300 && maxHitpoint<= 350){
+		else if(maxHitpoint>700 && maxHitpoint<= 800){
 			this.forceAbilityLevel = 8;
 		}
 		
-		else if(maxHitpoint>350 && maxHitpoint<= 400){
+		else if(maxHitpoint>800 && maxHitpoint<= 900){
 			this.forceAbilityLevel = 9;
 		}
 		
-		else if(maxHitpoint>400){
+		else if(maxHitpoint>900){
 			this.forceAbilityLevel = 10;
 		}
 	}

@@ -11,6 +11,7 @@ import starwars.SWActionInterface;
 import starwars.SWLocation;
 import starwars.SWWorld;
 import starwars.Team;
+import starwars.actions.ForceChoke;
 import starwars.swinterfaces.SWGridController;
 
 /**

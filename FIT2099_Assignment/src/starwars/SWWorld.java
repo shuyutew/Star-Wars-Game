@@ -48,6 +48,7 @@ public class SWWorld extends World {
 		
 		//myGrid = deathstar;
 		//myGrid = yavinIV;
+		myGrid = main;
 		space = myGrid;
 		
 	}
@@ -298,31 +299,26 @@ public class SWWorld extends World {
 		
 		// Stormtrooper 1
 		Stormtrooper storm1 = new Stormtrooper(100, "Storm1", iface, this);
-		storm1.setSymbol("S");
-		loc = deathstar.getLocationByCoordinates(3,1);
+		loc = main.getLocationByCoordinates(3,3);
 		entityManager.setLocation(storm1, loc);
 		
 		// Stormtrooper 2
 		Stormtrooper storm2 = new Stormtrooper(100, "Storm2", iface, this);
-		storm2.setSymbol("S");
 		loc = deathstar.getLocationByCoordinates(4,6);
 		entityManager.setLocation(storm2, loc);
 		
 		// Stormtrooper 3
 		Stormtrooper storm3 = new Stormtrooper(100, "Storm3", iface, this);
-		storm3.setSymbol("S");
 		loc = deathstar.getLocationByCoordinates(5,5);
 		entityManager.setLocation(storm3, loc);
 		
 		// Stormtrooper 4
 		Stormtrooper storm4 = new Stormtrooper(100, "Storm4", iface, this);
-		storm4.setSymbol("S");
 		loc = deathstar.getLocationByCoordinates(6,3);
 		entityManager.setLocation(storm4, loc);
 		
 		// Stormtrooper 5
 		Stormtrooper storm5 = new Stormtrooper(100, "Storm5", iface, this);
-		storm5.setSymbol("S");
 		loc = deathstar.getLocationByCoordinates(2,7);
 		entityManager.setLocation(storm5, loc);
 		
