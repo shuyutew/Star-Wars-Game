@@ -264,8 +264,14 @@ public class SWWorld extends World {
 		
 		//darth Vader
 		DarthVader Anakin = new DarthVader(100000, iface, this);
-		loc = myGrid.getLocationByCoordinates(3,3);
+		loc = myGrid.getLocationByCoordinates(7,3);
 		entityManager.setLocation(Anakin, loc);
+		
+		// Stormtrooper
+		Stormtrooper storm = new Stormtrooper(100, "Storm", iface, this);
+		storm.setSymbol("S");
+		loc = myGrid.getLocationByCoordinates(3,3);
+		entityManager.setLocation(storm, loc);
 	}
 
 	/*

@@ -9,8 +9,10 @@ import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.TRandom;
 import starwars.SWActor;
 import starwars.SWEntityInterface;
+import starwars.SWLocation;
 import starwars.SWWorld;
 import starwars.actions.Attack;
+import starwars.entities.actors.Stormtrooper;
 
 public class AttackNeighboursBehaviour extends BehaviourInterface {
 	
@@ -55,12 +57,26 @@ public class AttackNeighboursBehaviour extends BehaviourInterface {
     		if (avoidFriendlies && (target instanceof SWActor) && ((SWActor) target).getTeam() == actor.getTeam()){// No friendly fire.
     			continue;
     		}
+    		
+    		if (actor instanceof Stormtrooper && Math.random() > 0.25){
+    			actor.schedule(new Attack(target, messageRenderer));
+    			return true;
+    		}
 		
     		targets.add(target);
     	}
 
-    	if (targets.size() == 0)
+    	if (targets.size() == 0){
+    		if (actor instanceof Stormtrooper && Math.random() > 0.1){
+			// call for backup / create new ST at the same location as the Stormtrooper
+			Stormtrooper clone = new Stormtrooper(100, "Clonetrooper", messageRenderer, actor.getWorld());
+			clone.setSymbol("S");
+			// SWLocation loc = (actor.getWorld().getEntityManager().whereIs(actor));
+			System.out.println(actor.getLocation());
+    		entityManager.setLocation(clone, actor.getLocation());
+    		}
     		return false;
+    	}
 
     	SWEntityInterface target = TRandom.itemFrom(targets);
     	actor.say(String.format(message, actor.getShortDescription(), target.getShortDescription()));
