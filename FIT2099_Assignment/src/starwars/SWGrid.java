@@ -19,12 +19,12 @@ public class SWGrid extends Grid<SWLocation> {
 
 	/**
 	 * The constructor of the <code>SWGrid</code>. 
-	 * Will create a 10 by 10 grid with 100 <code>SWLocation</code>s
+	 * Will create an x by y grid with xy <code>SWLocation</code>s
 	 * 
 	 * @param factory the maker of the <code>SWLocation</code>s
 	 */
-	public SWGrid(int height, int width, LocationMaker<SWLocation> factory) {
-		super(height, width, factory);
+	public SWGrid(int x, int y, LocationMaker<SWLocation> factory) {
+		super(x, y, factory);
 	}
 	
 

@@ -29,7 +29,7 @@ import starwars.SWWorld;
 public class SWGridTextInterface implements GridRenderer {
 	
 	/**The grid of the world*/
-	private static SWGrid grid;
+	private static SWWorld world;
 	
 	/**If or not to show the banner*/
 	private static boolean showBanner;
@@ -40,11 +40,11 @@ public class SWGridTextInterface implements GridRenderer {
 	 * Constructor for the <code>SWGridTextInterface</code>. Will set showBanner flag to true to
 	 * show the text banner with the first map render.
 	 * 
-	 * @param 	grid the grid of the world
+	 * @param 	world the grid of the world
 	 * @pre 	grid should not be null 
 	 */
-	public SWGridTextInterface(SWGrid grid) {
-		SWGridTextInterface.grid = grid;
+	public SWGridTextInterface(SWWorld world) {
+		this.world = world;
 		instream = new Scanner(System.in);
 		//set the show banner to true so that the banner would be displayed on the first map render
 		showBanner = true;
@@ -147,14 +147,14 @@ public class SWGridTextInterface implements GridRenderer {
 		}
 				
 		String buffer = "\n";
-		final int gridHeight = grid.getHeight();
-		final int gridWidth  = grid.getWidth();
+		final int gridHeight = world.getGrid().getHeight();
+		final int gridWidth  = world.getGrid().getWidth();
 		
 	
 		for (int row = 0; row< gridHeight; row++){ //for each row
 			for (int col = 0; col< gridWidth; col++){ //each column of a row
 				
-				SWLocation loc = (SWLocation) grid.getLocationByCoordinates(col, row);
+				SWLocation loc = (SWLocation) world.getGrid().getLocationByCoordinates(col, row);
 				
 				//construct the string of a location to be displayed on the text interface
 				buffer = buffer + "|"+ getLocationString(loc)+"| ";

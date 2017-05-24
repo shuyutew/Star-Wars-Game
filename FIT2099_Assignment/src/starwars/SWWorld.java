@@ -27,6 +27,9 @@ public class SWWorld extends World {
 	 * <code>SWGrid</code> of this <code>SWWorld</code>
 	 */
 	private SWGrid myGrid;
+	private SWGrid main;
+	private SWGrid deathstar;
+	private SWGrid yavinIV;
 	
 	private MessageRenderer messageRenderer;
 	
@@ -39,7 +42,12 @@ public class SWWorld extends World {
 	 */
 	public SWWorld() {
 		SWLocation.SWLocationMaker factory = SWLocation.getMaker();
-		myGrid = new SWGrid(10, 10, factory);
+		this.main = new SWGrid(10, 10, factory);
+		this.deathstar = new SWGrid(10, 10, factory);
+		this.yavinIV = new SWGrid(2, 2, factory);
+		
+		//myGrid = deathstar;
+		//myGrid = yavinIV;
 		space = myGrid;
 		
 	}
@@ -81,18 +89,39 @@ public class SWWorld extends World {
 		// Set default location string
 		for (int row=0; row < height(); row++) {
 			for (int col=0; col < width(); col++) {
-				loc = myGrid.getLocationByCoordinates(col, row);
-				loc.setLongDescription("SWWorld (" + col + ", " + row + ")");
-				loc.setShortDescription("SWWorld (" + col + ", " + row + ")");
+				loc = main.getLocationByCoordinates(col, row);
+				loc.setLongDescription("Main (" + col + ", " + row + ")");
+				loc.setShortDescription("Main (" + col + ", " + row + ")");
 				loc.setSymbol('.');				
 			}
 		}
+			
+		// Set default location string
+		for (int row=0; row < height(); row++) {
+			for (int col=0; col < width(); col++) {
+				loc = deathstar.getLocationByCoordinates(col, row);
+				loc.setLongDescription("DeathStar (" + col + ", " + row + ")");
+				loc.setShortDescription("DeathStar (" + col + ", " + row + ")");
+				loc.setSymbol('.');				
+			}
+		}
+		
+		// Set default location string
+		for (int row=0; row < 2; row++) {
+			for (int col=0; col < 2; col++) {
+				loc = yavinIV.getLocationByCoordinates(col, row);
+				loc.setLongDescription("Yavin IV (" + col + ", " + row + ")");
+				loc.setShortDescription("Yavin IV (" + col + ", " + row + ")");
+				loc.setSymbol('.');				
+			}
+		}
+
 		
 		
 		// BadLands
 		for (int row = 5; row < 8; row++) {
 			for (int col = 4; col < 7; col++) {
-				loc = myGrid.getLocationByCoordinates(col, row);
+				loc = main.getLocationByCoordinates(col, row);
 				loc.setLongDescription("Badlands (" + col + ", " + row + ")");
 				loc.setShortDescription("Badlands (" + col + ", " + row + ")");
 				loc.setSymbol('b');
@@ -100,7 +129,7 @@ public class SWWorld extends World {
 		}
 		
 		//Ben's Hut
-		loc = myGrid.getLocationByCoordinates(5, 6);
+		loc = main.getLocationByCoordinates(5, 6);
 		loc.setLongDescription("Ben's Hut");
 		loc.setShortDescription("Ben's Hut");
 		loc.setSymbol('H');
@@ -110,7 +139,7 @@ public class SWWorld extends World {
 		
 		// Beggar's Canyon 
 		for (int col = 3; col < 8; col++) {
-			loc = myGrid.getLocationByCoordinates(col, 8);
+			loc = main.getLocationByCoordinates(col, 8);
 			loc.setShortDescription("Beggar's Canyon (" + col + ", " + 8 + ")");
 			loc.setLongDescription("Beggar's Canyon  (" + col + ", " + 8 + ")");
 			loc.setSymbol('C');
@@ -120,7 +149,7 @@ public class SWWorld extends World {
 		// Moisture Farms
 		for (int row = 0; row < 10; row++) {
 			for (int col = 8; col < 10; col++) {
-				loc = myGrid.getLocationByCoordinates(col, row);
+				loc = main.getLocationByCoordinates(col, row);
 				loc.setLongDescription("Moisture Farm (" + col + ", " + row + ")");
 				loc.setShortDescription("Moisture Farm (" + col + ", " + row + ")");
 				loc.setSymbol('F');
@@ -130,7 +159,7 @@ public class SWWorld extends World {
 			}
 		}
 		
-		loc = myGrid.getLocationByCoordinates(3, 3);
+		loc = main.getLocationByCoordinates(3, 3);
 		
 		// Luke
 		Player luke = new Player(Team.GOOD, 1000, iface, this);
@@ -143,7 +172,7 @@ public class SWWorld extends World {
 		TestActor owen = new TestActor("UncleOwen", iface, this);
 		
 		owen.setSymbol("UO");
-		loc = myGrid.getLocationByCoordinates(6,5);
+		loc = main.getLocationByCoordinates(6,5);
 		entityManager.setLocation(owen, loc);
 		owen.resetMoveCommands(loc);
 		
@@ -151,7 +180,7 @@ public class SWWorld extends World {
 		TestActor beru = new TestActor("AuntBeru", iface, this);
 		
 		beru.setSymbol("AB");
-		loc = myGrid.getLocationByCoordinates(8,8);
+		loc = main.getLocationByCoordinates(8,8);
 		entityManager.setLocation(beru, loc);
 		beru.resetMoveCommands(loc);
 		
@@ -160,7 +189,7 @@ public class SWWorld extends World {
 		 * Scatter some other entities and actors around
 		 */
 		// a canteen
-		loc = myGrid.getLocationByCoordinates(3,1);
+		loc = main.getLocationByCoordinates(3,1);
 		SWEntity canteen = new Canteen(iface, 10,0);
 		canteen.setSymbol("o");
 		canteen.setHitpoints(500);
@@ -169,14 +198,14 @@ public class SWWorld extends World {
 		
 		//adding a canteen somewhere at Ben's patrol route. Since Ben would be moving East the 2 times,
 		// since the coordinate is (col, row), thus the coordinate is (4+1+1,5) = (6,5)
-		loc = myGrid.getLocationByCoordinates(6, 5);
+		loc = main.getLocationByCoordinates(6, 5);
 		SWEntity canteenBen = new Canteen(iface, 10, 10);
 		canteenBen.setSymbol("o");
 		entityManager.setLocation(canteenBen, loc);
 		canteenBen.addAffordance(new Take(canteenBen, iface));
 
 		// an oil can treasure
-		loc = myGrid.getLocationByCoordinates(1,5);
+		loc = main.getLocationByCoordinates(1,5);
 		SWEntity oilcan = new SWEntity(iface);
 		oilcan.setShortDescription("an oil can");
 		oilcan.setLongDescription("an oil can, which would theoretically be useful for fixing robots");
@@ -188,12 +217,12 @@ public class SWWorld extends World {
 		
 		// a lightsaber
 		LightSaber lightSaber = new LightSaber(iface);
-		loc = myGrid.getLocationByCoordinates(5,5);
+		loc = main.getLocationByCoordinates(5,5);
 		entityManager.setLocation(lightSaber, loc);
 		
 		// A blaster 
 		Blaster blaster = new Blaster(iface);
-		loc = myGrid.getLocationByCoordinates(2, 5);
+		loc = main.getLocationByCoordinates(2, 5);
 		entityManager.setLocation(blaster, loc);
 
 /**We decided to setSymbol "T" for all TuskenRaider because we realised that if we set different symbol to 
@@ -205,28 +234,28 @@ public class SWWorld extends World {
 		TuskenRaider tim = new TuskenRaider(10, "Tim", iface, this);
 		
 		tim.setSymbol("T");
-		loc = myGrid.getLocationByCoordinates(4,5);
+		loc = main.getLocationByCoordinates(4,5);
 		entityManager.setLocation(tim, loc);
 		
 		// A Tusken Raider
 		TuskenRaider david = new TuskenRaider(10, "David", iface, this);
 		
 		david.setSymbol("T");
-		loc = myGrid.getLocationByCoordinates(7,2);
+		loc = main.getLocationByCoordinates(7,2);
 		entityManager.setLocation(david, loc);
 		
 		// A Tusken Raider
 		TuskenRaider zac = new TuskenRaider(10, "Zac", iface, this);
 		
 		zac.setSymbol("T");
-		loc = myGrid.getLocationByCoordinates(8,5);
+		loc = main.getLocationByCoordinates(8,5);
 		entityManager.setLocation(zac, loc);
 		
 		// A Tusken Raider
 		TuskenRaider tom = new TuskenRaider(10, "Tom", iface, this);
 		
 		tom.setSymbol("T");
-		loc = myGrid.getLocationByCoordinates(1,1);
+		loc = main.getLocationByCoordinates(1,1);
 		entityManager.setLocation(tom, loc);
 		
 		Direction [] patrolmoves = {CompassBearing.EAST, CompassBearing.EAST,
@@ -238,7 +267,7 @@ public class SWWorld extends World {
 		
 		BenKenobi ben = BenKenobi.getBenKenobi(iface, this, patrolmoves);
 		ben.setSymbol("B");
-		loc = myGrid.getLocationByCoordinates(4,  5);
+		loc = main.getLocationByCoordinates(4,  5);
 		entityManager.setLocation(ben, loc);
 
 		//Droids
@@ -248,30 +277,64 @@ public class SWWorld extends World {
 		// R2D2 new
 		SWRobots RD = new R2D2(200, r2d2Patrol, iface, this);
 		
-		loc = myGrid.getLocationByCoordinates(3,3);
+		loc = main.getLocationByCoordinates(3,3);
 		entityManager.setLocation(RD, loc);
 		
 		
-		//C3PO new
+		// C3PO new
 		SWRobots C3Po = new C3PO(200, iface, this);
-		loc = myGrid.getLocationByCoordinates(5,5);
+		loc = main.getLocationByCoordinates(5,5);
 		entityManager.setLocation(C3Po, loc);
 		
-		//princess
+		// Princess
 		PrincessLeia Princess = new PrincessLeia(200, iface, this);
-		loc = myGrid.getLocationByCoordinates(5,5);
+		loc = deathstar.getLocationByCoordinates(9,9);
 		entityManager.setLocation(Princess, loc);
 		
-		//darth Vader
+		// Darth Vader
 		DarthVader Anakin = new DarthVader(100000, iface, this);
-		loc = myGrid.getLocationByCoordinates(7,3);
+		loc = deathstar.getLocationByCoordinates(4,4);
 		entityManager.setLocation(Anakin, loc);
 		
-		// Stormtrooper
-		Stormtrooper storm = new Stormtrooper(100, "Storm", iface, this);
-		storm.setSymbol("S");
-		loc = myGrid.getLocationByCoordinates(3,3);
-		entityManager.setLocation(storm, loc);
+		// Stormtrooper 1
+		Stormtrooper storm1 = new Stormtrooper(100, "Storm1", iface, this);
+		storm1.setSymbol("S");
+		loc = deathstar.getLocationByCoordinates(3,1);
+		entityManager.setLocation(storm1, loc);
+		
+		// Stormtrooper 2
+		Stormtrooper storm2 = new Stormtrooper(100, "Storm2", iface, this);
+		storm2.setSymbol("S");
+		loc = deathstar.getLocationByCoordinates(4,6);
+		entityManager.setLocation(storm2, loc);
+		
+		// Stormtrooper 3
+		Stormtrooper storm3 = new Stormtrooper(100, "Storm3", iface, this);
+		storm3.setSymbol("S");
+		loc = deathstar.getLocationByCoordinates(5,5);
+		entityManager.setLocation(storm3, loc);
+		
+		// Stormtrooper 4
+		Stormtrooper storm4 = new Stormtrooper(100, "Storm4", iface, this);
+		storm4.setSymbol("S");
+		loc = deathstar.getLocationByCoordinates(6,3);
+		entityManager.setLocation(storm4, loc);
+		
+		// Stormtrooper 5
+		Stormtrooper storm5 = new Stormtrooper(100, "Storm5", iface, this);
+		storm5.setSymbol("S");
+		loc = deathstar.getLocationByCoordinates(2,7);
+		entityManager.setLocation(storm5, loc);
+		
+		// Admiral Ackbar
+		AdmiralAckbar ackbar = new AdmiralAckbar(100, iface, this);
+		loc = yavinIV.getLocationByCoordinates(1,1);
+		entityManager.setLocation(ackbar, loc);
+		
+		// Mon Mothma
+		MonMothma moth = new MonMothma(100, iface, this);
+		loc = yavinIV.getLocationByCoordinates(0,1);
+		entityManager.setLocation(moth, loc);
 	}
 
 	/*
