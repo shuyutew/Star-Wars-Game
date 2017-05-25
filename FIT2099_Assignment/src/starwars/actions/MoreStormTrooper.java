@@ -27,7 +27,6 @@ public class MoreStormTrooper extends SWAction{
     	SWOrganicActor clone = new Stormtrooper(100, "StormBackUp", messageRenderer, world);
 		
 		EntityManager<SWEntityInterface, SWLocation> entityManager = getEntitymanager();
-		System.out.println(a.getShortDescription());
 		entityManager.setLocation(clone, location);
 	}
 	

@@ -478,7 +478,6 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
     	if (isDead()){
     		return;
     	}
-    	
     	executeBehaviours();
     }
 

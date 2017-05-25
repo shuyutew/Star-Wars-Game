@@ -1,15 +1,18 @@
 package starwars.actions;
 
+import edu.monash.fit2099.simulator.matter.EntityManager;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.SWActionInterface;
 import starwars.SWActor;
 import starwars.SWWorld;
+import starwars.SWGrid;
+import starwars.SWLocation;
 import starwars.SWAffordance;
 import starwars.SWEntityInterface;
 
-public class FlyToDeath extends SWAffordance implements SWActionInterface {
+public class FlyToYavin extends SWAffordance implements SWActionInterface {
 
-	public FlyToDeath(SWEntityInterface theTarget, MessageRenderer m) {
+	public FlyToYavin(SWEntityInterface theTarget, MessageRenderer m) {
 		super(theTarget, m);
 	}
 	
@@ -25,7 +28,7 @@ public class FlyToDeath extends SWAffordance implements SWActionInterface {
 	
 	@Override
 	public String getDescription() {
-		return this.target.getShortDescription() + " fly to DeathStar";
+		return this.target.getShortDescription() + " fly to Yavin IV";
 	}
 	
 	@Override
@@ -35,9 +38,16 @@ public class FlyToDeath extends SWAffordance implements SWActionInterface {
 
 	@Override
 	public void act(SWActor a) {
+		SWLocation loc;
 		SWWorld world = a.getWorld();
-		world.SetMyGrid("DeathStar");
 		
+		EntityManager<SWEntityInterface, SWLocation> entityManager = world.getEntitymanager();
+		world.SetMyGrid("Yavin IV");
+		
+		SWGrid newW = world.getGrid();
+		loc = newW.getLocationByCoordinates(0, 0);
+		
+		entityManager.setLocation(a, loc);
 	}
 
 }

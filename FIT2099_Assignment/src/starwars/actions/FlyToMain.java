@@ -7,9 +7,9 @@ import starwars.SWWorld;
 import starwars.SWAffordance;
 import starwars.SWEntityInterface;
 
-public class FlyToDeath extends SWAffordance implements SWActionInterface {
+public class FlyToMain extends SWAffordance implements SWActionInterface {
 
-	public FlyToDeath(SWEntityInterface theTarget, MessageRenderer m) {
+	public FlyToMain(SWEntityInterface theTarget, MessageRenderer m) {
 		super(theTarget, m);
 	}
 	
@@ -25,7 +25,7 @@ public class FlyToDeath extends SWAffordance implements SWActionInterface {
 	
 	@Override
 	public String getDescription() {
-		return this.target.getShortDescription() + " fly to DeathStar";
+		return this.target.getShortDescription() + " fly to Main";
 	}
 	
 	@Override
@@ -36,7 +36,7 @@ public class FlyToDeath extends SWAffordance implements SWActionInterface {
 	@Override
 	public void act(SWActor a) {
 		SWWorld world = a.getWorld();
-		world.SetMyGrid("DeathStar");
+		world.SetMyGrid("Main");
 		
 	}
 

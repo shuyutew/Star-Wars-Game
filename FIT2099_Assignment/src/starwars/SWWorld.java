@@ -8,6 +8,7 @@ import edu.monash.fit2099.simulator.space.Direction;
 import edu.monash.fit2099.simulator.space.Location;
 import edu.monash.fit2099.simulator.space.World;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
+import starwars.actions.FlyToMain;
 import starwars.actions.Take;
 import starwars.entities.*;
 import starwars.entities.actors.*;
@@ -32,7 +33,9 @@ public class SWWorld extends World {
 	private SWGrid main;
 	private SWGrid deathstar;
 	private SWGrid yavinIV;
+	
 	private ArrayList<SWGrid> maps;
+
 	
 	private MessageRenderer messageRenderer;
 	
@@ -49,13 +52,16 @@ public class SWWorld extends World {
 		this.deathstar = new SWGrid(10, 10, factory, "DeathStar");
 		this.yavinIV = new SWGrid(2, 2, factory, "Yavin IV");
 		
-		maps.add(main);
-		maps.add(deathstar);
-		maps.add(yavinIV);
+		ArrayList<SWGrid> mapss = new ArrayList<SWGrid>();
+		mapss.add(this.main);
+		mapss.add(this.deathstar);
+		mapss.add(this.yavinIV);
+		this.maps = mapss;
 		
 		//myGrid = deathstar;
 		//myGrid = yavinIV;
-		space = main;
+		myGrid = main;
+		space = myGrid;
 		
 	}
 
@@ -166,7 +172,7 @@ public class SWWorld extends World {
 			}
 		}
 		
-		loc = main.getLocationByCoordinates(3, 3);
+		loc = main.getLocationByCoordinates(0, 0);
 		
 		// Luke
 		Player luke = new Player(Team.GOOD, 1000, iface, this);
@@ -337,6 +343,12 @@ public class SWWorld extends World {
 		MonMothma moth = new MonMothma(100, iface, this);
 		loc = yavinIV.getLocationByCoordinates(0,1);
 		entityManager.setLocation(moth, loc);
+		
+		//falcon
+		Falcon fal = new Falcon(iface);
+		loc = main.getLocationByCoordinates(0, 0);
+		fal.removeAffordance(FlyToMain.class);
+		entityManager.setLocation(fal, loc);
 	}
 
 	/*
@@ -373,7 +385,7 @@ public class SWWorld extends World {
     public void SetMyGrid(String mapName){
     	for(SWGrid world: maps){
     		if (world.getMapName() == mapName){
-    			this.space = world;
+    			this.myGrid = world;
     		}
     	}
     }
