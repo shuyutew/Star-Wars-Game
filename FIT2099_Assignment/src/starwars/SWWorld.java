@@ -285,7 +285,6 @@ public class SWWorld extends World {
 		// R2D2 new
 		SWRobots RD = new R2D2(200, r2d2Patrol, iface, this);
 		
-		RD.takeDamage(200);
 		loc = main.getLocationByCoordinates(3,3);
 		entityManager.setLocation(RD, loc);
 		
