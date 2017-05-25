@@ -28,20 +28,27 @@ public class MonMothma extends SWActor {
 		this.setSymbol("M*");
 	}
 	
+	/**
+	 * Checks what are around the Yavin IV, if Luke is found on the map,
+	 * check whether Luke owns R2-D2 and whether Princess Leia is following him using boolean statuses,
+	 * If both are true, the game is won, otherwise, this actor will tell Luke to get
+	 * R2-D2 and Leia to the moon.
+	 */
 	@Override
 	public void act() {
 		
-		SWLocation location = this.world.getEntityManager().whereIs(this);
+		List<SWLocation> locations = this.getWorld()
+		// SWLocation location = this.world.getEntityManager().whereIs(this);
 		List<SWEntityInterface> contents = this.world.getEntityManager().contents(location);
 		System.out.println(contents.size());
 	
 		if (isDead()) {
 			return;
 		}
-		if (contents.size() > 1) { // check who is accompanying the Player 
+		if (contents.size() > 1) { // // if it is equal to one, the only thing here is this Player, so there is nothing to report
 			for (SWEntityInterface entity : contents) {
 				if (entity != this && entity instanceof SWActor){
-					if (entity.getShortDescription() == "Luke"){ 
+					if (entity.getShortDescription() == "Luke"){ //check who is accompanying the Player 
 						SWActor a = (SWActor) entity;
 						if (a.getDroidOwned().getShortDescription() == "R2-D2" && a.princesshere() == true){
 						say("Good job");

@@ -13,13 +13,28 @@ import starwars.entities.actors.behaviors.FollowBehaviour;
 public class PrincessLeia extends SWOrganicActor{
 	
 	private boolean meeted = false;
+	
+	/**
+	 * Princess Leia Organa
+	 * 
+	 * At the beginning of the game, Princess Leia, a General of the Rebel forces 
+	 * is a prisoner sitting motionlessly at the edge of Death Star. 
+	 * She has medium Force Ability Level, hence cannot be mind controlled.
+	 * If the princess dies, the game is lost.
+	 * If Luke carries both Leia and R2-D2 to the Rebel Headquarters on Yavin IV,
+	 * the game is won.
+	 * 
+	 * @param hitpoints
+	 * @param m
+	 * @param world
+	 */
 
 	public PrincessLeia(int hitpoints, MessageRenderer m, SWWorld world) {
 		super(Team.GOOD, 600, m, world);
 		
 		this.setShortDescription("Leia");
 		this.setLongDescription("Leia, Princess Leia Organa");
-		this.setSymbol("<");
+		this.setSymbol("%");
 
 	}
 	
@@ -29,6 +44,12 @@ public class PrincessLeia extends SWOrganicActor{
     	super.executeBehaviours();
     }
 	
+    /**
+     * Checks what other entities/actors are at Princess Leia's location,
+     * if it is Luke, mark 'meeted' as true, and
+     * give Leia a FollowBehaviour so she will follow Luke.
+     * when 'meeted' is true, she will execute the behaviour.
+     */
 	@Override
 	public void act() {
 		
