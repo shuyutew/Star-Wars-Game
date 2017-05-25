@@ -63,8 +63,6 @@ public class SWWorld extends World {
 		mapss.add(this.yavinIV);
 		this.maps = mapss;
 		
-		//myGrid = deathstar;
-		//myGrid = yavinIV;
 		myGrid = main;
 		space = myGrid;
 		
