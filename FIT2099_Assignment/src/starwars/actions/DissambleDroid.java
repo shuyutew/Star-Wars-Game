@@ -24,8 +24,12 @@ public class DissambleDroid extends SWAffordance {
     public void act(SWActor actor) {
     	EntityManager<SWEntityInterface, SWLocation> entityManager = SWAction.getEntitymanager();
     	entityManager.setLocation(new DroidParts(messageRenderer), entityManager.whereIs(getTarget()));
-    	getTarget().takeDamage(getTarget().getHitpoints());
+    	entityManager.remove(getTarget());
     	actor.say(String.format("%s has been reduced to parts and it's now immobile.", target.getShortDescription()));
+    	if(target.getShortDescription()== "R2-D2"){
+    		actor.getWorld().setNotRun();
+    		actor.getWorld().setEndGame("Game Over! R2-D2 was disassembled!");
+    	}
     }
     
     @Override

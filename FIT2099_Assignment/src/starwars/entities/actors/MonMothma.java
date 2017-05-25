@@ -43,34 +43,37 @@ public class MonMothma extends SWActor {
 		for(int row = 0; row<2; row++){
 			for (int col = 0; col<2; col++){
 				SWGrid grid = this.world.getGrid();
-				SWLocation location = grid.getLocationByCoordinates(col, row);
-				List<SWEntityInterface> contents = this.world.getEntityManager().contents(location);
-				if (isDead()) {
-					return;
-				}
-				if (contents != null) { // check who is accompanying the Player 
-					for (SWEntityInterface entity : contents) {
-						if (entity != this && entity instanceof SWActor){
-							if (entity.getShortDescription() == "Luke"){ 
-								SWActor a = (SWActor) entity;
-								if (a.getDroidOwned()!=null){
-									if (a.getDroidOwned().getShortDescription() == "R2-D2" && a.princesshere() == true){
-										System.out.println("*************************");
-										say("Good job " + a.getShortDescription() + ". We can now destroy the Empire's Death Star now!");
-										good = true;
-										this.world.setNotRun();
-										this.world.setEndGame("Misson Accomplished!");
-									}	
-								}
-	
-								if(!good){
-									System.out.println("*************************");
-									say(nag());
+				if (grid.getMapName() == "Yavin IV"){
+					SWLocation location = grid.getLocationByCoordinates(col, row);
+					List<SWEntityInterface> contents = this.world.getEntityManager().contents(location);
+					if (isDead()) {
+						return;
+					}
+					if (contents != null) { // check who is accompanying the Player 
+						for (SWEntityInterface entity : contents) {
+							if (entity != this && entity instanceof SWActor){
+								if (entity.getShortDescription() == "Luke"){ 
+									SWActor a = (SWActor) entity;
+									if (a.getDroidOwned()!=null){
+										if (a.getDroidOwned().getShortDescription() == "R2-D2" && a.princesshere() == true){
+											System.out.println("*************************");
+											say("Good job " + a.getShortDescription() + ". We can now destroy the Empire's Death Star now!");
+											good = true;
+											this.world.setNotRun();
+											this.world.setEndGame("Misson Accomplished!");
+										}	
 									}
-								}
+		
+									if(!good){
+										System.out.println("*************************");
+										say(nag());
+										}
+									}
+							}
 						}
 					}
 				}
+
 			}
 
 		}

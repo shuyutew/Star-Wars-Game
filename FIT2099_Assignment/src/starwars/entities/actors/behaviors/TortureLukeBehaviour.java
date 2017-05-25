@@ -1,7 +1,7 @@
 package starwars.entities.actors.behaviors;
 
 import java.util.ArrayList;
-
+import starwars.SWWorld;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.SWActor;
 import starwars.SWEntityInterface;
@@ -25,6 +25,9 @@ public class TortureLukeBehaviour extends BehaviourInterface {
 	    		if (target.getShortDescription() == "Luke"){
 	    			if(Math.random()>0.5){
 	    				actor.schedule(new BetrayTeam(target, messageRenderer, Team.EVIL));
+	    				SWWorld w = actor.getWorld();
+	    				w.setNotRun();
+	    				w.setEndGame("Game Over! Vader successfully turned Luke to the dark side!");
 	    				return true;
 	    			}
 	    			else{

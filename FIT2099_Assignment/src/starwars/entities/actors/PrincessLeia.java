@@ -30,7 +30,7 @@ public class PrincessLeia extends SWOrganicActor{
 	 */
 
 	public PrincessLeia(int hitpoints, MessageRenderer m, SWWorld world) {
-		super(Team.GOOD, 600, m, world);
+		super(Team.EVIL, 60, m, world);
 		
 		this.setShortDescription("Leia");
 		this.setLongDescription("Leia, Princess Leia Organa");
@@ -49,7 +49,12 @@ public class PrincessLeia extends SWOrganicActor{
      * if it is Luke, mark 'meeted' as true, and
      * give Leia a FollowBehaviour so she will follow Luke.
      * when 'meeted' is true, she will execute the behaviour.
+     * 
+     * When Leia isDead(), it takes one round to check whether is she died or not. Then
+     * another round to check whether the "run" boolean in SWWorld is true or false, thus, there
+     * will be a game lag of 2 rounds before the game will end and prints out "Game Over! Princess Leia has died!".
      */
+
 	@Override
 	public void act() {
 		
@@ -57,6 +62,8 @@ public class PrincessLeia extends SWOrganicActor{
 		List<SWEntityInterface> contents = this.world.getEntityManager().contents(location);
 		
 		if (isDead()) {
+			world.setNotRun();
+			world.setEndGame("Game Over! Princess Leia has died!");
 			return;
 		}
 		

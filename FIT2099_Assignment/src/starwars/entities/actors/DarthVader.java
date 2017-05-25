@@ -55,6 +55,8 @@ public class DarthVader extends SWOrganicActor{
 	@Override
 	public void act() {
 		if (isDead()) {
+			world.setNotRun();
+			world.setEndGame("Mission Accomplished! Darth Vader has died!");
 			return;
 		}
 
