@@ -5,6 +5,7 @@ import java.util.List;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.SWActor;
 import starwars.SWEntityInterface;
+import starwars.SWGrid;
 import starwars.SWLocation;
 import starwars.SWWorld;
 import starwars.Team;
@@ -37,28 +38,39 @@ public class MonMothma extends SWActor {
 	@Override
 	public void act() {
 		
-		List<SWLocation> locations = this.getWorld()
-		// SWLocation location = this.world.getEntityManager().whereIs(this);
-		List<SWEntityInterface> contents = this.world.getEntityManager().contents(location);
-		System.out.println(contents.size());
+		boolean good = false;
+		
+		for(int row = 0; row<2; row++){
+			for (int col = 0; col<2; col++){
+				SWGrid grid = this.world.getGrid();
+				SWLocation location = grid.getLocationByCoordinates(col, row);
+				List<SWEntityInterface> contents = this.world.getEntityManager().contents(location);
+				if (isDead()) {
+					return;
+				}
+				if (contents != null) { // check who is accompanying the Player 
+					for (SWEntityInterface entity : contents) {
+						if (entity != this && entity instanceof SWActor){
+							if (entity.getShortDescription() == "Luke"){ 
+								SWActor a = (SWActor) entity;
+								if (a.getDroidOwned()!=null){
+									if (a.getDroidOwned().getShortDescription() == "R2-D2" && a.princesshere() == true){
+										System.out.println("*************************");
+										say("Good job " + a.getShortDescription() + ". We can now destroy the Empire's Death Star now!");
+										good = true;
+									}	
+								}
 	
-		if (isDead()) {
-			return;
-		}
-		if (contents.size() > 1) { // // if it is equal to one, the only thing here is this Player, so there is nothing to report
-			for (SWEntityInterface entity : contents) {
-				if (entity != this && entity instanceof SWActor){
-					if (entity.getShortDescription() == "Luke"){ //check who is accompanying the Player 
-						SWActor a = (SWActor) entity;
-						if (a.getDroidOwned().getShortDescription() == "R2-D2" && a.princesshere() == true){
-						say("Good job");
-						}		
-					else{
-						say(nag());
+							if(!good){
+								System.out.println("*************************");
+								say(nag());
+								}
+							}
 						}
 					}
 				}
 			}
+
 		}
 	}
 	
