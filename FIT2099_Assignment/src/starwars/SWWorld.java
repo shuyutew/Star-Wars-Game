@@ -170,7 +170,7 @@ public class SWWorld extends World {
 		// Luke
 		Player luke = new Player(Team.GOOD, 300, iface, this);
 		
-		loc = main.getLocationByCoordinates(3, 3);
+		loc = main.getLocationByCoordinates(5, 9);
 		luke.setShortDescription("Luke");
 		entityManager.setLocation(luke, loc);
 		luke.resetMoveCommands(loc);
@@ -180,7 +180,7 @@ public class SWWorld extends World {
 		TestActor owen = new TestActor("UncleOwen", iface, this);
 		
 		owen.setSymbol("UO");
-		loc = main.getLocationByCoordinates(3,3);
+		loc = main.getLocationByCoordinates(8,9);
 		entityManager.setLocation(owen, loc);
 		owen.resetMoveCommands(loc);
 		
