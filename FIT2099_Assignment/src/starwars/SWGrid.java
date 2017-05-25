@@ -16,6 +16,8 @@ import edu.monash.fit2099.simulator.space.LocationMaker;
  * 				and this resulted in a simpler SWGrid class (asel) 
  */
 public class SWGrid extends Grid<SWLocation> {
+	
+	private String name;
 
 	/**
 	 * The constructor of the <code>SWGrid</code>. 
@@ -23,8 +25,13 @@ public class SWGrid extends Grid<SWLocation> {
 	 * 
 	 * @param factory the maker of the <code>SWLocation</code>s
 	 */
-	public SWGrid(int x, int y, LocationMaker<SWLocation> factory) {
+	public SWGrid(int x, int y, LocationMaker<SWLocation> factory, String name) {
 		super(x, y, factory);
+		this.name = name;
+	}
+	
+	public String getMapName(){
+		return name;
 	}
 	
 

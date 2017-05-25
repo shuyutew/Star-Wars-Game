@@ -1,5 +1,7 @@
 package starwars;
 
+import java.util.ArrayList;
+
 import edu.monash.fit2099.gridworld.Grid.CompassBearing;
 import edu.monash.fit2099.simulator.matter.EntityManager;
 import edu.monash.fit2099.simulator.space.Direction;
@@ -30,6 +32,7 @@ public class SWWorld extends World {
 	private SWGrid main;
 	private SWGrid deathstar;
 	private SWGrid yavinIV;
+	private ArrayList<SWGrid> maps;
 	
 	private MessageRenderer messageRenderer;
 	
@@ -42,14 +45,17 @@ public class SWWorld extends World {
 	 */
 	public SWWorld() {
 		SWLocation.SWLocationMaker factory = SWLocation.getMaker();
-		this.main = new SWGrid(10, 10, factory);
-		this.deathstar = new SWGrid(10, 10, factory);
-		this.yavinIV = new SWGrid(2, 2, factory);
+		this.main = new SWGrid(10, 10, factory, "Main");
+		this.deathstar = new SWGrid(10, 10, factory, "DeathStar");
+		this.yavinIV = new SWGrid(2, 2, factory, "Yavin IV");
+		
+		maps.add(main);
+		maps.add(deathstar);
+		maps.add(yavinIV);
 		
 		//myGrid = deathstar;
 		//myGrid = yavinIV;
-		myGrid = main;
-		space = myGrid;
+		space = main;
 		
 	}
 
@@ -363,6 +369,14 @@ public class SWWorld extends World {
 	public SWGrid getGrid() {
 		return myGrid;
 	}
+	
+    public void SetMyGrid(String mapName){
+    	for(SWGrid world: maps){
+    		if (world.getMapName() == mapName){
+    			this.space = world;
+    		}
+    	}
+    }
 
 	/**
 	 * Move an actor in a direction.
