@@ -61,11 +61,11 @@ public class MonMothma extends SWActor {
 									}	
 								}
 	
-							if(!good){
-								System.out.println("*************************");
-								say(nag());
+								if(!good){
+									System.out.println("*************************");
+									say(nag());
+									}
 								}
-							}
 						}
 					}
 				}

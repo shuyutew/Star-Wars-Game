@@ -8,7 +8,9 @@ import edu.monash.fit2099.simulator.space.Direction;
 import edu.monash.fit2099.simulator.space.Location;
 import edu.monash.fit2099.simulator.space.World;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
+import starwars.actions.FlyToDeath;
 import starwars.actions.FlyToMain;
+import starwars.actions.FlyToYavin;
 import starwars.actions.Take;
 import starwars.entities.*;
 import starwars.entities.actors.*;
@@ -108,28 +110,6 @@ public class SWWorld extends World {
 				loc.setSymbol('.');				
 			}
 		}
-			
-		// Set default location string
-		for (int row=0; row < height(); row++) {
-			for (int col=0; col < width(); col++) {
-				loc = deathstar.getLocationByCoordinates(col, row);
-				loc.setLongDescription("DeathStar (" + col + ", " + row + ")");
-				loc.setShortDescription("DeathStar (" + col + ", " + row + ")");
-				loc.setSymbol('.');				
-			}
-		}
-		
-		// Set default location string
-		for (int row=0; row < 2; row++) {
-			for (int col=0; col < 2; col++) {
-				loc = yavinIV.getLocationByCoordinates(col, row);
-				loc.setLongDescription("Yavin IV (" + col + ", " + row + ")");
-				loc.setShortDescription("Yavin IV (" + col + ", " + row + ")");
-				loc.setSymbol('.');				
-			}
-		}
-
-		
 		
 		// BadLands
 		for (int row = 5; row < 8; row++) {
@@ -172,10 +152,10 @@ public class SWWorld extends World {
 			}
 		}
 		
-		loc = main.getLocationByCoordinates(0, 0);
-		
 		// Luke
 		Player luke = new Player(Team.GOOD, 1000, iface, this);
+		
+		loc = main.getLocationByCoordinates(3, 3);
 		luke.setShortDescription("Luke");
 		entityManager.setLocation(luke, loc);
 		luke.resetMoveCommands(loc);
@@ -299,6 +279,24 @@ public class SWWorld extends World {
 		loc = main.getLocationByCoordinates(5,5);
 		entityManager.setLocation(C3Po, loc);
 		
+		//falcon
+		Falcon falM = new Falcon(iface);
+		loc = main.getLocationByCoordinates(0, 0);
+		falM.removeAffordance(FlyToMain.class);
+		entityManager.setLocation(falM, loc);
+		
+/**DEATH STAR*/		
+			
+		// Set default location string
+		for (int row=0; row < height(); row++) {
+			for (int col=0; col < width(); col++) {
+				loc = deathstar.getLocationByCoordinates(col, row);
+				loc.setLongDescription("DeathStar (" + col + ", " + row + ")");
+				loc.setShortDescription("DeathStar (" + col + ", " + row + ")");
+				loc.setSymbol('.');				
+			}
+		}
+		
 		// Princess
 		PrincessLeia Princess = new PrincessLeia(200, iface, this);
 		loc = deathstar.getLocationByCoordinates(9,9);
@@ -334,6 +332,24 @@ public class SWWorld extends World {
 		loc = deathstar.getLocationByCoordinates(2,7);
 		entityManager.setLocation(storm5, loc);
 		
+		//falcon
+		Falcon falD = new Falcon(iface);
+		loc = deathstar.getLocationByCoordinates(0, 0);
+		falD.removeAffordance(FlyToDeath.class);
+		entityManager.setLocation(falD, loc);
+
+
+/**YAVIN IV*/				
+		// Set default location string
+		for (int row=0; row < 2; row++) {
+			for (int col=0; col < 2; col++) {
+				loc = yavinIV.getLocationByCoordinates(col, row);
+				loc.setLongDescription("Yavin IV (" + col + ", " + row + ")");
+				loc.setShortDescription("Yavin IV (" + col + ", " + row + ")");
+				loc.setSymbol('.');				
+			}
+		}
+		
 		// Admiral Ackbar
 		AdmiralAckbar ackbar = new AdmiralAckbar(100, iface, this);
 		loc = yavinIV.getLocationByCoordinates(1,1);
@@ -345,10 +361,12 @@ public class SWWorld extends World {
 		entityManager.setLocation(moth, loc);
 		
 		//falcon
-		Falcon fal = new Falcon(iface);
-		loc = main.getLocationByCoordinates(0, 0);
-		fal.removeAffordance(FlyToMain.class);
-		entityManager.setLocation(fal, loc);
+		Falcon falY = new Falcon(iface);
+		loc = yavinIV.getLocationByCoordinates(0, 0);
+		falY.removeAffordance(FlyToYavin.class);
+		entityManager.setLocation(falY, loc);
+		
+		
 	}
 
 	/*
