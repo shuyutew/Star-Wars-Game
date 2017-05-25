@@ -10,7 +10,6 @@ import edu.monash.fit2099.gridworld.GridRenderer;
 import edu.monash.fit2099.simulator.matter.ActionInterface;
 import edu.monash.fit2099.simulator.matter.EntityManager;
 import starwars.SWEntityInterface;
-import starwars.SWGrid;
 import starwars.SWLocation;
 import starwars.SWWorld;
 
@@ -28,7 +27,7 @@ import starwars.SWWorld;
  */
 public class SWGridTextInterface implements GridRenderer {
 	
-	/**The grid of the world*/
+	/**World to access the grids (maps)*/
 	private static SWWorld world;
 	
 	/**If or not to show the banner*/
@@ -146,6 +145,10 @@ public class SWGridTextInterface implements GridRenderer {
 			showBanner();
 		}
 				
+		/**
+		 * From the world, get the grid/map to obtain 
+		 * the height and width of the grid/map
+		 */
 		String buffer = "\n";
 		final int gridHeight = world.getGrid().getHeight();
 		final int gridWidth  = world.getGrid().getWidth();

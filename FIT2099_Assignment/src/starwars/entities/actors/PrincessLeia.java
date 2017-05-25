@@ -24,9 +24,9 @@ public class PrincessLeia extends SWOrganicActor{
 	 * If Luke carries both Leia and R2-D2 to the Rebel Headquarters on Yavin IV,
 	 * the game is won.
 	 * 
-	 * @param hitpoints
-	 * @param m
-	 * @param world
+	 * @param hitpoints the hit points of this <code>SWOrganicActor</code> to get started with
+	 * @param m <code>MessageRenderer</code> to display messages.
+	 * @param world the <code>SWWorld</code> world to which this <code>SWOrganicActor</code> belongs to
 	 */
 
 	public PrincessLeia(int hitpoints, MessageRenderer m, SWWorld world) {
@@ -67,7 +67,7 @@ public class PrincessLeia extends SWOrganicActor{
 		else if (contents.size() > 1) { // if it is equal to one, the only thing here is this Player, so there is nothing to report
 			for (SWEntityInterface entity : contents) {
 				if (entity != this && entity instanceof SWOrganicActor){
-					if (entity.getShortDescription() == "Luke"){ // check is Ben's previous belongings is still around
+					if (entity.getShortDescription() == "Luke"){ // check if entity is Luke
 						this.behaviours.add(new FollowBehaviour(this, this.world, (SWOrganicActor)entity));
 						executeBehaviours();
 						meeted = true;

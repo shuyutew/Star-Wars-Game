@@ -14,10 +14,10 @@ public class Stormtrooper extends SWOrganicActor {
 	private String name;
 
 	/**
-	 * Create a Stormtrooper. Stormtroopers will randomly wander
-	 * around the playfield (on any given turn, there is a 50% probability
-	 * that they will move) and attack anything they can (if they can attack
-	 * something, they will).  They are all members of team EVIL, 
+	 * Create a Stormtrooper. Stormtroopers has a <code> Blaster</code> and will randomly wander
+	 * around the playfield (on any given turn, they will move randomly) 
+	 * and attack anything they can (if they can attack
+	 * something, they will). They are all members of team EVIL, 
 	 * so their attempts to attack other Stormtroopers 
 	 * or Darth Vader won't be effectual.
 	 * 
@@ -40,7 +40,6 @@ public class Stormtrooper extends SWOrganicActor {
 		this.setSymbol("S");
 		Blaster troopweapon = new Blaster(m);
 		setItemCarried(troopweapon);
-		//behaviours.add(new StormtrooperAttackBehaviour(this, world, m, true, true, "%s has attacked %2s"));
 		behaviours.add(new AttackNeighboursBehaviour(this, world, m, true, true, "%s has attacked %2s", "%s shoots wildly!", 0.75));
 		behaviours.add(new CallBackUp(this, world));
 		behaviours.add(new WanderAround(this, world));
@@ -66,6 +65,9 @@ public class Stormtrooper extends SWOrganicActor {
 		return name + " the Stormtrooper";
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public String getLongDescription() {
 		return this.getShortDescription();

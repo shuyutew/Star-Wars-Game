@@ -28,6 +28,8 @@ import starwars.entities.actors.behaviors.TrainerBehaviour;
  * who wanders around in a fixed pattern and neatly slices any Actor not on his
  * team with his lightsaber.
  * 
+ * He has a Train affordance and is able to train the Player in order to increase the Player's force level.
+ * 
  * Note that you can only create ONE Ben, like all SWLegends.
  * @author rober_000
  *
@@ -38,6 +40,28 @@ public class BenKenobi extends SWOrganicActor {
 	private MessageRenderer m;
 	private boolean taken;
 	private SWEntityInterface benSS;	// ben's original holding stuff
+	
+	/**
+     * Ben Kenobi checks for entities in his location
+     * <ul>
+     * <li>If there is an entity that is drinkable, and the level is not 0, 
+     * returns there is a canteen available at Ben's location.</li>
+     * 
+     * <li>If Ben Kenobi is already holding a drinkable, 
+     * returns available canteen as false at Ben's location.</li>
+     * 
+     * <li>If a canteen exists and Ben Kenobi's hitpoint is not maximum, 
+     * and he is not holding a canteen, make Ben take the canteen, if he is holding something,
+     * make Ben leave the item and take the canteen (in a single turn).</li>
+     * 
+     * <li>If Ben is already holding the canteen, and his hitpoint is not maximum, 
+     * Ben heals himself.</li>
+     * 
+     * <li>If Ben has healed himself or if the canteen's level reaches 0,
+     * make Ben leave the canteen and take his lightsaber (in a single turn).</li>
+     * 
+     * </ul>
+     */
 	private BenKenobi(MessageRenderer m, SWWorld world, Direction [] moves) {
 		super(Team.GOOD, 800, m, world);
 		this.m = m;
@@ -97,6 +121,7 @@ public class BenKenobi extends SWOrganicActor {
 			}
 		}
 		
+		//if Ben Kenobi is already holding a drinkable, returns available canteen in surroundings as false
 		if (this.getItemCarried()!=null){
 			if (this.getItemCarried().hasCapability(Capability.DRINKABLE)){
 				isCanteen = false;
@@ -104,7 +129,7 @@ public class BenKenobi extends SWOrganicActor {
 		}
 		
 		
-//if a canteen exist and ben's hitpoint is not maximum and he is not holding a canteen
+		//if a canteen exist and ben's hitpoint is not maximum and he is not holding a canteen
 		if(isCanteen && this.getHitpoints()!= this.getmaxHitpoints() && !taken){
 			if (this.getItemCarried() == null && !(taken)){
 				Take theCan = new Take(fullCan,m);
@@ -131,8 +156,8 @@ public class BenKenobi extends SWOrganicActor {
 			done = true;
 		}
 		
-//when his hitpoints are fully recovered and he is holding a canteen. Drop canteen and pick up his light saber.
-// when the canteen level <=0 drop canteen and pick up whatever he left.
+		//when his hitpoints are fully recovered and he is holding a canteen. Drop canteen and pick up his light saber.
+		// when the canteen level <=0 drop canteen and pick up whatever he left.
 		else if((this.getHitpoints() == this.getmaxHitpoints() && this.getItemCarried().hasCapability(Capability.DRINKABLE)) || (taken && this.getItemCarried().getLevel() <= 0)){
 			Leave byecanteen = new Leave(this.getItemCarried(), m);
 			taken = false;

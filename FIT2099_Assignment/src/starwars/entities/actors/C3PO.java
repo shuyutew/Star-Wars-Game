@@ -8,6 +8,15 @@ import starwars.Team;
 import starwars.entities.actors.behaviors.TalkingBehaviour;
 
 public class C3PO extends SWRobots {
+	
+	/**
+	 * A robot called C-3PO, who remains still when it's not owned.
+	 * He has a 10% chance of talking from a list of quotes.
+	 * 
+	 * @param hitpoints the hit points of this <code>C3PO</code> to get started with
+	 * @param m <code>MessageRenderer</code> to display messages.
+	 * @param world the <code>SWWorld</code> world to which this <code>C-3PO</code> belongs to
+	 */
 
 	public C3PO(int hitpoints, MessageRenderer m, SWWorld world) {
 		super(Team.GOOD, hitpoints, m, world);

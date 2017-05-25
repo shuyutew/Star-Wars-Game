@@ -32,7 +32,7 @@ public abstract class BehaviourInterface {
     
     /**
      * 
-     * @return a list of entites in the same location as the actor.
+     * @return a list of entities in the same location as the actor.
      * 
      */
     protected List<SWEntityInterface> getLocalEntites() {

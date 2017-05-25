@@ -13,6 +13,22 @@ import starwars.entities.actors.behaviors.TortureLukeBehaviour;
 import starwars.entities.actors.behaviors.ChokeBehaviour;
 
 public class DarthVader extends SWOrganicActor{
+	
+	/**
+	 * Darth Vader
+	 * 
+	 * A major character from Team EVIL who is extremely strong in force and 
+	 * will have a 50% chance of using his force to Force Choke other actors with it, 
+	 * regardless of the target's team.
+	 * He wanders around Death Star at random and carries a Lightsaber.
+	 * If he encounters Luke, he has a 50% of turning Luke to the Dark side,
+	 * if he has successfully turned Luke, the game is lost.
+	 * If Darth Vader is dead, the game is won, since he is very difficult of kill.
+	 * 
+	 * @param hitpoints the hit points of this <code>SWOrganicActor</code> to get started with
+	 * @param m <code>MessageRenderer</code> to display messages.
+	 * @param world the <code>SWWorld</code> world to which this <code>SWOrganicActor</code> belongs to
+	 */
 
 	public DarthVader(int hitpoints, MessageRenderer m, SWWorld world) {
 		super(Team.EVIL, hitpoints, m, world);
