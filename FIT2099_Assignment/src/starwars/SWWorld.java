@@ -37,6 +37,9 @@ public class SWWorld extends World {
 	private SWGrid yavinIV;
 	
 	private ArrayList<SWGrid> maps;
+	
+	private boolean run = true;
+	private String endGameMessage = "";
 
 	
 	private MessageRenderer messageRenderer;
@@ -65,6 +68,22 @@ public class SWWorld extends World {
 		myGrid = main;
 		space = myGrid;
 		
+	}
+	
+	public boolean getRun(){
+		return run;
+	}
+	
+	public void setNotRun(){
+		run = false;
+	}
+	
+	public String getENDGame(){
+		return endGameMessage;
+	}
+	
+	public void setEndGame(String theMessage){
+		endGameMessage = theMessage;
 	}
 
 	/** 
@@ -127,8 +146,6 @@ public class SWWorld extends World {
 		loc.setShortDescription("Ben's Hut");
 		loc.setSymbol('H');
 		
-
-		
 		
 		// Beggar's Canyon 
 		for (int col = 3; col < 8; col++) {
@@ -165,7 +182,7 @@ public class SWWorld extends World {
 		TestActor owen = new TestActor("UncleOwen", iface, this);
 		
 		owen.setSymbol("UO");
-		loc = main.getLocationByCoordinates(6,5);
+		loc = main.getLocationByCoordinates(3,3);
 		entityManager.setLocation(owen, loc);
 		owen.resetMoveCommands(loc);
 		
@@ -299,7 +316,7 @@ public class SWWorld extends World {
 		
 		// Princess
 		PrincessLeia Princess = new PrincessLeia(200, iface, this);
-		loc = deathstar.getLocationByCoordinates(9,9);
+		loc = main.getLocationByCoordinates(3,4);
 		entityManager.setLocation(Princess, loc);
 		
 		// Darth Vader

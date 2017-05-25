@@ -58,6 +58,8 @@ public class MonMothma extends SWActor {
 										System.out.println("*************************");
 										say("Good job " + a.getShortDescription() + ". We can now destroy the Empire's Death Star now!");
 										good = true;
+										this.world.setNotRun();
+										this.world.setEndGame("Misson Accomplished!");
 									}	
 								}
 	

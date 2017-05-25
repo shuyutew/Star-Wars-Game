@@ -21,6 +21,7 @@ public class Application {
 	public static void main(String args[]) {
 		
 		SWWorld world = new SWWorld();
+		boolean test = world.getRun();
 		
 		//Grid controller controls the data and commands between the UI and the model
 		SWGridController uiController = new SWGridController(world);
@@ -32,9 +33,16 @@ public class Application {
 		world.initializeWorld(uiController);
 	
 		// kick off the scheduler
-		while(true) {
+		while(test) {
+			test = world.getRun();
 			uiController.render();
 			theScheduler.tick();
+		}
+		
+		
+		if (!test){
+			System.out.println("****************************");
+			System.out.println(world.getENDGame());
 		}
 		
 		

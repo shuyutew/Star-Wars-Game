@@ -7,7 +7,6 @@ import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.SWEntityInterface;
 import starwars.SWActor;
 import starwars.SWEntity;
-import starwars.SWLegend;
 import starwars.SWLocation;
 import starwars.SWWorld;
 import starwars.Team;

@@ -59,7 +59,13 @@ public class Player extends SWOrganicActor {
 	 * @see {@link starwars.swinterfaces.SWGridController}
 	 */
 	@Override
-	public void act() {	
+	public void act() {
+		if (isDead()){
+			world.setNotRun();
+			world.setEndGame("Game Over! Luke SkyWalker has died!");
+			return;
+		}
+		
 		if (Controlling){
 			SWActor g = this.getPoorOnes();
 			System.out.println("--------------------");
