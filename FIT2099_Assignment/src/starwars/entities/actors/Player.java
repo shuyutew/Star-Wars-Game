@@ -47,6 +47,7 @@ public class Player extends SWOrganicActor {
 		super(team, hitpoints, m, world);
 		humanControlled = true; // this feels like a hack. Surely this should be dynamic
 		this.addCapability(Capability.JEDI_Student);
+		this.addCapability(Capability.DROID_MECHANIC);
 	}
 	
 	/**

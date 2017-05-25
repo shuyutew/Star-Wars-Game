@@ -7,7 +7,6 @@ import starwars.SWLocation;
 import starwars.SWWorld;
 import starwars.Team;
 import starwars.actions.DissambleDroid;
-import starwars.actions.ForceChoke;
 import starwars.actions.Owned;
 import starwars.actions.RebuildDroid;
 import starwars.actions.Repair;
@@ -35,7 +34,7 @@ import starwars.entities.actors.behaviors.FollowBehaviour;
  * @author shuyu
  *
  */
-public abstract class SWRobots extends SWActor implements SWRobotsInterface {
+public class SWRobots extends SWActor implements SWRobotsInterface {
 	
 	/**If or not this <code>SWRobot</code> has an internal oil reservoir. <code>SWRobot</code>s will not have it by default*/
 	private boolean internal = false;
@@ -53,7 +52,7 @@ public abstract class SWRobots extends SWActor implements SWRobotsInterface {
 	 * @param world
 	 */
 	
-	protected SWRobots(Team team, int hitpoints,  MessageRenderer m, SWWorld world) {
+	public SWRobots(Team team, int hitpoints,  MessageRenderer m, SWWorld world) {
 		super(team, hitpoints, m, world);
 		//this.addAffordance(new Repair(this, m));
 		this.addAffordance(new Owned(this, messageRenderer));
@@ -110,12 +109,6 @@ public abstract class SWRobots extends SWActor implements SWRobotsInterface {
 	
 	public boolean checkInternal(){
 		return internal;
-	}
-
-	private String describeLocation() {
-		SWLocation location = this.world.getEntityManager().whereIs(this);
-		return this.getShortDescription() + " [" + this.getHitpoints() +", " + this.getForce()  + "]" + " is at " + location.getShortDescription();
-
 	}
 	
     @Override

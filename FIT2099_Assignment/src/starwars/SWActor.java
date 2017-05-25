@@ -22,13 +22,10 @@ import edu.monash.fit2099.gridworld.Grid.CompassBearing;
 import edu.monash.fit2099.simulator.matter.ActionInterface;
 import edu.monash.fit2099.simulator.matter.Actor;
 import edu.monash.fit2099.simulator.matter.Affordance;
-import edu.monash.fit2099.simulator.matter.EntityManager;
 import edu.monash.fit2099.simulator.space.Location;
 import edu.monash.fit2099.simulator.time.Scheduler;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.actions.Attack;
-import starwars.actions.MindControl;
-import starwars.actions.ForceChoke;
 import starwars.entities.actors.behaviors.BehaviourInterface;
 import starwars.actions.Move;
 
@@ -69,9 +66,6 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	protected boolean Controlling = false;
 	
 	private SWActor poorOne;
-	
-	/**A set of <code>Capabilities</code> of this <code>SWActor</code>*/
-	private HashSet<Capability> capabilities;
 	
 	/**
 	 * Constructor for the <code>SWActor</code>.

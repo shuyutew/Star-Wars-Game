@@ -50,7 +50,12 @@ public class BetrayTeam extends SWAffordance implements SWActionInterface{
 		if (targetIsActor) {
 			targetActor = (SWActor) target;
 		}
-		
+
+/**If the actor is trained in the force resulting in higher force level,
+ * the actor will have a 75% chance to resist the attempt to change team.
+ * Which means there is 25% chance that the actor will betray it's own team
+ * 
+ * If the actor is not trained by Force, then th actor will 100% cannot resist this action.*/
 		if (targetIsActor && targetActor.getForce()>8){
 			if (Math.random()>0.75){
 				targetActor.setTeam(this.team);

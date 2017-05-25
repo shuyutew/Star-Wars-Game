@@ -4,6 +4,8 @@ import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.SWLocation;
 import starwars.SWWorld;
 import starwars.Team;
+import starwars.actions.Take;
+import starwars.actions.Leave;
 import starwars.entities.Blaster;
 import starwars.entities.actors.behaviors.AttackNeighboursBehaviour;
 import starwars.entities.actors.behaviors.WanderAround;
@@ -36,8 +38,12 @@ public class TuskenRaider extends SWOrganicActor {
 		super(Team.TUSKEN, hitpoints, m, world);
 		// TODO Auto-generated constructor stub
 		this.name = name;
+		
 		Blaster tuckenweapon = new Blaster(m);
+		tuckenweapon.removeAffordance(Take.class);
+		tuckenweapon.addAffordance(new Leave(tuckenweapon, m));
 		setItemCarried(tuckenweapon);
+		
 		behaviours.add(new AttackNeighboursBehaviour(this, world, m, false, false, "%s has attacked %2s", null, 0.0));
 		behaviours.add(new WanderAround(this, world));
 	}

@@ -29,8 +29,8 @@ public class PrincessLeia extends SWOrganicActor{
 	 * @param world the <code>SWWorld</code> world to which this <code>SWOrganicActor</code> belongs to
 	 */
 
-	public PrincessLeia(int hitpoints, MessageRenderer m, SWWorld world) {
-		super(Team.EVIL, 60, m, world);
+	public PrincessLeia(MessageRenderer m, SWWorld world) {
+		super(Team.GOOD, 600, m, world);
 		
 		this.setShortDescription("Leia");
 		this.setLongDescription("Leia, Princess Leia Organa");

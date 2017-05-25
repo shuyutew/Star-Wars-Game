@@ -74,6 +74,8 @@ public class AttackNeighboursBehaviour extends BehaviourInterface {
         	actor.schedule(new Attack(target, messageRenderer));
         	return true;
     	}
+//When there is probability that the actor will miss and a string message is passed, this else statement will print the
+//message indicating that the actor missed.
     	else{
     		if (messageMiss != null){
     			actor.say(String.format(messageMiss, actor.getShortDescription()));

@@ -4,6 +4,8 @@ import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.SWLocation;
 import starwars.SWWorld;
 import starwars.Team;
+import starwars.actions.Leave;
+import starwars.actions.Take;
 import starwars.entities.Blaster;
 import starwars.entities.actors.behaviors.AttackNeighboursBehaviour;
 import starwars.entities.actors.behaviors.WanderAround;
@@ -38,8 +40,12 @@ public class Stormtrooper extends SWOrganicActor {
 		// TODO Auto-generated constructor stub
 		this.name = name;
 		this.setSymbol("S");
+		
 		Blaster troopweapon = new Blaster(m);
+		troopweapon.removeAffordance(Take.class);
+		troopweapon.addAffordance(new Leave(troopweapon, m));
 		setItemCarried(troopweapon);
+		
 		behaviours.add(new AttackNeighboursBehaviour(this, world, m, true, true, "%s has attacked %2s", "%s shoots wildly!", 0.75));
 		behaviours.add(new CallBackUp(this, world));
 		behaviours.add(new WanderAround(this, world));

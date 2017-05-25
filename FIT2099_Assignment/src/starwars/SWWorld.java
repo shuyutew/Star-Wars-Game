@@ -170,7 +170,7 @@ public class SWWorld extends World {
 		}
 		
 		// Luke
-		Player luke = new Player(Team.GOOD, 1000, iface, this);
+		Player luke = new Player(Team.GOOD, 300, iface, this);
 		
 		loc = main.getLocationByCoordinates(3, 3);
 		luke.setShortDescription("Luke");
@@ -297,6 +297,15 @@ public class SWWorld extends World {
 		loc = main.getLocationByCoordinates(5,5);
 		entityManager.setLocation(C3Po, loc);
 		
+		//RED
+		loc = myGrid.getLocationByCoordinates(5, 7);
+		SWRobots red = new SWRobots(Team.GOOD, 200, iface, this);
+		red.setShortDescription("Red");
+		red.setLongDescription("Red, the R2 unit with a bad motivator. I know how he feels.");
+		red.setSymbol("r");
+		red.takeDamage(200);
+		entityManager.setLocation(red, loc);
+		
 		//falcon
 		Falcon falM = new Falcon(iface);
 		loc = main.getLocationByCoordinates(0, 0);
@@ -316,8 +325,8 @@ public class SWWorld extends World {
 		}
 		
 		// Princess
-		PrincessLeia Princess = new PrincessLeia(200, iface, this);
-		loc = main.getLocationByCoordinates(3,4);
+		PrincessLeia Princess = new PrincessLeia(iface, this);
+		loc = deathstar.getLocationByCoordinates(9,9);
 		entityManager.setLocation(Princess, loc);
 		
 		// Darth Vader
