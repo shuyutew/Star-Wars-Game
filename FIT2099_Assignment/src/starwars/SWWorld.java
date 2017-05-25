@@ -333,7 +333,7 @@ public class SWWorld extends World {
 		
 		// Stormtrooper 1
 		Stormtrooper storm1 = new Stormtrooper(100, "Storm1", iface, this);
-		loc = main.getLocationByCoordinates(3,3);
+		loc = deathstar.getLocationByCoordinates(3,3);
 		entityManager.setLocation(storm1, loc);
 		
 		// Stormtrooper 2
