@@ -46,10 +46,10 @@ public class SWRobots extends SWActor implements SWRobotsInterface {
 	/** 
 	 * Protected constructor to prevent random other code from creating 
 	 * SWDroid or their descendants.
-	 * @param team
-	 * @param hitpoints
-	 * @param m
-	 * @param world
+	 * @param team the <code>Team</code> to which the this <code>SWRobots</code> belongs to
+	 * @param hitpoints the number of hit points of this <code>SWRobots</code>.
+	 * @param m <code>MessageRenderer</code> to display messages.
+	 * @param world the <code>SWWorld</code> world to which this <code>SWRobots</code> belongs to
 	 */
 	
 	public SWRobots(Team team, int hitpoints,  MessageRenderer m, SWWorld world) {
@@ -61,22 +61,34 @@ public class SWRobots extends SWActor implements SWRobotsInterface {
 		this.followBehaviour = new FollowBehaviour(this, world, null);
 	}
 	
-//Droids has no force ability	
+	/**
+	 * Droids has no force ability so return its level as 0
+	 */
 	@Override
 	public void setForceAbility(){
 		this.forceAbilityLevel = 0;
 	}
 	
+	/**
+	 * If Droid has an owner, it will have a follow behaviour towards its owner
+	 */
     @Override
     public boolean hasOwner() {
     	return followBehaviour.hasOwner();
     }
 
+    /**
+     * When Droid is owned, it has a follow behaviour, this method set the owner of
+     * whom this Droid will follow
+     */
     @Override
     public void setOwner(SWActor newOwner) {
     	followBehaviour.setOwner(newOwner);
     }
     
+    /**
+     * 
+     */
     @Override
     public void takeDamage(int hitPoints) {
     	super.takeDamage(hitPoints);
@@ -86,6 +98,12 @@ public class SWRobots extends SWActor implements SWRobotsInterface {
     	}
     }
     
+    /**
+     * Disabled droid will be immobile and it can be rebuild or disassembled
+     * If a Droid is healed, the droid is no longer disabled, 
+     * hence remove the rebuild and disassembled affordances
+     * since it can no longer be rebuild and disassembled.
+     */
     @Override
     public void heal(int hitPoints){
     	boolean wasDead = isDead();
@@ -107,10 +125,18 @@ public class SWRobots extends SWActor implements SWRobotsInterface {
 		this.setItemCarried(fullOil);
 	}
 	
+	/**
+	 * Checks if it has an internal oil reservoir
+	 * @return true is it has an internal oil reservoir, otherwise false
+	 */
 	public boolean checkInternal(){
 		return internal;
 	}
 	
+	/**
+	 * Droid reduces hitpoints when it moves into Badlands
+	 * This method checks if the Droid move into Badlands
+	 */
     @Override
     public void movedToLocation(SWLocation loc) {
     	if(loc.getSymbol() == 'b'){ //This is the only defining characterist of the badlands.

@@ -42,26 +42,12 @@ public class BenKenobi extends SWOrganicActor {
 	private SWEntityInterface benSS;	// ben's original holding stuff
 	
 	/**
-     * Ben Kenobi checks for entities in his location
-     * <ul>
-     * <li>If there is an entity that is drinkable, and the level is not 0, 
-     * returns there is a canteen available at Ben's location.</li>
-     * 
-     * <li>If Ben Kenobi is already holding a drinkable, 
-     * returns available canteen as false at Ben's location.</li>
-     * 
-     * <li>If a canteen exists and Ben Kenobi's hitpoint is not maximum, 
-     * and he is not holding a canteen, make Ben take the canteen, if he is holding something,
-     * make Ben leave the item and take the canteen (in a single turn).</li>
-     * 
-     * <li>If Ben is already holding the canteen, and his hitpoint is not maximum, 
-     * Ben heals himself.</li>
-     * 
-     * <li>If Ben has healed himself or if the canteen's level reaches 0,
-     * make Ben leave the canteen and take his lightsaber (in a single turn).</li>
-     * 
-     * </ul>
-     */
+	 * @param m <code>MessageRenderer</code> to display messages.
+	 * @param world world the <code>SWWorld</code> world to which this <code>SWOrganicActor</code> belongs to
+	 * @param moves patrol moves for the <code>SWOrganicActor</code>.
+	 */
+	
+	
 	private BenKenobi(MessageRenderer m, SWWorld world, Direction [] moves) {
 		super(Team.GOOD, 800, m, world);
 		this.m = m;
@@ -93,6 +79,27 @@ public class BenKenobi extends SWOrganicActor {
     	super.executeBehaviours();
     }
 
+    /**
+     * Ben Kenobi checks for entities in his location
+     * <ul>
+     * <li>If there is an entity that is drinkable, and the level is not 0, 
+     * returns there is a canteen available at Ben's location.</li>
+     * 
+     * <li>If Ben Kenobi is already holding a drinkable, 
+     * returns available canteen as false at Ben's location.</li>
+     * 
+     * <li>If a canteen exists and Ben Kenobi's hitpoint is not maximum, 
+     * and he is not holding a canteen, make Ben take the canteen, if he is holding something,
+     * make Ben leave the item and take the canteen (in a single turn).</li>
+     * 
+     * <li>If Ben is already holding the canteen, and his hitpoint is not maximum, 
+     * Ben heals himself.</li>
+     * 
+     * <li>If Ben has healed himself or if the canteen's level reaches 0,
+     * make Ben leave the canteen and take his lightsaber (in a single turn).</li>
+     * 
+     * </ul>
+     */
 	@Override
 	public void act() {
 		

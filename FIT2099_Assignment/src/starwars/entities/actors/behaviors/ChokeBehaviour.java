@@ -14,6 +14,19 @@ public class ChokeBehaviour extends BehaviourInterface{
 	private String message;
 	private boolean avoidNonActors;
     private MessageRenderer messageRenderer;
+    
+    /**
+     * This behaviour is held by actors that have a high force ability level so that he
+     * is able to perform Force Choke action on another actor
+     * The behaviour shows that it has a 50% of being able to perform this Force Choke action
+     * 
+     * @param attacker the <code>SWActor</code> in which will 
+     * 			perform the <code>Attack</code> action on another actor
+     * @param world the <code>SWWorld</code> world to which this <code>SWActor</code> belongs to
+     * @param m <code>MessageRenderer</code> to display messages.
+     * @param avoidNonActors boolean of whether it will ignore non-actors when encountered or not
+     * @param message <code>MessageRenderer</code> to display messages
+     */
 	
 	public ChokeBehaviour(SWActor attacker, SWWorld world, MessageRenderer m, boolean avoidNonActors, String message) {
 		super(attacker, world);
@@ -21,6 +34,13 @@ public class ChokeBehaviour extends BehaviourInterface{
     	this.messageRenderer = m;
 	}
 
+	/**
+	 * Ensures attacker won't target himself and will only execute behaviour when 
+	 * target is not a nonactor, or when target is dead
+	 * If he found a target in his location, he will have a 50% chance of
+	 * performing the Force Choke action this target
+	 * 
+	 */
 	@Override
     public boolean ExecuteBehaviour() {
 

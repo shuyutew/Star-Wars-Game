@@ -21,6 +21,19 @@ public class AttackNeighboursBehaviour extends BehaviourInterface {
     private MessageRenderer messageRenderer;
     private double probability;
     
+    /**
+     * 
+     * @param attacker the <code>SWActor</code> in which will 
+     * 			perform the <code>Attack</code> action on another actor
+     * @param world the <code>SWWorld</code> world to which this <code>SWActor</code> belongs to
+     * @param m <code>MessageRenderer</code> to display messages.
+     * @param avoidFriendlies boolean of whether it will attack actors of the same team or not
+     * @param avoidNonActors boolean of whether it will ignore non-actors when encountered or not
+     * @param message <code>MessageRenderer</code> to display messages.
+     * @param messageMiss <code>MessageRenderer</code> to display message when <code>SWActor</code> misses hitting their target
+     * @param proba a probabilty of how likely the attacker will miss their target.
+     */
+    
     public AttackNeighboursBehaviour(SWActor attacker, SWWorld world, MessageRenderer m, boolean avoidFriendlies, boolean avoidNonActors, String message, String messageMiss ,double proba) {
 
     	super(attacker, world);
@@ -32,6 +45,16 @@ public class AttackNeighboursBehaviour extends BehaviourInterface {
     	this.messageRenderer = m;
     }
     
+    /**
+     * If actor avoidsNonActors == true, it will proceed its moves without interacting with it
+     * If actor avoidsFriendlies == true, it will not attack target of the same team
+     * There will be a chance where certain actors may not have a perfect aim,
+     * so a aiming probability parameter is added to the constructor above where 
+     * when it executes this behaviour, whether the actor will hit their target
+     * depends on this probability, the higher the probability,
+     * the better the aim. When the attack misses their target,
+     * a message will be displayed.
+     */
     @Override
     public boolean ExecuteBehaviour() {
 
@@ -74,8 +97,8 @@ public class AttackNeighboursBehaviour extends BehaviourInterface {
         	actor.schedule(new Attack(target, messageRenderer));
         	return true;
     	}
-//When there is probability that the actor will miss and a string message is passed, this else statement will print the
-//message indicating that the actor missed.
+    	//When there is probability that the actor will miss and a string message is passed, this else statement will print the
+    	//message indicating that the actor missed.
     	else{
     		if (messageMiss != null){
     			actor.say(String.format(messageMiss, actor.getShortDescription()));

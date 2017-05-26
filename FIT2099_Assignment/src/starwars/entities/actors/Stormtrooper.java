@@ -66,19 +66,26 @@ public class Stormtrooper extends SWOrganicActor {
 		executeBehaviours();
 	}
 	
+	/**
+	 * This method returns its short description.
+	 */
 	@Override
 	public String getShortDescription() {
 		return name + " the Stormtrooper";
 	}
 
 	/**
-	 * 
+	 * This method gets the actor's long description by returning its short description
 	 */
 	@Override
 	public String getLongDescription() {
 		return this.getShortDescription();
 	}
 
+	/**
+	 * This method gets the actor's location and describes his surroundings at the same location
+	 * @return a string of the actor's description and location's description.
+	 */
 	private String describeLocation() {
 		SWLocation location = this.world.getEntityManager().whereIs(this);
 		return this.getShortDescription() + " [" + this.getHitpoints() +", " + this.getForce()  + "] is at " + location.getShortDescription();

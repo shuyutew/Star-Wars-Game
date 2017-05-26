@@ -4,7 +4,8 @@ import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.SWAction;
 import starwars.SWActor;
 
-/** Mostly just here to be a time waster so Ben doesn't wander off during training
+/** An action in which enables <code>SWActor</code> to talk
+ * And displays the message the actor is trying to convey
  */
 public class Speak extends SWAction {
 

@@ -116,6 +116,9 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 		scheduler = s;
 	}
 	
+	/**
+	 * This method sets the force ability level for the <code>SWActor</code>s based on their maximum hitpoints
+	 */
 	public void setForceAbility(){
 		if (maxHitpoint>0 && maxHitpoint<= 100){
 			this.forceAbilityLevel = 1;
@@ -210,10 +213,18 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 		return false;
 	}
 	
+	/**
+	 * This method is a getter for which world the <code>SWActor</code> is at
+	 * @return the world the <code>SWActor</code> is located
+	 */
 	public SWWorld getWorld(){
 		return this.world;
 	}
 	
+	/**
+	 * A method to get the <code>SWActor</code>'s location (in a shorter form)
+	 * @return the SWActor's location
+	 */
 	public SWLocation getLocation(){
 		SWLocation location = this.world.getEntityManager().whereIs(this);
 		return location;
@@ -462,6 +473,16 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
  		this.droidOwned = target;
 	}
 	
+	/**
+	 * Assigns this <code>SWActor</code>'s <code>princess</code> (Princess Leia) 
+	 * as <code>target</code>
+	 * <p>
+	 * A null <code>target</code> would signify that this <code>SWActor</code> 
+	 * is not followed by Princess Leia anymore.
+	 * 
+	 * @param 	target Princess Leia
+	 * @see 	#princess
+	 */
 	public void setPrincess(SWEntityInterface target){
 		this.princess = target;
 	}
@@ -500,10 +521,12 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
     @Override
     public void movedToLocation(SWLocation loc) { }
     
-    // Entity wrapper methods.
-    // SWActor is an Actor (subclass of Entity), so it can't be a SWEntity because of single inheritance.
-    // I need more affordance methods, which are on SWEntity, so I'm wrapping a SWEntity and delegating all affordance behaviour to it.
-    // It turned out to be only marginally less awkward than copy pasting all the SWEntityInteface code out of SWEntity. But, DRY.
+    /**
+     * Entity wrapper methods.
+     * SWActor is an Actor (subclass of Entity), so it can't be a SWEntity because of single inheritance.
+     * I need more affordance methods, which are on SWEntity, so I'm wrapping a SWEntity and delegating all affordance behaviour to it.
+     * It turned out to be only marginally less awkward than copy pasting all the SWEntityInteface code out of SWEntity. But, DRY.
+     */
 
     @Override
     public void addAffordance(Affordance a) {

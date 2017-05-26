@@ -33,8 +33,6 @@ public class Repair extends SWAffordance{
     	}
 	}
 
-	
-	
 	/**
 	 * A String describing what this action will do, suitable for display in a user interface
 	 * 

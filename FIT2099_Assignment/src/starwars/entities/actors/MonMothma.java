@@ -10,16 +10,16 @@ import starwars.SWLocation;
 import starwars.SWWorld;
 import starwars.Team;
 
-public class MonMothma extends SWActor {
+public class MonMothma extends SWOrganicActor {
 
 	/**
 	 * Create a new character called Mon Mothma, who works at the headquarters of the Rebel Alliance
 	 * which is located on the moon Yavin IV
 	 * He needs to stay still at the headquarters and will tell Luke 
 	 * to bring the necessary characters to the Yavin IV in order to win
-	 * @param hitpoints
-	 * @param m
-	 * @param world
+	 * @param hitpoints the number of hit points of this <code>SWOrganicActor</code>.
+	 * @param m <code>MessageRenderer</code> to display messages.
+	 * @param world the <code>SWWorld</code> world to which this <code>SWOrganicActor</code> belongs to
 	 */
 	public MonMothma(int hitpoints, MessageRenderer m, SWWorld world) {
 		super(Team.GOOD, hitpoints, m, world);

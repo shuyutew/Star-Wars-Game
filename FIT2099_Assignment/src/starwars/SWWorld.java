@@ -36,6 +36,9 @@ public class SWWorld extends World {
 	private SWGrid deathstar;
 	private SWGrid yavinIV;
 	
+	/**
+	 * Instantiates a list of maps to store the SWGrids (main, Death Star, Yavin IV)
+	 */
 	private ArrayList<SWGrid> maps;
 	
 	private boolean run = true;
@@ -57,6 +60,9 @@ public class SWWorld extends World {
 		this.deathstar = new SWGrid(10, 10, factory, "DeathStar");
 		this.yavinIV = new SWGrid(2, 2, factory, "Yavin IV");
 		
+		/**
+		 *  Store the SWGrids (main, Death Star, Yavin IV) into mapss
+		 */
 		ArrayList<SWGrid> mapss = new ArrayList<SWGrid>();
 		mapss.add(this.main);
 		mapss.add(this.deathstar);

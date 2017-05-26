@@ -7,6 +7,13 @@ import starwars.SWEntity;
 import starwars.actions.Take;
 
 public class DroidParts extends SWEntity {
+	
+	/**
+	 * This entity can be used by mechanic droids to repair disabled droids
+	 * When a Droid is disassembled, this will generate droid parts from it
+	 * 
+	 * @param m <code>MessageRenderer</code> to display messages.
+	 */
 
 	public DroidParts(MessageRenderer m) {
 		super(m);

@@ -10,6 +10,20 @@ import starwars.SWLocation;
 import starwars.entities.DroidParts;
 
 public class DissambleDroid extends SWAffordance {
+	
+	/**
+	 * This action is done by an SWActor and they will disassembled a droid
+	 * After the droid is disassembled, the droid will be reduced to parts
+	 * and the actor performing this disassemble action will obtain its 
+	 * droid parts
+	 * 
+	 * If <code>R2D2</code> is disassembled, the game is lost.
+	 * Note: there is a 2 round game lag for this game to end when R2-D2 is disassembled
+	 * as it requires another round to check for that condition.
+	 * 
+	 * @param theTarget the target that is being disassembled.
+	 * @param m message renderer to display messages
+	 */
 
 	public DissambleDroid(SWEntityInterface theTarget, MessageRenderer m) {
 		super(theTarget, m);

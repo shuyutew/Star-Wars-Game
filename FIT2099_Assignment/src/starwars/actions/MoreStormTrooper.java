@@ -15,6 +15,15 @@ import starwars.SWWorld;
 public class MoreStormTrooper extends SWAction{
 	
 	SWWorld world;
+	
+	/**
+	 * This action creates a new Stormtrooper at the same position as the actor 
+	 * as a form of radioing for backup when the caller does not encounter anything 
+	 * that the actor is able to attack.
+	 * 
+	 * @param m m message renderer to display messages
+	 * @param world the <code>SWWorld</code> world to which this <code>SWActor</code> belongs to
+	 */
 
 	public MoreStormTrooper(MessageRenderer m, SWWorld world) {
 		super(m);

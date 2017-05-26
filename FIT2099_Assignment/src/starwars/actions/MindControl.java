@@ -9,6 +9,14 @@ import starwars.SWEntityInterface;
 public class MindControl extends SWAffordance implements SWActionInterface{
 	
 
+	/**
+	 * This action is done by actor with a high force ability level and when it is able to
+	 * perform this action on the target, it will be able to command the actor
+	 * to do any action as desired given its options based on the target's surroundings. 
+	 * 
+	 * @param theTarget the target to be mind controlled
+	 * @param m message renderer to display messages
+	 */
 	public MindControl(SWEntityInterface theTarget, MessageRenderer m) {
 		super(theTarget, m);
 	}

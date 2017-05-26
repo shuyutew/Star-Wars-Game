@@ -20,6 +20,14 @@ import starwars.swinterfaces.SWGridController;
 public class Application {
 	public static void main(String args[]) {
 		
+		/**
+		 * A boolean called test is added to check if the game is won or lost,
+		 * while the game has not been won or lost, it will keep running the world,
+		 * displaying the user interface(enable user commands) and hence the game.
+		 * When the game has been won or lost, it will print out a message depending on 
+		 * whether is it a win or lose, and the loop breaks
+		 * therefore the game will end.
+		 */
 		SWWorld world = new SWWorld();
 		boolean test = world.getRun();
 		

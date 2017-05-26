@@ -11,6 +11,14 @@ import starwars.SWGrid;
 import starwars.SWLocation;
 
 public class FlyToMain extends SWAffordance implements SWActionInterface {
+	
+	/**
+	 * An action where the Millenium Falcon is able to fly the target and his companions
+	 * to this desired location, specifically the Main map
+	 * 
+	 * @param theTarget <code>SWActor</code> that will be targeted for this action
+	 * @param m <code>MessageRenderer</code> to display messages.
+	 */
 
 	public FlyToMain(SWEntityInterface theTarget, MessageRenderer m) {
 		super(theTarget, m);
@@ -36,6 +44,11 @@ public class FlyToMain extends SWAffordance implements SWActionInterface {
 		return true;
 	}
 
+
+	/**
+	 * Set the world of where to transport the target and his companions to Main world
+	 * then lands them on the new desired map at coordinates (0,0)
+	 */
 	@Override
 	public void act(SWActor a) {
 		SWLocation loc;

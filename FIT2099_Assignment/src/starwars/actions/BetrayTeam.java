@@ -10,6 +10,19 @@ import starwars.SWEntityInterface;
 public class BetrayTeam extends SWAffordance implements SWActionInterface{
 	
 	private Team team;
+	
+	/**
+	 * This action is done by an actor with a high force ability level in which
+	 * the actor will have a 25% chance of turning his target to betray the
+	 * target's own team and join the actor's team instead
+	 * However if the target has a high force ability level as well,
+	 * the target will have a 75% of resisting this actor's attempt to
+	 * make the target betray his own team.
+	 * 
+	 * @param theTarget the target about to be turned to the attacker's team
+	 * @param m message renderer to display messages
+	 * @param team the team in which the actor will turn its target to
+	 */
 
 	public BetrayTeam(SWEntityInterface theTarget, MessageRenderer m, Team team) {
 		super(theTarget, m);
@@ -34,7 +47,7 @@ public class BetrayTeam extends SWAffordance implements SWActionInterface{
 	 */
 	@Override
 	public boolean canDo(SWActor a) {
-		if(a.getForce()>9){
+		if(a.getForce()>=9){
 			return true;
 		}
 		return false;
@@ -55,7 +68,7 @@ public class BetrayTeam extends SWAffordance implements SWActionInterface{
  * the actor will have a 75% chance to resist the attempt to change team.
  * Which means there is 25% chance that the actor will betray it's own team
  * 
- * If the actor is not trained by Force, then th actor will 100% cannot resist this action.*/
+ * If the actor is not trained by Force, then the actor will 100% cannot resist this action.*/
 		if (targetIsActor && targetActor.getForce()>8){
 			if (Math.random()>0.75){
 				targetActor.setTeam(this.team);

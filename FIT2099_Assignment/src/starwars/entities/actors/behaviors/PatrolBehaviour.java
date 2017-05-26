@@ -14,12 +14,26 @@ public class PatrolBehaviour extends BehaviourInterface {
 	private ArrayList<Direction> moves;
 	private int position = 0;
 	
+	/**
+	 * This behaviour makes the actor patrol around the map based on a list of
+	 * directions.
+	 * 
+	 * @param actor the <code>SWActor</code> that is being called
+	 * @param world the <code>SWWorld</code> world to which this <code>SWActor</code> belongs to
+	 * @param moves a list of directions that the actor will move according to
+	 */
+	
 	public PatrolBehaviour(SWActor actor, SWWorld world, Direction [] moves) {
 		super(actor, world);
 		this.moves = new ArrayList<Direction>(Arrays.asList(moves));
 
 	}
 	
+	/**
+	 * Initiates the <code>Move</code> action and gets its next direction
+	 * either North, West, East, South, Northwest, Northeast, Southeast or Southwest
+	 * and displays it's new direction
+	 */
     @Override
     public boolean ExecuteBehaviour() {
 
@@ -31,6 +45,11 @@ public class PatrolBehaviour extends BehaviourInterface {
     	return true;
     }
 	
+    /**
+     * This method find the next position of where the actor 
+     * will head toward
+     * @return next position of actor
+     */
 	public Direction getNext() {
 		Direction nextMove = moves.get(position);
 		position = ++position % moves.size();

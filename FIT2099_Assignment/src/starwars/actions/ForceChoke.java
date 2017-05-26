@@ -10,6 +10,14 @@ import starwars.Team;
 
 public class ForceChoke extends SWAffordance implements SWActionInterface {
 
+	/**
+	 * This action is done by an actor with a high force ability level (currently only 
+	 * Darth Vader is able to perform this action), this attack will cause
+	 * the target a damage of 50 to their hitpoints.
+	 * 
+	 * @param theTarget the target being attacked
+	 * @param m <code>MessageRenderer</code> to display messages.
+	 */
 	public ForceChoke(SWEntityInterface theTarget, MessageRenderer m) {
 		super(theTarget, m);	
 	}
