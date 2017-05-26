@@ -27,6 +27,10 @@ public class Application {
 		 * When the game has been won or lost, it will print out a message depending on 
 		 * whether is it a win or lose, and the loop breaks
 		 * therefore the game will end.
+		 * 
+		 * Note: We did not touch or edit the engine codes because the changes to the application class
+		 *  and other associated classes in the Starwars package is sufficient to get our game 
+		 * to perform the win and lose conditions.
 		 */
 		SWWorld world = new SWWorld();
 		boolean test = world.getRun();
