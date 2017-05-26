@@ -41,7 +41,6 @@ public class SWWorld extends World {
 	 */
 	private ArrayList<SWGrid> maps;
 	
-	private boolean run = true;
 	private String endGameMessage = "";
 
 	
@@ -75,11 +74,11 @@ public class SWWorld extends World {
 	}
 	
 	public boolean getRun(){
-		return run;
+		return getEndGame();
 	}
 	
 	public void setNotRun(){
-		run = false;
+		setDontrun();
 	}
 	
 	public String getENDGame(){
@@ -245,28 +244,28 @@ public class SWWorld extends World {
 * only know which TuskenRaider has the name of what when they meet up at the same coordinate."*/				
 		
 		// A Tusken Raider
-		TuskenRaider tim = new TuskenRaider(10, "Tim", iface, this);
+		TuskenRaider tim = new TuskenRaider(200, "Tim", iface, this);
 		
 		tim.setSymbol("T");
-		loc = main.getLocationByCoordinates(4,5);
+		loc = main.getLocationByCoordinates(3,4);
 		entityManager.setLocation(tim, loc);
 		
 		// A Tusken Raider
-		TuskenRaider david = new TuskenRaider(10, "David", iface, this);
+		TuskenRaider david = new TuskenRaider(200, "David", iface, this);
 		
 		david.setSymbol("T");
 		loc = main.getLocationByCoordinates(7,2);
 		entityManager.setLocation(david, loc);
 		
 		// A Tusken Raider
-		TuskenRaider zac = new TuskenRaider(10, "Zac", iface, this);
+		TuskenRaider zac = new TuskenRaider(200, "Zac", iface, this);
 		
 		zac.setSymbol("T");
 		loc = main.getLocationByCoordinates(8,5);
 		entityManager.setLocation(zac, loc);
 		
 		// A Tusken Raider
-		TuskenRaider tom = new TuskenRaider(10, "Tom", iface, this);
+		TuskenRaider tom = new TuskenRaider(200, "Tom", iface, this);
 		
 		tom.setSymbol("T");
 		loc = main.getLocationByCoordinates(1,1);

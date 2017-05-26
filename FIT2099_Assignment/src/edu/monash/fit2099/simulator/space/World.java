@@ -52,7 +52,7 @@ public abstract class World extends Observable {
 	@SuppressWarnings("rawtypes")		// space will contain instances of a Location subtype specified in client code
 	protected LocationContainer space;	// instantiate in subclass constructor
 	
-	
+	private boolean run = true;
 	/**
 	 * Part of the Observer pattern.
 	 * 
@@ -86,5 +86,13 @@ public abstract class World extends Observable {
 	 */
 	public void tick() {
 		getEntityManager().tick();
+	}
+	
+	public boolean getEndGame(){
+		return run;
+	}
+	
+	public void setDontrun(){
+		run = false;
 	}
 }
